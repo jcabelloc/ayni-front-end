@@ -7,6 +7,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
+import { FormsModule }   from '@angular/forms';
+
 
 import { PersonaNaturalRoutingModule } from './persona-natural-routing.module';
 import { CreatePersonaNaturalComponent } from './components/create-persona-natural/create-persona-natural.component';
@@ -21,6 +23,7 @@ import { CreatePersonaNaturalComponent } from './components/create-persona-natur
     MatSelectModule,
     MatDividerModule,
     MatCardModule,
+    FormsModule,
   ],
   declarations: [CreatePersonaNaturalComponent]
 })

@@ -21,7 +21,7 @@
               {{ module.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <a mat-list-item *ngFor="let option of module.options" routerLink="{{option.path}}" (click)="showOption(module.name, option.name)">{{ option.name}}</a>
+          <a mat-list-item *ngFor="let option of module.options" [routerLink]="option.path" (click)="showOption(module.name, option.name)">{{ option.name}}</a>
         </mat-expansion-panel>
         
       </mat-nav-list> 
