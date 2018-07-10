@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaNatural } from '../../models/PersonaNatural';
 import { PersonaNaturalService } from '../../services/persona-natural.service';
+import { Router } from '@angular/router';
+
 
 
 export interface Option {
@@ -40,16 +42,20 @@ export class CreatePersonaNaturalComponent implements OnInit {
 	  estadoCivil: "",
   }
 
-  constructor(private personaNaturalService: PersonaNaturalService) { }
+  constructor(private personaNaturalService: PersonaNaturalService, private router: Router) { }
 
   ngOnInit() {
   }
   onSubmit({value, valid}: {value: PersonaNatural, valid: boolean}) {
     this.personaNaturalService.create(this.personaNatural)
       .subscribe (
-        personaNatural => console.log(personaNatural),
+        personaNatural => { 
+          console.log(personaNatural);
+          this.router.navigate(['personas/persona-natural/update/' + personaNatural.id]); 
+        },
         err => console.log(err)
       );
+      
   }
 
 }

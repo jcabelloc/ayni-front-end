@@ -11,6 +11,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { PersonaNaturalRoutingModule } from './persona-natural-routing.module';
 import { CreatePersonaNaturalComponent } from './components/create-persona-natural/create-persona-natural.component';
+import { UpdatePersonaNaturalComponent } from './components/update-persona-natural/update-persona-natural.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { CreatePersonaNaturalComponent } from './components/create-persona-natur
     MatCardModule,
     FormsModule,
   ],
-  declarations: [CreatePersonaNaturalComponent]
+  declarations: [CreatePersonaNaturalComponent, UpdatePersonaNaturalComponent]
 })
 export class PersonaNaturalModule { }
