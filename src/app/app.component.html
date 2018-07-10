@@ -14,48 +14,23 @@
       [opened]="mobileQuery.matches ? false : true" 
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list >
-        <mat-expansion-panel [expanded] = "true">
+
+        <mat-expansion-panel *ngFor="let module of modules" [expanded] = "true">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Personas
+              {{ module.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <a mat-list-item routerLink="." >Adm. Personas Nat.</a>
-          <a mat-list-item routerLink="." >Adm. Personas Jur.</a>
+          <a mat-list-item *ngFor="let option of module.options" routerLink="{{option.path}}" (click)="showOption(module.name, option.name)">{{ option.name}}</a>
         </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Clientes
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a mat-list-item routerLink=".">Adm. Clientes</a>
-        </mat-expansion-panel>
-        <mat-expansion-panel >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Creditos
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a mat-list-item routerLink=".">Desembolso de Creditos</a>
-          <a mat-list-item routerLink=".">Consulta de Creditos</a>
-        </mat-expansion-panel>
-        <mat-expansion-panel >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Operaciones
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a mat-list-item routerLink=".">Pago de Cuotas</a>
-          <a mat-list-item routerLink=".">Extorno de Pagos</a>
-        </mat-expansion-panel>
+        
       </mat-nav-list> 
       
     </mat-sidenav>
 
     <mat-sidenav-content role="main" class="main-content">
       <mat-toolbar>
-        <span>Modulo > Opcion</span>
+        <span>{{ subTitle }}</span>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
