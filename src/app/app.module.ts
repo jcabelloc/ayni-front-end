@@ -12,6 +12,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatToolbarModule,
     MatListModule,
     MatExpansionModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

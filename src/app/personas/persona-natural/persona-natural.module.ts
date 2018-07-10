@@ -9,7 +9,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import { FormsModule }   from '@angular/forms';
 
-
 import { PersonaNaturalRoutingModule } from './persona-natural-routing.module';
 import { CreatePersonaNaturalComponent } from './components/create-persona-natural/create-persona-natural.component';
 

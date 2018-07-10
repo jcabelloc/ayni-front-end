@@ -45,7 +45,11 @@ export class CreatePersonaNaturalComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit({value, valid}: {value: PersonaNatural, valid: boolean}) {
-    this.personaNaturalService.create(this.personaNatural);
+    this.personaNaturalService.create(this.personaNatural)
+      .subscribe (
+        personaNatural => console.log(personaNatural),
+        err => console.log(err)
+      );
   }
 
 }
