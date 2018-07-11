@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CreateDireccionComponent } from '../create-direccion/create-direccion.component';
+import { MatDialog } from '@angular/material';
 
 export interface Direccion {
   direccion: string;
@@ -22,9 +23,20 @@ const DIRECCION_DATA: Direccion[] = [
 export class AdmDireccionComponent implements OnInit {
   displayedColumns: string[] = ['position', 'tipo', 'direccion', 'ubigeo'];
   direccionDataSource = DIRECCION_DATA;
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateDireccionComponent, {
+      width: '400px',
+      data: {titulo: "Titulo ..."}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      let mensage = result;
+    });
+  }
 }
