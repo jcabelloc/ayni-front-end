@@ -13,6 +13,8 @@ import { PersonaNaturalRoutingModule } from './persona-natural-routing.module';
 import { CreatePersonaNaturalComponent } from './components/create-persona-natural/create-persona-natural.component';
 import { UpdatePersonaNaturalComponent } from './components/update-persona-natural/update-persona-natural.component';
 
+import { PersonaModule } from '../persona/persona.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { UpdatePersonaNaturalComponent } from './components/update-persona-natur
     MatDividerModule,
     MatCardModule,
     FormsModule,
+    PersonaModule,
   ],
   declarations: [CreatePersonaNaturalComponent, UpdatePersonaNaturalComponent]
 })
