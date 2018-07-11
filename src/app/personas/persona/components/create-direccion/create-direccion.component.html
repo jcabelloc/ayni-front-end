@@ -1,3 +1,85 @@
-<p>
-  create-direccion works!
-</p>
+<div>
+  <div mat-dialog-content>
+    <form class="example-form">
+      <mat-form-field class="mat-form-field-large"  >
+        <mat-select placeholder="Departamento" [(ngModel)]="direccion.departamento" name="departamento" required>
+          <mat-option *ngFor="let departamento of departamentos" [value]="departamento.value">
+            {{departamento.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-large"  >
+        <mat-select placeholder="Provincia" [(ngModel)]="direccion.provincia" name="provincia" required>
+          <mat-option *ngFor="let provincia of provincias" [value]="provincia.value">
+            {{provincia.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-large"  >
+        <mat-select placeholder="Distrito" [(ngModel)]="direccion.distrito" name="distrito" required>
+          <mat-option *ngFor="let distrito of distritos" [value]="distrito.value">
+            {{distrito.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-large"  >
+        <mat-select placeholder="Tipo de Via" [(ngModel)]="direccion.tipoVia" name="tipoVia">
+          <mat-option *ngFor="let tipoVia of tipoVias" [value]="tipoVia.value">
+            {{tipoVia.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>    
+
+      <mat-form-field class="mat-form-field-large" appearance="standard">
+        <mat-label>Nombre de Via</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.nombreVia" name="nombreVia">
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-large" appearance="standard">
+        <mat-label>Numero en la Via</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.numeroVia" name="numeroVia">
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-medium"  >
+        <mat-select placeholder="Tipo de Localidad" [(ngModel)]="direccion.tipoLocalidad" name="tipoLocalidad">
+          <mat-option *ngFor="let tipoLocalidad of tipoLocalidades" [value]="tipoLocalidad.value">
+            {{tipoLocalidad.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-large" appearance="standard">
+        <mat-label>Nombre Localidad</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.nombreLocalidad" name="nombreLocalidad">
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-small" appearance="standard">
+        <mat-label>Manzana</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.manzana" name="manzana">
+      </mat-form-field>  
+
+      <mat-form-field class="mat-form-field-small" appearance="standard">
+        <mat-label>Lote</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.lote" name="lote">
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-small" appearance="standard">
+        <mat-label>Interior</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.interior" name="interior">
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-full" appearance="standard">
+        <mat-label>Referencia</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.referencia" name="referencia">
+      </mat-form-field>      
+
+      </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="direccion.interior" cdkFocusInitial>Agregar</button>
+  </div>
+</div>

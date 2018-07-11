@@ -30,7 +30,7 @@ export class AdmDireccionComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateDireccionComponent, {
-      width: '400px',
+      width: '800px',
       data: {titulo: "Titulo ..."}
     });
 
