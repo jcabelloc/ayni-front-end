@@ -1,3 +1,82 @@
-<p>
-  update-persona-natural works! 
-</p>
+<div class="container">
+    <form novalidate #ppnnForm="ngForm" (ngSubmit)="onSubmit(ppnnForm)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><h2>Registro de Persona Natural</h2></mat-card-title>
+          <mat-card-subtitle *ngIf="personaNatural.id != null">Codigo Persona: {{personaNatural.id}}</mat-card-subtitle>
+
+        </mat-card-header>
+  
+        <mat-card-content>
+            <mat-form-field class="mat-form-field" >
+              <mat-select placeholder="Tipo Identificacion" appearance="standard" [(ngModel)]="personaNatural.tipoIdentificacion" name="tipoIdentificacion" disabled>
+                <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.value">
+                  {{tipoDoc.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Nro. de Identificacion</mat-label>
+              <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.nroIdentificacion" name="nroIdentificacion" required>
+            </mat-form-field>
+            {{nroIdentificacion}}
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Apellido Paterno</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoPaterno" name="apellidoPaterno" required>
+              <mat-hint>Min 3 letras</mat-hint>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Apellido Materno</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoMaterno" name="apellidoMaterno">
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Primer Nombre</mat-label>
+              <input type="text" matInput #input maxlength="12" placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.primerNombre" name="primerNombre" required>
+            </mat-form-field>
+            
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Segundo Nombre</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.segundoNombre" name="segundoNombre">
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field"  >
+              <mat-select placeholder="Sexo" [(ngModel)]="personaNatural.sexo" name="sexo" required >
+                <mat-option *ngFor="let sexo of sexos" [value]="sexo.value">
+                  {{sexo.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-divider></mat-divider>
+            
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Fecha Nacimiento</mat-label>
+              <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.fechaNacimiento" name="fechaNacimiento" >
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field"  >
+              <mat-select placeholder="Estado Civil" [(ngModel)]="personaNatural.estadoCivil" name="estadoCivil">
+                <mat-option *ngFor="let estado of civilEstados" [value]="estado.value">
+                  {{estado.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.email" name="email">
+            </mat-form-field>
+            
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <button type = "submit" mat-button color="primary">GUARDAR</button>
+            <button mat-button color="warn">CANCELAR</button>
+          </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>

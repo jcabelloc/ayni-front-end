@@ -18,9 +18,22 @@ export class PersonaNaturalService {
 
   constructor(private http: HttpClient) { }
 
-  create (personaNatural: PersonaNatural): Observable<PersonaNatural> {
-    const url = "http://localhost:8080/ayni-core/api/personas-naturales";
-    return this.http.post<PersonaNatural>(url, personaNatural, httpOptions)
+  createPersonaNatural (personaNatural: PersonaNatural): Observable<PersonaNatural> {
+    const createUrl = "http://localhost:8080/ayni-core/api/personas-naturales";
+    return this.http.post<PersonaNatural>(createUrl, personaNatural, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  findPersonaNaturalById (id: number): Observable<PersonaNatural> {
+    const findByIdUrl = "http://localhost:8080/ayni-core/api/personas-naturales/" + id;
+    return this.http.get<PersonaNatural>(findByIdUrl);
+  }
+
+  updatePersonaNatural(id: number, personaNatural: PersonaNatural) {
+    const updateUrl =  "http://localhost:8080/ayni-core/api/personas-naturales/" + id;
+    return this.http.put<PersonaNatural> (updateUrl, personaNatural)
       .pipe(
         catchError(this.handleError)
       );
