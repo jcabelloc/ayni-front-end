@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Direccion } from '../../models/Direccion';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { DireccionService } from '../../services/direccion.service';
 
 export interface Option {
   value: string;
@@ -13,27 +15,39 @@ export interface Option {
 })
 export class CreateDireccionComponent implements OnInit {
   departamentos: Option[] = [
-    {value: 'HOMBRE', viewValue: 'Hombre'},
-    {value: 'MUJER', viewValue: 'Mujer'},
+    {value: 'LIMA', viewValue: 'Lima'},
+    {value: 'ICA', viewValue: 'Ica'},
   ];
   provincias: Option[] = [
-    {value: 'SOLTERO', viewValue: 'Soltero'},
-    {value: 'CASADO', viewValue: 'Casado'},
+    {value: 'LIMA', viewValue: 'Lima'},
+    {value: 'ICA', viewValue: 'Ica'},
   ];
 
   distritos: Option[] = [
-    {value: 'DNI', viewValue: 'DNI'}
+    {value: 'ANCON', viewValue: 'Ancon'},
+    {value: 'OCUCAJE', viewValue: 'Ocucaje'},
   ];
 
   tipoVias: Option[] = [
-    {value: 'SOLTERO', viewValue: 'Soltero'},
-    {value: 'CASADO', viewValue: 'Casado'},
+    {value: 'JIRON', viewValue: 'Jiron'},
+    {value: 'CALLE', viewValue: 'Calle'},
+    {value: 'AVENIDA', viewValue: 'Avenida'},
   ];
 
   tipoLocalidades: Option[] = [
-    {value: 'SOLTERO', viewValue: 'Soltero'},
-    {value: 'CASADO', viewValue: 'Casado'},
+    {value: 'URB', viewValue: 'Urbanizacion'},
+    {value: 'AAHH', viewValue: 'AAHH'},
+    {value: 'ASOC_VIVIENDA', viewValue: 'Asoc. Vivienda'},
+    {value: 'CASERIO', viewValue: 'Caserio'},
+    {value: 'CENTRO_POBLADO', viewValue: 'Centro Poblado'},
+
   ];
+
+  tipos: Option[] = [
+    {value: 'CASA', viewValue: 'Casa'},
+    {value: 'NEGOCIO', viewValue: 'Negocio'},
+  ];
+
 
   direccion: Direccion = {
     tipo: "",
@@ -51,9 +65,28 @@ export class CreateDireccionComponent implements OnInit {
     referencia: "",
 }
 
-  constructor() { }
+  constructor(
+    private direccionService: DireccionService,
+    public dialogRef: MatDialogRef<CreateDireccionComponent>,
+    @Inject(MAT_DIALOG_DATA) public idPersona: number) { }
 
   ngOnInit() {
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit({value, valid}: {value: Direccion, valid: boolean}) {
+    this.direccionService.createDireccion(this.idPersona, this.direccion)
+      .subscribe (
+        direccion => { 
+          console.log(direccion);
+          //this.router.navigate(['personas/persona-natural/update/' + personaNatural.id]); 
+        },
+        err => console.log(err)
+      );
+      
   }
 
 }

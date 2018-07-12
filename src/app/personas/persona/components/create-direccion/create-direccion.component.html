@@ -1,6 +1,17 @@
 <div>
-  <div mat-dialog-content>
-    <form class="example-form">
+  <h2 mat-dialog-title>Agregar Direccion</h2>
+  <form novalidate #direccionForm="ngForm" (ngSubmit)="onSubmit(direccionForm)">
+    <div mat-dialog-content>
+      <div>
+        <mat-form-field class="mat-form-field-large">
+          <mat-select placeholder="Tipo de Direccion" [(ngModel)]="direccion.tipo" name="tipo" required>
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+              {{tipo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <mat-form-field class="mat-form-field-large"  >
         <mat-select placeholder="Departamento" [(ngModel)]="direccion.departamento" name="departamento" required>
           <mat-option *ngFor="let departamento of departamentos" [value]="departamento.value">
@@ -75,11 +86,11 @@
         <mat-label>Referencia</mat-label>
         <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="direccion.referencia" name="referencia">
       </mat-form-field>      
+    </div>
+    <div mat-dialog-actions>
+      <button type = "submit" mat-button color="primary">AGREGAR</button>
+      <button mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
 
-      </form>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="direccion.interior" cdkFocusInitial>Agregar</button>
-  </div>
+    </div>
+  </form>
 </div>

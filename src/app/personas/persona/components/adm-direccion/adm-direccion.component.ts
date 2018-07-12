@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CreateDireccionComponent } from '../create-direccion/create-direccion.component';
 import { MatDialog } from '@angular/material';
 
@@ -21,6 +21,9 @@ const DIRECCION_DATA: Direccion[] = [
   styleUrls: ['./adm-direccion.component.css']
 })
 export class AdmDireccionComponent implements OnInit {
+  @Input()  
+  idPersona: number;
+
   displayedColumns: string[] = ['position', 'tipo', 'direccion', 'ubigeo'];
   direccionDataSource = DIRECCION_DATA;
   constructor(public dialog: MatDialog) { }
@@ -31,7 +34,7 @@ export class AdmDireccionComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateDireccionComponent, {
       width: '800px',
-      data: {titulo: "Titulo ..."}
+      data: this.idPersona
     });
 
     dialogRef.afterClosed().subscribe(result => {

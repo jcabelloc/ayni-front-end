@@ -1,5 +1,5 @@
 export interface PersonaNatural {
-    id?: number,
+    id?: number;
     tipoIdentificacion: string;
     nroIdentificacion: string;
     primerNombre: string;

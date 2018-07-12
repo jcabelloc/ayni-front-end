@@ -1,5 +1,5 @@
 export interface Direccion {
-    id?: number,
+    id?: number;
     tipo: string;
     departamento: string;
     provincia: string;
