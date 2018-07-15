@@ -34,8 +34,8 @@ export class DireccionService {
   }
 
   findAllDireccionesByIdPersona(idPersona: number) {
-    const findAllUrl = "http://localhost:8000/ayni-core/api/persona/" + idPersona + "/direcciones";
-    return this.http.get<Direccion>(findAllUrl);
+    const findAllUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/direcciones";
+    return this.http.get<Direccion[]>(findAllUrl);
   }
 
   private handleError(error: HttpErrorResponse) {

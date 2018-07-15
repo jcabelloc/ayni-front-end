@@ -4,18 +4,6 @@ import { MatDialog } from '@angular/material';
 import { Direccion } from '../../models/Direccion';
 import { DireccionService } from '../../services/direccion.service';
 
-export interface Direccion2 {
-  direccion: string;
-  position: number;
-  tipo: string;
-  ubigeo: string;
-}
-
-
-const DIRECCION_DATA: Direccion2[] = [
-  {position: 1, direccion: 'Jr.Rioja C-01 caserio la union', tipo: 'Casa', ubigeo: 'Nueva Cajamarca/Amazonas'},
-  {position: 2, direccion: 'Jr. Santa Isabel C-03 urb. Santa Isabel', tipo: 'Negocio', ubigeo: 'Nueva Cajamarca/Amazonas'},
-];
 
 @Component({
   selector: 'app-adm-direccion',
@@ -26,15 +14,30 @@ export class AdmDireccionComponent implements OnInit {
   @Input()  
   idPersona: number;
 
-  displayedColumns: string[] = ['position', 'tipo', 'direccion', 'ubigeo'];
-  direccionDataSource = DIRECCION_DATA;
+  displayedColumns: string[] = ['tipo', 'ubigeo', 'direccion'];
 
   dataDireccion : Direccion[];
 
   constructor(private direccionService: DireccionService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.direccionService.findAllDireccionesByIdPersona(this.idPersona)
+
+  }
+  ngOnChanges(){
+    if (this.idPersona != null) {
+      this.direccionService.findAllDireccionesByIdPersona(this.idPersona)
+      .subscribe(
+        direcciones => {
+          this.dataDireccion = direcciones;
+          this.dataDireccion.map(e => {
+            e.direccion = [e.tipoVia, e.nombreVia, e.numeroVia, e.tipoLocalidad, e.nombreLocalidad, e.manzana, e.lote, e.interior]
+                    .filter(Boolean).join(" ").substr(0, 40);
+          })
+        },
+        err => console.log(err)
+      );
+    }
+
   }
 
   openDialog(): void {

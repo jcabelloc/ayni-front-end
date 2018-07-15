@@ -16,5 +16,6 @@ export interface Direccion {
     referencia: string;
     idUbigeoDpto: number;
 	idUbigeoProvincia: number;
-	idUbigeoDistrito: number;
+    idUbigeoDistrito: number;
+    direccion?: string;
 }

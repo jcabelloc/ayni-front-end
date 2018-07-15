@@ -28,6 +28,7 @@ export class UpdatePersonaNaturalComponent implements OnInit {
   ];
 
   personaNatural : PersonaNatural = {
+    id: null,
     tipoIdentificacion: "",
     nroIdentificacion: "",
     primerNombre: "",
@@ -52,7 +53,6 @@ export class UpdatePersonaNaturalComponent implements OnInit {
       .subscribe(
         personaNatural => { 
           this.personaNatural = personaNatural;
-          console.log(this.personaNatural);
         }
     );
     
