@@ -3,6 +3,7 @@ import { Direccion } from '../models/Direccion';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { ConfiguracionUbigeo } from '../models/ConfiguracionUbigeo';
 
 
 const httpOptions = {
@@ -20,12 +21,21 @@ export class DireccionService {
 
   createDireccion(idPersona: number, direccion: Direccion): Observable<Direccion> {
     const createUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/direcciones";
-    console.log(createUrl);
     return this.http.post<Direccion>(createUrl, direccion, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
 
+  }
+
+  getConfiguracionUbigeo() {
+    let configUbigeoUrl = "http://localhost:8080/ayni-core/api/configuracion/ubigeo";
+    return this.http.get<ConfiguracionUbigeo>(configUbigeoUrl);
+  }
+
+  findAllDireccionesByIdPersona(idPersona: number) {
+    const findAllUrl = "http://localhost:8000/ayni-core/api/persona/" + idPersona + "/direcciones";
+    return this.http.get<Direccion>(findAllUrl);
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,9 +1,10 @@
 export interface Direccion {
     id?: number;
     tipo: string;
-    departamento: string;
-    provincia: string;
-    distrito: string;
+    departamento?: string;
+    provincia?: string;
+    distrito?: string;
+    idUbigeo: number;
     tipoVia: string;
     nombreVia: string;
     numeroVia: string;
@@ -13,4 +14,7 @@ export interface Direccion {
     lote: string;
     interior: string;
     referencia: string;
+    idUbigeoDpto: number;
+	idUbigeoProvincia: number;
+	idUbigeoDistrito: number;
 }

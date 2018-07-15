@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CreateDireccionComponent } from '../create-direccion/create-direccion.component';
 import { MatDialog } from '@angular/material';
+import { Direccion } from '../../models/Direccion';
+import { DireccionService } from '../../services/direccion.service';
 
-export interface Direccion {
+export interface Direccion2 {
   direccion: string;
   position: number;
   tipo: string;
@@ -10,7 +12,7 @@ export interface Direccion {
 }
 
 
-const DIRECCION_DATA: Direccion[] = [
+const DIRECCION_DATA: Direccion2[] = [
   {position: 1, direccion: 'Jr.Rioja C-01 caserio la union', tipo: 'Casa', ubigeo: 'Nueva Cajamarca/Amazonas'},
   {position: 2, direccion: 'Jr. Santa Isabel C-03 urb. Santa Isabel', tipo: 'Negocio', ubigeo: 'Nueva Cajamarca/Amazonas'},
 ];
@@ -26,9 +28,13 @@ export class AdmDireccionComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'tipo', 'direccion', 'ubigeo'];
   direccionDataSource = DIRECCION_DATA;
-  constructor(public dialog: MatDialog) { }
+
+  dataDireccion : Direccion[];
+
+  constructor(private direccionService: DireccionService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.direccionService.findAllDireccionesByIdPersona(this.idPersona)
   }
 
   openDialog(): void {

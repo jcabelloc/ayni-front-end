@@ -13,25 +13,25 @@
       </div>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Departamento" [(ngModel)]="direccion.departamento" name="departamento" required>
-          <mat-option *ngFor="let departamento of departamentos" [value]="departamento.value">
-            {{departamento.viewValue}}
+        <mat-select placeholder="Departamento" [(ngModel)]="direccion.idUbigeoDpto" name="idUbigeoDpto" (selectionChange)="updateProvincias($event)" required>
+          <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
+            {{departamento.nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Provincia" [(ngModel)]="direccion.provincia" name="provincia" required>
-          <mat-option *ngFor="let provincia of provincias" [value]="provincia.value">
-            {{provincia.viewValue}}
+        <mat-select placeholder="Provincia" [(ngModel)]="direccion.idUbigeoProvincia" name="idUbigeoProvincia" (selectionChange)="updateDistritos($event)" required>
+          <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">
+            {{provincia.nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Distrito" [(ngModel)]="direccion.distrito" name="distrito" required>
-          <mat-option *ngFor="let distrito of distritos" [value]="distrito.value">
-            {{distrito.viewValue}}
+        <mat-select placeholder="Distrito" [(ngModel)]="direccion.idUbigeoDistrito" name="idUbigeoDistrito" (selectionChange)="updateIdUbigeo($event)" required>
+          <mat-option *ngFor="let distrito of distritos" [value]="distrito.id">
+            {{distrito.nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -89,7 +89,7 @@
     </div>
     <div mat-dialog-actions>
       <button type = "submit" mat-button color="primary">AGREGAR</button>
-      <button mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
+      <button type="button" mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
 
     </div>
   </form>
