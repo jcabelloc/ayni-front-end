@@ -6,6 +6,7 @@ export interface PersonaNatural {
     segundoNombre: string;
     apellidoPaterno: string;
     apellidoMaterno: string;
+    nombre?: string;
     sexo: string;
     fechaNacimiento: string;
 	email: string;

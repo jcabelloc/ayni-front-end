@@ -20,7 +20,7 @@ export class AppComponent implements OnDestroy {
   subTitle = "";
   modules: Module[] = [
     { name: "Personas", 
-      options: [{name: "Adm. Persona Nat.", path: "."}, {name: "Adm. Persona Jur.", path: "./personas/persona-natural/create"}]
+      options: [{name: "Adm. Persona Nat.", path: "./personas/persona-natural/adm"}, {name: "Adm. Persona Jur.", path: "./personas/persona-natural/create"}]
     },
     { name: "Clientes", 
       options: [{name: "Adm. Clientes", path: "."}, {name: "Adm. Clientes", path: "."}]

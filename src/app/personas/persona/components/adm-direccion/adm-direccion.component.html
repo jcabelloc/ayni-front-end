@@ -14,7 +14,7 @@
 
     <ng-container matColumnDef="ubigeo">
       <th mat-header-cell *matHeaderCellDef> Ubigeo </th>
-      <td mat-cell *matCellDef="let element"> {{element.departamento | titlecase}} - {{element.provincia | titlecase}} - {{element.distrito | titlecase}}  </td>
+      <td mat-cell *matCellDef="let element"> {{element.distrito | titlecase}} - {{element.provincia | titlecase}} </td>
     </ng-container>
 
     <ng-container matColumnDef="direccion">

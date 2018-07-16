@@ -38,6 +38,11 @@ export class PersonaNaturalService {
         catchError(this.handleError)
       );
   }
+
+  findFirstNumberPersonasNaturales(max: number) {
+    let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
+    return this.http.get<PersonaNatural[]>(findFirstNumberUrl);
+  }
   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
