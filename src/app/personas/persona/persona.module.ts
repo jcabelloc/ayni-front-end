@@ -32,7 +32,7 @@ import { CreateTelefonoComponent } from './components/create-telefono/create-tel
     FormsModule,
 
   ],
-  entryComponents: [CreateDireccionComponent],
+  entryComponents: [CreateDireccionComponent, CreateTelefonoComponent ],
   declarations: [AdmDireccionComponent, CreateDireccionComponent, AdmTelefonoComponent, CreateTelefonoComponent],
   exports: [
     AdmDireccionComponent, AdmTelefonoComponent, 

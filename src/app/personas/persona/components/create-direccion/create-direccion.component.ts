@@ -3,7 +3,6 @@ import { Direccion } from '../../models/Direccion';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSelectChange } from '@angular/material';
 import { DireccionService } from '../../services/direccion.service';
 import { ConfiguracionUbigeo, Departamento, Provincia, Distrito } from '../../models/ConfiguracionUbigeo';
-import { Router } from '@angular/router';
 
 export interface Option {
   value: string;
@@ -63,12 +62,13 @@ export class CreateDireccionComponent implements OnInit {
     idUbigeoDpto: null,
     idUbigeoProvincia: null,
     idUbigeoDistrito: null,
-}
+  }
+
+  isCreated: boolean = false;
 
   constructor(
     private direccionService: DireccionService,
     public dialogRef: MatDialogRef<CreateDireccionComponent>,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) public idPersona: number) { }
 
   ngOnInit() {
@@ -89,25 +89,25 @@ export class CreateDireccionComponent implements OnInit {
     this.direccionService.createDireccion(this.idPersona, this.direccion)
       .subscribe (
         direccion => { 
-          this.router.navigate(['personas/persona-natural/update/' + this.idPersona]);
-          this.dialogRef.close();
+          this.isCreated = true;
+          this.dialogRef.close(this.isCreated);
         },
         err => console.log(err)
       );
       
   }
 
-  updateProvincias(dpto: MatSelectChange) {
+  onDptoSelection(dpto: MatSelectChange) {
     this.departamentoSeleccionado = this.departamentos.find(e => e.id == dpto.value); 
     this.provincias = this.departamentoSeleccionado.provincias;
     this.distritos = null;
   }
-  updateDistritos(provincia: MatSelectChange) {
+  onProvinciaSelection(provincia: MatSelectChange) {
     this.provinciaSeleccionada = this.departamentoSeleccionado.provincias.find(e => e.id == provincia.value);
     this.distritos = this.provinciaSeleccionada.distritos;
   }
 
-  updateIdUbigeo(distrito: MatSelectChange) {
+  onDistritoSelection(distrito: MatSelectChange) {
     this.direccion.idUbigeo = this.direccion.idUbigeoDistrito;
   }
 }

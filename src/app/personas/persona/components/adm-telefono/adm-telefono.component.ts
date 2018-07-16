@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TelefonoService } from '../../services/telefono.service';
 import { Telefono } from '../../models/Telefono';
+import { CreateTelefonoComponent } from '../create-telefono/create-telefono.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-adm-telefono',
@@ -17,7 +19,7 @@ export class AdmTelefonoComponent implements OnInit {
   displayedColumns: string[] = ['tipo', 'numero'];
 
 
-  constructor(private telefonoService : TelefonoService) { }
+  constructor(private telefonoService : TelefonoService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -32,6 +34,19 @@ export class AdmTelefonoComponent implements OnInit {
           err => console.log(err)
         );
     }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateTelefonoComponent, {
+      width: '400px',
+      data: this.idPersona
+    });
+
+    dialogRef.afterClosed().subscribe(isCreated => {
+      if (isCreated) {
+        this.ngOnChanges();
+      }
+    });
   }
 
 }

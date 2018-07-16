@@ -1,3 +1,33 @@
-<p>
-  create-telefono works!
-</p>
+<div>
+  <h2 mat-dialog-title>Agregar Telefono </h2>
+  <form novalidate #telefonoForm="ngForm" (ngSubmit)="onSubmit(telefonoForm)">
+    <div mat-dialog-content>
+      <mat-form-field class="mat-form-field-full">
+        <mat-select placeholder="Tipo de Telefono" [(ngModel)]="telefono.tipo" name="tipo" required>
+          <mat-option *ngFor="let option of optionsTipoTelefono" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-full"  >
+        <mat-select placeholder="Cod. Telefonico Dpto." [(ngModel)]="telefono.codTelefonicoDpto" name="codTelefonicoDpto" required>
+          <mat-option *ngFor="let option of optionsCodTelefonicoDpto" [value]="option.value">
+            {{option.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field-full" appearance="standard">
+        <mat-label>Numero</mat-label>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="telefono.numero" name="numero" required>
+      </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+      <button type = "submit" mat-button color="primary" >AGREGAR</button>
+      <button type="button" mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
+
+    </div>
+  </form>
+</div>

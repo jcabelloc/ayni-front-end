@@ -46,9 +46,10 @@ export class AdmDireccionComponent implements OnInit {
       data: this.idPersona
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      let mensage = result;
+    dialogRef.afterClosed().subscribe(isCreated => {
+      if (isCreated) {
+        this.ngOnChanges();
+      }
     });
   }
 }

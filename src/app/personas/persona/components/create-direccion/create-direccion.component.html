@@ -13,7 +13,7 @@
       </div>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Departamento" [(ngModel)]="direccion.idUbigeoDpto" name="idUbigeoDpto" (selectionChange)="updateProvincias($event)" required>
+        <mat-select placeholder="Departamento" [(ngModel)]="direccion.idUbigeoDpto" name="idUbigeoDpto" (selectionChange)="onDptoSelection($event)" required>
           <mat-option *ngFor="let departamento of departamentos" [value]="departamento.id">
             {{departamento.nombre}}
           </mat-option>
@@ -21,7 +21,7 @@
       </mat-form-field>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Provincia" [(ngModel)]="direccion.idUbigeoProvincia" name="idUbigeoProvincia" (selectionChange)="updateDistritos($event)" required>
+        <mat-select placeholder="Provincia" [(ngModel)]="direccion.idUbigeoProvincia" name="idUbigeoProvincia" (selectionChange)="onProvinciaSelection($event)" required>
           <mat-option *ngFor="let provincia of provincias" [value]="provincia.id">
             {{provincia.nombre}}
           </mat-option>
@@ -29,7 +29,7 @@
       </mat-form-field>
 
       <mat-form-field class="mat-form-field-large"  >
-        <mat-select placeholder="Distrito" [(ngModel)]="direccion.idUbigeoDistrito" name="idUbigeoDistrito" (selectionChange)="updateIdUbigeo($event)" required>
+        <mat-select placeholder="Distrito" [(ngModel)]="direccion.idUbigeoDistrito" name="idUbigeoDistrito" (selectionChange)="onDistritoSelection($event)" required>
           <mat-option *ngFor="let distrito of distritos" [value]="distrito.id">
             {{distrito.nombre}}
           </mat-option>
