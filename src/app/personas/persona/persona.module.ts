@@ -15,6 +15,8 @@ import { FormsModule }   from '@angular/forms';
 import { PersonaRoutingModule } from './persona-routing.module';
 import { AdmDireccionComponent } from './components/adm-direccion/adm-direccion.component';
 import { CreateDireccionComponent } from './components/create-direccion/create-direccion.component';
+import { AdmTelefonoComponent } from './components/adm-telefono/adm-telefono.component';
+import { CreateTelefonoComponent } from './components/create-telefono/create-telefono.component';
 
 @NgModule({
   imports: [
@@ -31,9 +33,9 @@ import { CreateDireccionComponent } from './components/create-direccion/create-d
 
   ],
   entryComponents: [CreateDireccionComponent],
-  declarations: [AdmDireccionComponent, CreateDireccionComponent],
+  declarations: [AdmDireccionComponent, CreateDireccionComponent, AdmTelefonoComponent, CreateTelefonoComponent],
   exports: [
-    AdmDireccionComponent,
+    AdmDireccionComponent, AdmTelefonoComponent, 
   ]
 
 })
