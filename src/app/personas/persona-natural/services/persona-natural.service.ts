@@ -39,9 +39,14 @@ export class PersonaNaturalService {
       );
   }
 
-  findFirstNumberPersonasNaturales(max: number) {
+  findFirstNumberOfPersonasNaturales(max: number) {
     let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
     return this.http.get<PersonaNatural[]>(findFirstNumberUrl);
+  }
+
+  findPersonasNaturalesBy(by: string, input: string) {
+    let findBy =  "http://localhost:8080/ayni-core/api/personas-naturales/?by=" + by + "&input=" + input;
+    return this.http.get<PersonaNatural[]>(findBy);
   }
   
   private handleError(error: HttpErrorResponse) {

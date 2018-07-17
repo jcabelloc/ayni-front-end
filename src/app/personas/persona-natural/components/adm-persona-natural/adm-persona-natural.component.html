@@ -10,22 +10,21 @@
       
     <mat-card-content>
       <div>
-        <form>
+        <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm)">
           <mat-form-field>
-            <mat-select placeholder="Buscar por" required>
-              <mat-option *ngFor="let criterio of criterios" [value]="criterio.value">
-                {{criterio.viewValue}}
+            <mat-select placeholder="Buscar por" [(ngModel)]="option" name="option" required>
+              <mat-option *ngFor="let option of options" [value]="option.value">
+                {{option.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field  appearance="standard" class="search-field">
             <mat-label>Criterio de Busqueda</mat-label>
-            <input type="text" matInput placeholder="Ingresar aqui.." required>
+            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="searchInput" name="searchInput" required>
           </mat-form-field>
-          <a mat-icon-button color="primary">
+          <button type="submit" mat-icon-button color="primary">
               <mat-icon>search</mat-icon>
-          </a>
-          
+          </button>
         </form>
       </div>
 

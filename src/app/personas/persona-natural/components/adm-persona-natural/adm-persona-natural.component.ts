@@ -24,16 +24,19 @@ export class AdmPersonaNaturalComponent implements OnInit {
   displayedColumns: string[] = ['posicion', 'nombre', 'tipoIdentificacion', 'nroIdentificacion'];
   dataSource = new MatTableDataSource<TableElement>(this.data);
 
-  criterios: Option[] = [
+  options: Option[] = [
     {value: 'NOMBRE', viewValue: 'Nombre'},
     {value: 'DNI', viewValue: 'DNI'},
   ];
+
+  option: string;
+  searchInput: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private personaNaturalService: PersonaNaturalService) { }
 
   ngOnInit() {
-    this.personaNaturalService.findFirstNumberPersonasNaturales(100)
+    this.personaNaturalService.findFirstNumberOfPersonasNaturales(100)
       .subscribe(
         personasNaturales => {
           let posicion = 0;
@@ -41,7 +44,7 @@ export class AdmPersonaNaturalComponent implements OnInit {
             e => {
               posicion = posicion + 1;
               this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion });
-          }
+            }
           );
           this.dataSource.data = this.data
         },
@@ -50,6 +53,22 @@ export class AdmPersonaNaturalComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
 
   }
-
+  onSubmit({value, valid}: {value: any, valid: boolean}){
+      this.personaNaturalService.findPersonasNaturalesBy(value.option, value.searchInput)
+        .subscribe(
+          personasNaturales => {
+            this.data = [];
+            let posicion = 0;
+            personasNaturales.forEach(
+              e => {
+                posicion = posicion + 1;
+                this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion });
+              }
+            );
+          this.dataSource.data = this.data
+          },
+          err => console.log(err)
+        );
+  }
 }
 
