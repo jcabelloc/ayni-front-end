@@ -9,6 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule }   from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -30,6 +31,7 @@ import { CreateTelefonoComponent } from './components/create-telefono/create-tel
     MatInputModule,
     MatSelectModule,
     FormsModule,
+    MatIconModule,
 
   ],
   entryComponents: [CreateDireccionComponent, CreateTelefonoComponent ],

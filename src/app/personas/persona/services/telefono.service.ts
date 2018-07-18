@@ -36,6 +36,14 @@ export class TelefonoService {
         catchError(this.handleError)
       );
   }
+  
+  deleteTelefono(idPersona: number, idTelefono: number){
+    const deleteUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/telefonos/" + idTelefono;
+    return this.http.delete(deleteUrl, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
   private handleError(error: HttpErrorResponse) {

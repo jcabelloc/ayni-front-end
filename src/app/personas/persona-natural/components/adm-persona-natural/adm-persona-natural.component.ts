@@ -7,6 +7,7 @@ export interface TableElement {
   nombre: string;
   tipoIdentificacion: string;
   nroIdentificacion: string;
+  id: number;
 }
 
 export interface Option {
@@ -21,7 +22,7 @@ export interface Option {
 })
 export class AdmPersonaNaturalComponent implements OnInit {
   data: TableElement[]= new Array(); 
-  displayedColumns: string[] = ['posicion', 'nombre', 'tipoIdentificacion', 'nroIdentificacion'];
+  displayedColumns: string[] = ['posicion', 'nombre', 'tipoIdentificacion', 'nroIdentificacion', 'mas'];
   dataSource = new MatTableDataSource<TableElement>(this.data);
 
   options: Option[] = [
@@ -43,7 +44,7 @@ export class AdmPersonaNaturalComponent implements OnInit {
           personasNaturales.forEach(
             e => {
               posicion = posicion + 1;
-              this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion });
+              this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion, id: e.id});
             }
           );
           this.dataSource.data = this.data
@@ -62,7 +63,7 @@ export class AdmPersonaNaturalComponent implements OnInit {
             personasNaturales.forEach(
               e => {
                 posicion = posicion + 1;
-                this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion });
+                this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, nroIdentificacion: e.nroIdentificacion, id: e.id});
               }
             );
           this.dataSource.data = this.data

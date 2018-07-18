@@ -1,8 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TelefonoService } from '../../services/telefono.service';
-import { Telefono } from '../../models/Telefono';
 import { CreateTelefonoComponent } from '../create-telefono/create-telefono.component';
 import { MatDialog } from '@angular/material';
+
+export interface TableElement {
+  posicion: number;
+  tipo: string;
+  numero: string;
+  id: number;
+}
+
 
 @Component({
   selector: 'app-adm-telefono',
@@ -11,13 +18,12 @@ import { MatDialog } from '@angular/material';
 })
 export class AdmTelefonoComponent implements OnInit {
 
+  dataTable: TableElement[]; 
+
   @Input()
   idPersona: number;
 
-  dataTelefono: Telefono[];
-
-  displayedColumns: string[] = ['tipo', 'numero'];
-
+  displayedColumns: string[] = ['posicion', 'tipo', 'numero', 'mas'];
 
   constructor(private telefonoService : TelefonoService, private dialog: MatDialog) { }
 
@@ -29,7 +35,12 @@ export class AdmTelefonoComponent implements OnInit {
       this.telefonoService.findAllTelefonosByIdPersona(this.idPersona)
         .subscribe(
           telefonos => {
-            this.dataTelefono = telefonos;
+            this.dataTable = [];
+            let posicion = 0;
+            telefonos.forEach(e => {
+              posicion++;
+              this.dataTable.push({posicion: posicion, tipo: e.tipo, numero: e.codTelefonicoDpto+"-"+e.numero, id: e.id });
+            });
           },
           err => console.log(err)
         );
@@ -47,6 +58,15 @@ export class AdmTelefonoComponent implements OnInit {
         this.ngOnChanges();
       }
     });
+  }
+  delete(element: TableElement){
+    this.telefonoService.deleteTelefono(this.idPersona, element.id)
+      .subscribe(
+        response => {
+          this.ngOnChanges();
+        },
+        err => console.log(err)
+      );
   }
 
 }
