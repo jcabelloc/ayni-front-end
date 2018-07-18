@@ -1,8 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CreateDireccionComponent } from '../create-direccion/create-direccion.component';
 import { MatDialog } from '@angular/material';
-import { Direccion } from '../../models/Direccion';
 import { DireccionService } from '../../services/direccion.service';
+
+export interface TableElement {
+  posicion: number;
+  tipo: string;
+  ubigeo: string;
+  direccion: string;
+  id: number;
+}
 
 
 @Component({
@@ -11,12 +18,13 @@ import { DireccionService } from '../../services/direccion.service';
   styleUrls: ['./adm-direccion.component.css']
 })
 export class AdmDireccionComponent implements OnInit {
+  
+  dataTable: TableElement[]; 
+
   @Input()  
   idPersona: number;
 
-  displayedColumns: string[] = ['tipo', 'ubigeo', 'direccion'];
-
-  dataDireccion : Direccion[];
+  displayedColumns: string[] = ['posicion', 'tipo', 'ubigeo', 'direccion', 'mas'];
 
   constructor(private direccionService: DireccionService, public dialog: MatDialog) { }
 
@@ -28,11 +36,16 @@ export class AdmDireccionComponent implements OnInit {
       this.direccionService.findAllDireccionesByIdPersona(this.idPersona)
       .subscribe(
         direcciones => {
-          this.dataDireccion = direcciones;
-          this.dataDireccion.map(e => {
-            e.direccion = [e.tipoVia, e.nombreVia, e.numeroVia, e.tipoLocalidad, e.nombreLocalidad, e.manzana, e.lote, e.interior]
-                    .filter(Boolean).join(" ").substr(0, 40);
-          })
+          this.dataTable = [];
+          let posicion = 0;
+          direcciones.forEach(e => {
+            posicion++;
+            this.dataTable.push({
+              posicion: posicion, tipo: e.tipo, ubigeo: e.distrito+" / "+e.provincia, 
+              direccion : [e.tipoVia, e.nombreVia, e.numeroVia, e.tipoLocalidad, e.nombreLocalidad, e.manzana, e.lote, e.interior]
+                .filter(Boolean).join(" ").substr(0, 45), 
+              id: e.id});
+          });
         },
         err => console.log(err)
       );
@@ -51,5 +64,15 @@ export class AdmDireccionComponent implements OnInit {
         this.ngOnChanges();
       }
     });
+  }
+  
+  delete(element: TableElement){
+    this.direccionService.deleteDireccion(this.idPersona, element.id)
+      .subscribe(
+        response => {
+          this.ngOnChanges();
+        },
+        err => console.log(err)
+      );
   }
 }
