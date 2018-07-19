@@ -4,6 +4,7 @@ import { Telefono } from '../models/Telefono';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { TelefonoForm } from '../models/TelefonoForm';
+import { environment } from '../../../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,21 +17,23 @@ const httpOptions = {
 })
 export class TelefonoService {
 
+  apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
 
   findAllTelefonosByIdPersona(idPersona: number) {
-    let findAllUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/telefonos";
+    let findAllUrl = this.apiUrl + "persona/" + idPersona + "/telefonos";
     return this.http.get<Telefono[]>(findAllUrl);
   }
   
   getTelefonoForm(idPersona: number) {
-    let formUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/telefonos/form";
+    let formUrl = this.apiUrl + "persona/" + idPersona + "/telefonos/form";
     return this.http.get<TelefonoForm>(formUrl);
   }
 
   createTelefono(idPersona: number, telefono: Telefono) {
-    const createUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/telefonos";
+    const createUrl = this.apiUrl + "persona/" + idPersona + "/telefonos";
     return this.http.post<Telefono>(createUrl, telefono, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -38,7 +41,7 @@ export class TelefonoService {
   }
   
   deleteTelefono(idPersona: number, idTelefono: number){
-    const deleteUrl = "http://localhost:8080/ayni-core/api/persona/" + idPersona + "/telefonos/" + idTelefono;
+    const deleteUrl = this.apiUrl + "persona/" + idPersona + "/telefonos/" + idTelefono;
     return this.http.delete(deleteUrl, httpOptions)
       .pipe(
         catchError(this.handleError)

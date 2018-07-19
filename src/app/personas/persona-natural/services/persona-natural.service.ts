@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,10 +17,12 @@ const httpOptions = {
 })
 export class PersonaNaturalService {
 
+  apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
   createPersonaNatural (personaNatural: PersonaNatural): Observable<PersonaNatural> {
-    const createUrl = "http://localhost:8080/ayni-core/api/personas-naturales";
+    const createUrl = this.apiUrl + "personas-naturales";
     return this.http.post<PersonaNatural>(createUrl, personaNatural, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -27,12 +30,12 @@ export class PersonaNaturalService {
   }
 
   findPersonaNaturalById (id: number): Observable<PersonaNatural> {
-    const findByIdUrl = "http://localhost:8080/ayni-core/api/personas-naturales/" + id;
+    const findByIdUrl = this.apiUrl + "personas-naturales/" + id;
     return this.http.get<PersonaNatural>(findByIdUrl);
   }
 
   updatePersonaNatural(id: number, personaNatural: PersonaNatural) {
-    const updateUrl =  "http://localhost:8080/ayni-core/api/personas-naturales/" + id;
+    const updateUrl =  this.apiUrl + "personas-naturales/" + id;
     return this.http.put<PersonaNatural> (updateUrl, personaNatural)
       .pipe(
         catchError(this.handleError)
@@ -40,12 +43,13 @@ export class PersonaNaturalService {
   }
 
   findFirstNumberOfPersonasNaturales(max: number) {
-    let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
+    //let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
+    let findFirstNumberUrl = this.apiUrl + "personas-naturales/?max=" + max;
     return this.http.get<PersonaNatural[]>(findFirstNumberUrl);
   }
 
   findPersonasNaturalesBy(by: string, input: string) {
-    let findBy =  "http://localhost:8080/ayni-core/api/personas-naturales/?by=" + by + "&input=" + input;
+    let findBy =  this.apiUrl + "personas-naturales?by=" + by + "&input=" + input;
     return this.http.get<PersonaNatural[]>(findBy);
   }
   
