@@ -1,5 +1,5 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches" >
-  <mat-toolbar role="heading" color="primary" class="toolbar">
+  <mat-toolbar role="heading" color="primary" class="toolbar" *ngIf="isAuthenticated() ">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="app-name">{{title}}</h1>
    <span class="fill-remaining-space"></span>
@@ -9,7 +9,7 @@
   
   <mat-sidenav-container class="sidenav-container"
                          [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav role="navigation" #snav class= "mat-sidenav" 
+    <mat-sidenav role="navigation" #snav class= "mat-sidenav" *ngIf="isAuthenticated()"
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [opened]="mobileQuery.matches ? false : true" 
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
@@ -29,7 +29,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content role="main" class="main-content">
-      <mat-toolbar>
+      <mat-toolbar *ngIf="isAuthenticated()">
         <span>{{ subTitle }}</span>
       </mat-toolbar>
       <router-outlet></router-outlet>

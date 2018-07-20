@@ -3,12 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'inicio',
+    loadChildren: './seguridad/inicio/inicio.module#InicioModule'
+  },
+  {
     path: 'personas/persona-natural',
     loadChildren: './personas/persona-natural/persona-natural.module#PersonaNaturalModule'
   },
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'inicio/ingreso',
     pathMatch: 'full'
   }
 ];
