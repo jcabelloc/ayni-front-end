@@ -44,9 +44,9 @@ export class PersonaNaturalService {
 
   findFirstNumberOfPersonasNaturales(max: number) {
     //let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
-    const headers = new HttpHeaders({'authorization' : 'Basic ' + btoa('mary:test123')});
+    //const headers = new HttpHeaders({'authorization' : 'Basic ' + btoa('mary:test123')});
     let findFirstNumberUrl = this.apiUrl + "personas-naturales/?max=" + max;
-    return this.http.get<PersonaNatural[]>(findFirstNumberUrl, {headers: headers});
+    return this.http.get<PersonaNatural[]>(findFirstNumberUrl);
   }
 
   findPersonasNaturalesBy(by: string, input: string) {

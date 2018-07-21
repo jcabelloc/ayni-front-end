@@ -33,9 +33,16 @@ export class AuthService {
 
   }
 
-  logout(){}
+  logout(){
+    return this.http.post('logout',{});
+    
+  }
 
   getAuth(){
     return this.authenticated;
+  }
+
+  setAuth(val: boolean) {
+    this.authenticated = false;
   }
 }

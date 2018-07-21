@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { AuthService } from './seguridad/autenticacion/services/auth.service';
+import { Router } from '@angular/router';
 
 export interface MenuOption {
   name: string;
@@ -39,7 +40,7 @@ export class AppComponent implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authService: AuthService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -54,6 +55,21 @@ export class AppComponent implements OnDestroy {
   }
   isAuthenticated() {
     return this.authService.getAuth();
+  }
+  logout(){
+    this.authService.logout()
+      .subscribe(
+        response => {
+          this.authService.setAuth(false);
+          this.router.navigate(['inicio/ingreso']);
+        },
+        err => {
+          console.log(err);
+          this.authService.setAuth(false);
+          this.router.navigate(['inicio/ingreso']);
+        }
+
+      );
   }
 }
 
