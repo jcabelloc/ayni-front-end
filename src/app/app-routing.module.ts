@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: './personas/persona-natural/persona-natural.module#PersonaNaturalModule'
   },
   {
+    path: 'creditos/simulacion-credito',
+    loadChildren: './creditos/simulacion-credito/simulacion-credito.module#SimulacionCreditoModule'
+  },
+  {
     path: '',
     redirectTo: 'inicio/ingreso',
     pathMatch: 'full'
