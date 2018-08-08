@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { DatosCredito } from '../../models/DatosCredito';
+import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
 
 export interface TableElement {
   nroCuota: number;
@@ -16,21 +18,42 @@ export interface TableElement {
   styleUrls: ['./simulacion-cronograma.component.css']
 })
 export class SimulacionCronogramaComponent implements OnInit {
+  
+  @Input()  
+  datosCredito: DatosCredito;
 
-  dataTable: TableElement[] = [
-    {  nroCuota: 1, fechaVencimiento: '03/10/2018', saldoCapital: 1000, capital: 250, interes: 50, montoCuota: 300},
-    {  nroCuota: 2, fechaVencimiento: '04/10/2018', saldoCapital: 750, capital: 250, interes: 50, montoCuota: 300},
-    {  nroCuota: 3, fechaVencimiento: '05/11/2018', saldoCapital: 500, capital: 250, interes: 50, montoCuota: 300},
-    {  nroCuota: 4, fechaVencimiento: '06/12/2018', saldoCapital: 250, capital: 250, interes: 50, montoCuota: 300},
+  dataTable: TableElement[];
 
-
-
-  ]; 
   displayedColumns: string[] = ['nroCuota', 'fechaVencimiento', 'saldoCapital', 'capital', 'interes', 'montoCuota'];
 
-  constructor() { }
+  constructor(private simulacionCreditoService: SimulacionCreditoService) { }
 
   ngOnInit() {
+
+  }
+  ngOnChanges(){
+    if (this.isComplete(this.datosCredito)) {
+      this.simulacionCreditoService.getSimulacionCronograma(this.datosCredito)
+      .subscribe(
+        detallesCronogramaCredito => {
+          this.dataTable = [];
+          detallesCronogramaCredito.forEach(
+            e => {
+              this.dataTable.push({  nroCuota: e.nroCuota, fechaVencimiento: e.fechaVencimiento, saldoCapital: e.saldoCapital, capital: e.capital, interes: e.interes, montoCuota: e.montoCuota});
+            }
+          );
+        },
+        err => console.log(err)
+      );
+    }
+  }
+
+  isComplete(datosCredito: DatosCredito): boolean {
+    if (datosCredito === undefined) return false;
+    if (datosCredito.fechaDesembolso && datosCredito.montoDesembolso && datosCredito.fechaPrimeraCuota && datosCredito.frecuencia && datosCredito.nroCuotas && datosCredito.tem) {
+      return true;
+    }
+    return false;
   }
 
 }

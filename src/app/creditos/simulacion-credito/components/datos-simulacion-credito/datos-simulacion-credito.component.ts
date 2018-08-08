@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosCredito } from '../../models/DatosCredito';
 import { MatSelectChange } from '@angular/material';
-import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
-
 
 export interface Option {
   value: string;
@@ -26,13 +24,15 @@ export class DatosSimulacionCreditoComponent implements OnInit {
     fechaPrimeraCuota: null
   };
 
+  datosCreditoForChild: DatosCredito;
+
   frecuencias: Option[] = [
     {value: 'SEMANAL', viewValue: 'Semanal'},
     {value: 'MENSUAL', viewValue: 'Mensual'},
     {value: 'DIARIA', viewValue: 'Diaria'},
   ];
 
-  constructor(private simulacionCreditoService: SimulacionCreditoService) { }
+  constructor() { }
 
   ngOnInit() {
     this.datosCredito.tem = 14.5;
@@ -48,7 +48,6 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   getStringLocalDate(fecha: Date): string {
     let fechaString: string;
     fechaString = fecha.getFullYear() + "-" + (fecha.getMonth() + 1).toString().padStart(2,"0") + "-" + fecha.getDate().toString().padStart(2,"0");
-    console.log(fechaString);
     return fechaString;
   }
 
@@ -84,10 +83,15 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.simulacionCreditoService.getSimulacionCronograma(this.datosCredito)
-      .subscribe(
-        data => {console.log(data)}
-      );
+     
+    this.datosCreditoForChild = {
+      montoDesembolso: this.datosCredito.montoDesembolso,
+      frecuencia: this.datosCredito.frecuencia,
+      tem: this.datosCredito.tem,
+      nroCuotas: this.datosCredito.nroCuotas,
+      fechaDesembolso: this.datosCredito.fechaDesembolso,
+      fechaPrimeraCuota: this.datosCredito.fechaPrimeraCuota,
+    };
   }
 
 

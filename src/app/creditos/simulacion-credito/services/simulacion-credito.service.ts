@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DatosCredito } from '../models/DatosCredito';
 import { environment } from '../../../../environments/environment'
 import { HttpClient } from '@angular/common/http';
+import { DetalleCronogramaCredito } from '../models/DetalleCronogramaCredito';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,6 @@ export class SimulacionCreditoService {
                             + "&fechaDesembolso=" + datosCredito.fechaDesembolso 
                             + "&fechaPrimeraCuota=" + datosCredito.fechaPrimeraCuota;
 
-    return this.http.get<any>(getSimulacionUrl);
+    return this.http.get<DetalleCronogramaCredito[]>(getSimulacionUrl);
   }
 }
