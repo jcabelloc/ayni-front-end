@@ -1,3 +1,91 @@
-<p>
-  create-desembolso works!
-</p>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Datos del Credito</ng-template>
+
+        <div>
+            <button mat-button matStepperNext (click) = "setDatosCredito()" >Siguiente</button>
+          </div>
+
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Monto</mat-label>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoDesembolso" required>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field">
+          <mat-select placeholder="Frecuencia" formControlName="frecuencia" (selectionChange)="onFrecuenciaSelection($event)" required >
+            <mat-option *ngFor="let frecuencia of frecuencias" [value]="frecuencia.value">
+              {{frecuencia.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Tasa Mensual(TEM) en %</mat-label>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="tem" required>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Nro. de Cuotas</mat-label>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="nroCuotas" required>
+        </mat-form-field>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Fecha de Desembolso</mat-label>
+          <input type="date" matInput placeholder="Ingresar aqui.." formControlName="fechaDesembolso" (blur)=onFechaDesembolsoBlur()  required>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Fecha Primera Cuota</mat-label>
+          <input type="date" matInput placeholder="Ingresar aqui.." formControlName="fechaPrimeraCuota" required>
+        </mat-form-field>
+        <button type = "submit" mat-button color="primary"  (click) = "setDatosCredito()">MOSTRAR CRONONOGRAMA</button>
+      </form>
+      
+      <mat-divider></mat-divider>
+      <br><br>
+      <app-simulacion-cronograma [datosCredito]="datosCredito"></app-simulacion-cronograma>
+
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Datos del Desembolso</ng-template>
+
+        <div>
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button matStepperNext >Siguiente</button>
+        </div>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Cliente</mat-label>
+          <input type="text" matInput placeholder="Ingresar aqui.." formControlName="cliente" required>
+        </mat-form-field>
+      
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Via Desembolso" formControlName="viaDesembolso" required >
+            <mat-option *ngFor="let viaDesembolso of viasDesembolso" [value]="viaDesembolso.value">
+              {{viaDesembolso.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+      <mat-divider></mat-divider>
+      <br><br>
+      <app-datos-desembolso [datosCredito] = "datosCredito"></app-datos-desembolso>
+
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirmar Desembolso</ng-template>
+      Verifique bien los datos antes de confirmar.
+      <div>
+        <button mat-button matStepperPrevious>Atras</button>
+        <button mat-button (click)="stepper.reset()">Cancelar</button>
+        <button mat-button >Desembolsar</button>
+      </div>
+      <mat-divider></mat-divider>
+      <br><br>
+      <app-datos-desembolso [datosCredito] = "datosCredito"></app-datos-desembolso>
+    </mat-step>
+  </mat-horizontal-stepper>

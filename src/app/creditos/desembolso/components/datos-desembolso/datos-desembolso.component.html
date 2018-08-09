@@ -1,0 +1,42 @@
+<div class="child">
+    <form novalidate (ngSubmit)="onSubmit()">
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Monto</mat-label>
+        <input type="number" matInput [value] = "datosCredito.montoDesembolso" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field">
+        <mat-select placeholder="Frecuencia" [value] = "datosCredito.frecuencia" disabled>
+          <mat-option value="{{datosCredito.frecuencia}}">
+            {{datosCredito.frecuencia}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Tasa Mensual(TEM) en %</mat-label>
+        <input type="number" matInput [value] = "datosCredito.tem" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Nro. de Cuotas</mat-label>
+        <input type="number" matInput [value] = "datosCredito.nroCuotas" disabled>
+      </mat-form-field>
+        
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Fecha de Desembolso</mat-label>
+        <input type="date" matInput [value] = "datosCredito.fechaDesembolso" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Fecha Primera Cuota</mat-label>
+        <input type="date" matInput [value] = "datosCredito.fechaPrimeraCuota" disabled>
+      </mat-form-field>
+  
+    </form>
+  </div>
+  
+  <mat-divider></mat-divider>
+  <br><br>
+  <app-simulacion-cronograma [datosCredito]="datosCredito"></app-simulacion-cronograma>

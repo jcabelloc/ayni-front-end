@@ -31,6 +31,9 @@ import { SimulacionCronogramaComponent } from './components/simulacion-cronogram
     MatTableModule,
     FormsModule,
   ],
-  declarations: [SimulacionCreditoComponent, DatosSimulacionCreditoComponent, SimulacionCronogramaComponent]
+  declarations: [SimulacionCreditoComponent, DatosSimulacionCreditoComponent, SimulacionCronogramaComponent],
+  exports: [
+    SimulacionCronogramaComponent,
+  ]
 })
 export class SimulacionCreditoModule { }
