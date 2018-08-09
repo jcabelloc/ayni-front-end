@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: './creditos/simulacion-credito/simulacion-credito.module#SimulacionCreditoModule'
   },
   {
+    path: 'creditos/desembolso',
+    loadChildren: './creditos/desembolso/desembolso.module#DesembolsoModule'
+  },
+  {
     path: '',
     redirectTo: 'inicio/ingreso',
     pathMatch: 'full'

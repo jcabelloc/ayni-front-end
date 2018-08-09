@@ -37,7 +37,7 @@ export class SimulacionCronogramaComponent implements OnInit {
       .subscribe(
         detallesCronogramaCredito => {
           this.dataTable = [];
-          detallesCronogramaCredito.forEach(
+          detallesCronogramaCredito.filter(e => e.nroCuota > 0).forEach(
             e => {
               this.dataTable.push({  nroCuota: e.nroCuota, fechaVencimiento: e.fechaVencimiento, saldoCapital: e.saldoCapital, capital: e.capital, interes: e.interes, montoCuota: e.montoCuota});
             }
