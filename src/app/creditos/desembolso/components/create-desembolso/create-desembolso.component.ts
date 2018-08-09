@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DatosCredito } from '../../../simulacion-credito/models/DatosCredito';
 import { MatSelectChange } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { SearchClienteComponent } from '../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 
 export interface Option {
   value: string;
@@ -32,7 +34,7 @@ export class CreateDesembolsoComponent implements OnInit {
     {value: 'DIARIA', viewValue: 'Diaria'},
   ];
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -111,5 +113,18 @@ export class CreateDesembolsoComponent implements OnInit {
       }
     }
     return this.getStringLocalDate(fechaPrimeraCuotaDate);
+  }
+
+  searchCliente(): void {
+    const dialogRef = this.dialog.open(SearchClienteComponent, {
+      width: '800px',
+      data: 'test data'
+    });
+
+    dialogRef.afterClosed().subscribe(isCreated => {
+      if (isCreated) {
+        //this.ngOnChanges();
+      }
+    });
   }
 }
