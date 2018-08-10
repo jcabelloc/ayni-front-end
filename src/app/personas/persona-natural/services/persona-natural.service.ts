@@ -17,12 +17,12 @@ const httpOptions = {
 })
 export class PersonaNaturalService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl + "personas-naturales";
 
   constructor(private http: HttpClient) { }
 
   createPersonaNatural (personaNatural: PersonaNatural): Observable<PersonaNatural> {
-    const createUrl = this.apiUrl + "personas-naturales";
+    const createUrl = this.apiUrl;
     return this.http.post<PersonaNatural>(createUrl, personaNatural, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -30,12 +30,12 @@ export class PersonaNaturalService {
   }
 
   findPersonaNaturalById (id: number): Observable<PersonaNatural> {
-    const findByIdUrl = this.apiUrl + "personas-naturales/" + id;
+    const findByIdUrl = this.apiUrl + "/" + id;
     return this.http.get<PersonaNatural>(findByIdUrl);
   }
 
   updatePersonaNatural(id: number, personaNatural: PersonaNatural) {
-    const updateUrl =  this.apiUrl + "personas-naturales/" + id;
+    const updateUrl =  this.apiUrl + "/" + id;
     return this.http.put<PersonaNatural> (updateUrl, personaNatural)
       .pipe(
         catchError(this.handleError)
@@ -43,14 +43,12 @@ export class PersonaNaturalService {
   }
 
   findFirstNumberOfPersonasNaturales(max: number) {
-    //let findFirstNumberUrl = "http://localhost:8080/ayni-core/api/personas-naturales/?max=" + max;
-    //const headers = new HttpHeaders({'authorization' : 'Basic ' + btoa('mary:test123')});
-    let findFirstNumberUrl = this.apiUrl + "personas-naturales/?max=" + max;
+    let findFirstNumberUrl = this.apiUrl + "?max=" + max;
     return this.http.get<PersonaNatural[]>(findFirstNumberUrl);
   }
 
   findPersonasNaturalesBy(by: string, input: string) {
-    let findBy =  this.apiUrl + "personas-naturales?by=" + by + "&input=" + input;
+    let findBy =  this.apiUrl + "?by=" + by + "&input=" + input;
     return this.http.get<PersonaNatural[]>(findBy);
   }
   
@@ -69,4 +67,15 @@ export class PersonaNaturalService {
     return throwError(
       'Something bad happened; please try again later.');
   };
+
+  //----------------------------------------------------------
+  findFirstNumberOfExtensionPersonasNaturales(max: number) {
+    let findFirstNumberOfExtensionUrl = this.apiUrl + "/extension?max=" + max;
+    return this.http.get<PersonaNatural[]>(findFirstNumberOfExtensionUrl);
+  }
+
+  findExtensionPersonasNaturalesBy(by: string, input: string) {
+    let findExtensionBy =  this.apiUrl + "/extension?by=" + by + "&input=" + input;
+    return this.http.get<PersonaNatural[]>(findExtensionBy);
+  }
 }
