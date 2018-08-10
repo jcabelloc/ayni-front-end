@@ -50,7 +50,6 @@ export class CreatePersonaNaturalComponent implements OnInit {
     this.personaNaturalService.createPersonaNatural(this.personaNatural)
       .subscribe (
         personaNatural => { 
-          console.log(personaNatural);
           this.router.navigate(['personas/persona-natural/update/' + personaNatural.id]); 
         },
         err => console.log(err)
