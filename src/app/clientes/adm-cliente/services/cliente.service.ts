@@ -30,6 +30,16 @@ export class ClienteService {
       );
   }
 
+  findClientesBy(by: string, input: string) {
+    let findByUrl =  this.apiUrl + "?by=" + by + "&input=" + input;
+    return this.http.get<Cliente[]>(findByUrl);
+  }
+
+  findClienteById(id: number): Observable<Cliente> {
+    let findByIdUrl = this.apiUrl + "/" + id;
+    return this.http.get<Cliente>(findByIdUrl)
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

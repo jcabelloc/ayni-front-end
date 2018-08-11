@@ -1,3 +1,5 @@
+import { Cliente } from "../../../clientes/adm-cliente/models/Cliente";
+
 export interface DatosCredito {
     montoDesembolso: number;
     frecuencia: string;
@@ -5,4 +7,5 @@ export interface DatosCredito {
     nroCuotas: number;
     fechaDesembolso: string;
     fechaPrimeraCuota: string;
+    cliente?: Cliente;
 }

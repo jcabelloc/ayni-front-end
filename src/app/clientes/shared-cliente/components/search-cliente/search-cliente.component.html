@@ -47,11 +47,11 @@
             </ng-container>
   
             <ng-container matColumnDef="mas">
-              <th mat-header-cell *matHeaderCellDef> Mas... </th>
+              <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
               <td mat-cell *matCellDef="let element"> 
-                <a href="" mat-icon-button color="primary">
-                  <mat-icon>select</mat-icon>
-                </a>
+                <button mat-icon-button color="primary">
+                  <mat-icon id={{element.id}} (click)="selectCliente($event)" >arrow_forward</mat-icon>
+                </button>
               </td>
             </ng-container>
         

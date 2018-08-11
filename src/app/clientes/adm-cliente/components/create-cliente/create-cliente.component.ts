@@ -52,7 +52,8 @@ export class CreateClienteComponent implements OnInit {
       .subscribe (
         cliente => { 
           console.log(cliente);
-          this.router.navigate(['cliente/adm-cliente/update/' + cliente.id]); 
+          // TODO Change to Update Cliente Path
+          this.router.navigate(['clientes/adm-cliente/adm']); 
         },
         err => console.log(err)
       );

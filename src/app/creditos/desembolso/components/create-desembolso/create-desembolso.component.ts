@@ -4,6 +4,7 @@ import { DatosCredito } from '../../../simulacion-credito/models/DatosCredito';
 import { MatSelectChange } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { SearchClienteComponent } from '../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
+import { ClienteService } from '../../../../clientes/adm-cliente/services/cliente.service';
 
 export interface Option {
   value: string;
@@ -34,7 +35,10 @@ export class CreateDesembolsoComponent implements OnInit {
     {value: 'DIARIA', viewValue: 'Diaria'},
   ];
 
-  constructor(private _formBuilder: FormBuilder, public dialog: MatDialog) { }
+  constructor(private _formBuilder: FormBuilder, 
+              public dialog: MatDialog,
+              private clienteService: ClienteService) 
+  { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -63,8 +67,6 @@ export class CreateDesembolsoComponent implements OnInit {
       fechaDesembolso: this.firstFormGroup.value.fechaDesembolso,
       fechaPrimeraCuota: this.firstFormGroup.value.fechaPrimeraCuota,
     }
-    console.log(this.datosCredito);
-
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
@@ -118,12 +120,19 @@ export class CreateDesembolsoComponent implements OnInit {
   searchCliente(): void {
     const dialogRef = this.dialog.open(SearchClienteComponent, {
       width: '800px',
-      data: 'test data'
     });
 
-    dialogRef.afterClosed().subscribe(isCreated => {
-      if (isCreated) {
-        //this.ngOnChanges();
+    dialogRef.afterClosed().subscribe(idCliente => {
+      if (idCliente) {
+        this.clienteService.findClienteById(idCliente)
+          .subscribe (
+            cliente => {
+              console.log(cliente);
+              this.datosCredito.cliente = cliente;
+              this.secondFormGroup.patchValue({cliente: cliente.personaNatural.nombre});
+            }
+          );
+
       }
     });
   }
