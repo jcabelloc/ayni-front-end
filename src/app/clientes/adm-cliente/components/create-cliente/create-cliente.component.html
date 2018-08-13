@@ -7,7 +7,7 @@
   
         <mat-card-content>
             <mat-form-field class="mat-form-field" >
-              <mat-select placeholder="Tipo Identificacion" appearance="standard" [(ngModel)]="cliente.personaNatural.tipoIdentificacion" name="tipoIdentificacion" disabled>
+              <mat-select placeholder="Tipo Identificacion" [(ngModel)]="cliente.personaNatural.tipoIdentificacion" name="tipoIdentificacion" disabled>
                 <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.value">
                   {{tipoDoc.viewValue}}
                 </mat-option>

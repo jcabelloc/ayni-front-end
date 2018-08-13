@@ -25,15 +25,27 @@ export class CreateDesembolsoComponent implements OnInit {
   datosCredito: DatosCredito;
 
   viasDesembolso: Option[] = [
-    {value: 'EFECTIVO', viewValue: 'Efectivo'},
-    {value: 'BANCO', viewValue: 'Banco'},
+    {value: 'EFECTIVO', viewValue: 'EFECTIVO'},
+    {value: 'BANCO', viewValue: 'BANCO'},
   ];
 
   frecuencias: Option[] = [
-    {value: 'SEMANAL', viewValue: 'Semanal'},
-    {value: 'MENSUAL', viewValue: 'Mensual'},
-    {value: 'DIARIA', viewValue: 'Diaria'},
+    {value: 'SEMANAL', viewValue: 'SEMANAL'},
+    {value: 'MENSUAL', viewValue: 'MENSUAL'},
+    {value: 'DIARIA', viewValue: 'DIARIA'},
   ];
+
+  tipoDocs: Option[] = [
+    {value: 'DNI', viewValue: 'DNI'}
+  ];
+
+  aprobadores: Option[] = [
+    {value: 'GRIOS', viewValue: 'GRIOS'},
+    {value: 'EPREZ', viewValue: 'EPEREZ'},
+    {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
+
+  ];
+
 
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
@@ -52,21 +64,32 @@ export class CreateDesembolsoComponent implements OnInit {
 
     this.secondFormGroup = this._formBuilder.group({
       cliente: ['', Validators.required],
+      tipoIdentificacion: ['DNI',Validators.required],
+      nroIdentificacion: ['',Validators.required],
+      usuarioAprobador:['', Validators.required],
       viaDesembolso: ['', Validators.required],
     });
 
-    this.setDatosCredito();
+    this.setDatosCredito(1);
   }
   
-  setDatosCredito(){
-    this.datosCredito = { 
-      montoDesembolso: this.firstFormGroup.value.montoDesembolso,
-      frecuencia: this.firstFormGroup.value.frecuencia,
-      tem: this.firstFormGroup.value.tem,
-      nroCuotas:  this.firstFormGroup.value.nroCuotas,
-      fechaDesembolso: this.firstFormGroup.value.fechaDesembolso,
-      fechaPrimeraCuota: this.firstFormGroup.value.fechaPrimeraCuota,
+  setDatosCredito(step: number){
+    if (step == 1) {
+      this.datosCredito = { 
+        montoDesembolso: this.firstFormGroup.value.montoDesembolso,
+        frecuencia: this.firstFormGroup.value.frecuencia,
+        tem: this.firstFormGroup.value.tem,
+        nroCuotas:  this.firstFormGroup.value.nroCuotas,
+        fechaDesembolso: this.firstFormGroup.value.fechaDesembolso,
+        fechaPrimeraCuota: this.firstFormGroup.value.fechaPrimeraCuota,
+        cliente: null,
+      }
+    } else if (step == 2) {
+      this.datosCredito.cliente = this.datosCredito.cliente;
+      this.datosCredito.usuarioAprobador = this.secondFormGroup.value.usuarioAprobador;
+      this.datosCredito.viaDesembolso = this.secondFormGroup.value.viaDesembolso;
     }
+    console.log(this.datosCredito);
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
@@ -130,6 +153,8 @@ export class CreateDesembolsoComponent implements OnInit {
               console.log(cliente);
               this.datosCredito.cliente = cliente;
               this.secondFormGroup.patchValue({cliente: cliente.personaNatural.nombre});
+              this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
+              this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
             }
           );
 

@@ -5,3 +5,17 @@
     margin-left: 1%;
     margin-right: 1%;
   }
+
+  .mat-form-field-nroIdentificacion {
+    width: 32%;
+    min-width: 180px;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+.mat-form-field-small {
+    width: 10%;
+    min-width: 80px;
+    margin-left: 1%;
+    margin-right: 1%;
+  }

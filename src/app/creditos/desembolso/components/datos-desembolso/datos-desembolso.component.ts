@@ -10,9 +10,12 @@ export class DatosDesembolsoComponent implements OnInit {
   @Input()
   datosCredito: DatosCredito;
 
-  datosCreditoForChild: DatosCredito;
+  @Input()
+  step: number;
 
-  constructor() { }
+
+  constructor() {
+   }
 
   ngOnInit() {
   }

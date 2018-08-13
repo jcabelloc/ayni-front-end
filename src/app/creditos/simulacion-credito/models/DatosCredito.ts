@@ -8,4 +8,6 @@ export interface DatosCredito {
     fechaDesembolso: string;
     fechaPrimeraCuota: string;
     cliente?: Cliente;
+    usuarioAprobador?: string;
+    viaDesembolso?: string; 
 }

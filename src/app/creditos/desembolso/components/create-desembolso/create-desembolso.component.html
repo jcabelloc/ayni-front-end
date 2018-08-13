@@ -4,11 +4,11 @@
         <ng-template matStepLabel>Datos del Credito</ng-template>
 
         <div>
-            <button mat-button matStepperNext (click) = "setDatosCredito()" >Siguiente</button>
-          </div>
+          <button mat-button matStepperNext (click) = "setDatosCredito(1)" >Siguiente</button>
+        </div>
 
         <mat-form-field class="mat-form-field" appearance="standard">
-          <mat-label>Monto</mat-label>
+          <mat-label>Monto S/</mat-label>
           <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoDesembolso" required>
         </mat-form-field>
 
@@ -39,9 +39,8 @@
           <mat-label>Fecha Primera Cuota</mat-label>
           <input type="date" matInput placeholder="Ingresar aqui.." formControlName="fechaPrimeraCuota" required>
         </mat-form-field>
-        <button type = "submit" mat-button color="primary"  (click) = "setDatosCredito()">MOSTRAR CRONONOGRAMA</button>
+        <button type = "submit" mat-button color="primary">MOSTRAR CRONONOGRAMA</button>
       </form>
-      
       <mat-divider></mat-divider>
       <br><br>
       <app-simulacion-cronograma [datosCredito]="datosCredito"></app-simulacion-cronograma>
@@ -54,17 +53,39 @@
 
         <div>
           <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button matStepperNext >Siguiente</button>
+          <button mat-button matStepperNext  (click) = "setDatosCredito(2)" >Siguiente</button>
         </div>
-        
-        <mat-form-field class="mat-form-field" appearance="standard">
-          <mat-label>Cliente</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." formControlName="cliente" required>
+
+        <mat-form-field class="mat-form-field-small" >
+          <mat-select placeholder="Tipo Identificacion" formControlName="tipoIdentificacion" disabled>
+            <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.value">
+              {{tipoDoc.viewValue}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <mat-form-field class="mat-form-field-nroIdentificacion" appearance="standard">
+          <mat-label>Nro. de Identificacion</mat-label>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="nroIdentificacion" readonly>
+        </mat-form-field>
+        
         <button mat-icon-button color="primary" (click)="searchCliente()">
             <mat-icon>search</mat-icon>
         </button>
-      
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Cliente</mat-label>
+          <input type="text" matInput placeholder="Ingresar aqui.." formControlName="cliente" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Usuario Aprobador" formControlName="usuarioAprobador" required >
+            <mat-option *ngFor="let aprobador of aprobadores" [value]="aprobador.value">
+              {{aprobador.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-form-field class="mat-form-field"  >
           <mat-select placeholder="Via Desembolso" formControlName="viaDesembolso" required >
             <mat-option *ngFor="let viaDesembolso of viasDesembolso" [value]="viaDesembolso.value">
@@ -76,7 +97,7 @@
 
       <mat-divider></mat-divider>
       <br><br>
-      <app-datos-desembolso [datosCredito] = "datosCredito"></app-datos-desembolso>
+      <app-datos-desembolso [datosCredito] = "datosCredito" [step]=2></app-datos-desembolso>
 
     </mat-step>
     <mat-step>
@@ -89,6 +110,6 @@
       </div>
       <mat-divider></mat-divider>
       <br><br>
-      <app-datos-desembolso [datosCredito] = "datosCredito"></app-datos-desembolso>
+      <app-datos-desembolso [datosCredito] = "datosCredito" [step]=3></app-datos-desembolso>
     </mat-step>
   </mat-horizontal-stepper>
