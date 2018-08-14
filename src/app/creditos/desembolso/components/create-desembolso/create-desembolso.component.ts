@@ -69,8 +69,6 @@ export class CreateDesembolsoComponent implements OnInit {
       usuarioAprobador:['', Validators.required],
       viaDesembolso: ['', Validators.required],
     });
-
-    this.setDatosCredito(1);
   }
   
   setDatosCredito(step: number){
@@ -82,14 +80,12 @@ export class CreateDesembolsoComponent implements OnInit {
         nroCuotas:  this.firstFormGroup.value.nroCuotas,
         fechaDesembolso: this.firstFormGroup.value.fechaDesembolso,
         fechaPrimeraCuota: this.firstFormGroup.value.fechaPrimeraCuota,
-        cliente: null,
       }
     } else if (step == 2) {
       this.datosCredito.cliente = this.datosCredito.cliente;
       this.datosCredito.usuarioAprobador = this.secondFormGroup.value.usuarioAprobador;
       this.datosCredito.viaDesembolso = this.secondFormGroup.value.viaDesembolso;
     }
-    console.log(this.datosCredito);
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
@@ -140,6 +136,16 @@ export class CreateDesembolsoComponent implements OnInit {
     return this.getStringLocalDate(fechaPrimeraCuotaDate);
   }
 
+  onSubmitStep1({value, valid}: {value: DatosCredito, valid: boolean}){
+    this.datosCredito = { 
+      montoDesembolso: value.montoDesembolso,
+      frecuencia: value.frecuencia,
+      tem: value.tem,
+      nroCuotas:  value.nroCuotas,
+      fechaDesembolso: value.fechaDesembolso,
+      fechaPrimeraCuota: value.fechaPrimeraCuota,
+    }
+  }
   searchCliente(): void {
     const dialogRef = this.dialog.open(SearchClienteComponent, {
       width: '800px',
@@ -150,7 +156,6 @@ export class CreateDesembolsoComponent implements OnInit {
         this.clienteService.findClienteById(idCliente)
           .subscribe (
             cliente => {
-              console.log(cliente);
               this.datosCredito.cliente = cliente;
               this.secondFormGroup.patchValue({cliente: cliente.personaNatural.nombre});
               this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});

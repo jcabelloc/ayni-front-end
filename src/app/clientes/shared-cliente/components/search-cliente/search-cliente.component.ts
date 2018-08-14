@@ -49,7 +49,6 @@ export class SearchClienteComponent implements OnInit {
     this.clienteService.findClientesBy(value.option, value.searchInput)
       .subscribe(
         clientes => {
-          console.log(clientes);
           this.data = [];
           let posicion = 0;
           clientes.forEach(
