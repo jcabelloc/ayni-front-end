@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DatosCredito } from '../models/DatosCredito';
+import { Credito } from '../models/Credito';
 import { environment } from '../../../../environments/environment'
 import { HttpClient } from '@angular/common/http';
 import { DetalleCronogramaCredito } from '../models/DetalleCronogramaCredito';
@@ -13,15 +13,15 @@ export class SimulacionCreditoService {
 
   constructor(private http: HttpClient) { }
 
-  getSimulacionCronograma(datosCredito: DatosCredito) {
+  getSimulacionCronograma(credito: Credito) {
 
-    const getSimulacionUrl =  this.apiUrl + "creditos/simulacion-cronograma?" 
-                            + "montoDesembolso=" + datosCredito.montoDesembolso
-                            + "&frecuencia=" + datosCredito.frecuencia 
-                            + "&tem=" + datosCredito.tem 
-                            + "&nroCuotas=" +  datosCredito.nroCuotas
-                            + "&fechaDesembolso=" + datosCredito.fechaDesembolso 
-                            + "&fechaPrimeraCuota=" + datosCredito.fechaPrimeraCuota;
+    const getSimulacionUrl =  this.apiUrl + "creditos/simular-cronograma?" 
+                            + "montoDesembolso=" + credito.montoDesembolso
+                            + "&frecuencia=" + credito.frecuencia 
+                            + "&tem=" + credito.tem 
+                            + "&nroCuotas=" +  credito.nroCuotas
+                            + "&fechaDesembolso=" + credito.fechaDesembolso 
+                            + "&fechaPrimeraCuota=" + credito.fechaPrimeraCuota;
 
     return this.http.get<DetalleCronogramaCredito[]>(getSimulacionUrl);
   }

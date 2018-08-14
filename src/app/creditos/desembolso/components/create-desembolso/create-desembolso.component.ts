@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { DatosCredito } from '../../../simulacion-credito/models/DatosCredito';
+import { Credito } from '../../../simulacion-credito/models/Credito';
 import { MatSelectChange } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { SearchClienteComponent } from '../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 import { ClienteService } from '../../../../clientes/adm-cliente/services/cliente.service';
+import { Cliente } from '../../../../clientes/adm-cliente/models/Cliente';
 
 export interface Option {
   value: string;
@@ -17,12 +18,11 @@ export interface Option {
   styleUrls: ['./create-desembolso.component.css']
 })
 export class CreateDesembolsoComponent implements OnInit {
-  isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  address: string;
-  datosCredito: DatosCredito;
+  credito: Credito;
+  cliente: Cliente;
 
   viasDesembolso: Option[] = [
     {value: 'EFECTIVO', viewValue: 'EFECTIVO'},
@@ -45,7 +45,6 @@ export class CreateDesembolsoComponent implements OnInit {
     {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
 
   ];
-
 
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
@@ -70,28 +69,28 @@ export class CreateDesembolsoComponent implements OnInit {
       viaDesembolso: ['', Validators.required],
     });
   }
-  
-  setDatosCredito(step: number){
-    if (step == 1) {
-      this.datosCredito = { 
-        montoDesembolso: this.firstFormGroup.value.montoDesembolso,
-        frecuencia: this.firstFormGroup.value.frecuencia,
-        tem: this.firstFormGroup.value.tem,
-        nroCuotas:  this.firstFormGroup.value.nroCuotas,
-        fechaDesembolso: this.firstFormGroup.value.fechaDesembolso,
-        fechaPrimeraCuota: this.firstFormGroup.value.fechaPrimeraCuota,
-      }
-    } else if (step == 2) {
-      this.datosCredito.cliente = this.datosCredito.cliente;
-      this.datosCredito.usuarioAprobador = this.secondFormGroup.value.usuarioAprobador;
-      this.datosCredito.viaDesembolso = this.secondFormGroup.value.viaDesembolso;
+
+  onSubmitStep1({value, valid}: {value: Credito, valid: boolean}){
+    this.credito = { 
+      montoDesembolso: value.montoDesembolso,
+      frecuencia: value.frecuencia,
+      tem: value.tem,
+      nroCuotas:  value.nroCuotas,
+      fechaDesembolso: value.fechaDesembolso,
+      fechaPrimeraCuota: value.fechaPrimeraCuota,
+      cliente: this.cliente,
     }
+  }
+
+  onSubmitStep2({value, valid}: {value: Credito, valid: boolean}){
+    this.credito.cliente = this.cliente;
+    this.credito.usuarioAprobador = value.usuarioAprobador;
+    this.credito.viaDesembolso = value.viaDesembolso;
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
     this.updateFechaPrimeraCuota();
   }
-
 
   getStringLocalDate(fecha: Date): string {
     let fechaString: string;
@@ -136,16 +135,6 @@ export class CreateDesembolsoComponent implements OnInit {
     return this.getStringLocalDate(fechaPrimeraCuotaDate);
   }
 
-  onSubmitStep1({value, valid}: {value: DatosCredito, valid: boolean}){
-    this.datosCredito = { 
-      montoDesembolso: value.montoDesembolso,
-      frecuencia: value.frecuencia,
-      tem: value.tem,
-      nroCuotas:  value.nroCuotas,
-      fechaDesembolso: value.fechaDesembolso,
-      fechaPrimeraCuota: value.fechaPrimeraCuota,
-    }
-  }
   searchCliente(): void {
     const dialogRef = this.dialog.open(SearchClienteComponent, {
       width: '800px',
@@ -156,7 +145,7 @@ export class CreateDesembolsoComponent implements OnInit {
         this.clienteService.findClienteById(idCliente)
           .subscribe (
             cliente => {
-              this.datosCredito.cliente = cliente;
+              this.cliente = cliente;
               this.secondFormGroup.patchValue({cliente: cliente.personaNatural.nombre});
               this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
               this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
@@ -165,5 +154,8 @@ export class CreateDesembolsoComponent implements OnInit {
 
       }
     });
+  }
+  desembolsarCredito(){
+    console.log(this.credito);
   }
 }

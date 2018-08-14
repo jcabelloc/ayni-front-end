@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DatosCredito } from '../../../simulacion-credito/models/DatosCredito';
+import { Credito } from '../../../simulacion-credito/models/Credito';
 
 @Component({
   selector: 'app-datos-desembolso',
@@ -8,7 +8,7 @@ import { DatosCredito } from '../../../simulacion-credito/models/DatosCredito';
 })
 export class DatosDesembolsoComponent implements OnInit {
   @Input()
-  datosCredito: DatosCredito;
+  credito: Credito;
 
   @Input()
   step: number;

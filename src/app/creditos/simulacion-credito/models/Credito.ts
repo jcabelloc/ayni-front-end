@@ -1,6 +1,6 @@
 import { Cliente } from "../../../clientes/adm-cliente/models/Cliente";
 
-export interface DatosCredito {
+export interface Credito {
     montoDesembolso: number;
     frecuencia: string;
     tem: number;
