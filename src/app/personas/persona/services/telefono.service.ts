@@ -17,23 +17,23 @@ const httpOptions = {
 })
 export class TelefonoService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl + "personas";
 
   constructor(private http: HttpClient) { }
 
 
   findAllTelefonosByIdPersona(idPersona: number) {
-    let findAllUrl = this.apiUrl + "persona/" + idPersona + "/telefonos";
+    let findAllUrl = this.apiUrl + "/" + idPersona + "/telefonos";
     return this.http.get<Telefono[]>(findAllUrl);
   }
   
   getTelefonoForm(idPersona: number) {
-    let formUrl = this.apiUrl + "persona/" + idPersona + "/telefonos/form";
+    let formUrl = this.apiUrl + "/" + idPersona + "/telefonos/form";
     return this.http.get<TelefonoForm>(formUrl);
   }
 
   createTelefono(idPersona: number, telefono: Telefono) {
-    const createUrl = this.apiUrl + "persona/" + idPersona + "/telefonos";
+    const createUrl = this.apiUrl + "/" + idPersona + "/telefonos";
     return this.http.post<Telefono>(createUrl, telefono, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -41,7 +41,7 @@ export class TelefonoService {
   }
   
   deleteTelefono(idPersona: number, idTelefono: number){
-    const deleteUrl = this.apiUrl + "persona/" + idPersona + "/telefonos/" + idTelefono;
+    const deleteUrl = this.apiUrl + "/" + idPersona + "/telefonos/" + idTelefono;
     return this.http.delete(deleteUrl, httpOptions)
       .pipe(
         catchError(this.handleError)

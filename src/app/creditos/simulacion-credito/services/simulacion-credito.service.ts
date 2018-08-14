@@ -15,7 +15,7 @@ export class SimulacionCreditoService {
 
   getSimulacionCronograma(datosCredito: DatosCredito) {
 
-    const getSimulacionUrl =  this.apiUrl + "creditos/simulacionCronograma?" 
+    const getSimulacionUrl =  this.apiUrl + "creditos/simulacion-cronograma?" 
                             + "montoDesembolso=" + datosCredito.montoDesembolso
                             + "&frecuencia=" + datosCredito.frecuencia 
                             + "&tem=" + datosCredito.tem 

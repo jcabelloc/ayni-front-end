@@ -18,12 +18,12 @@ const httpOptions = {
 })
 export class DireccionService {
 
-  apiUrl = environment.apiUrl;
+  apiUrl = environment.apiUrl + "personas";
 
   constructor(private http: HttpClient) { }
 
   createDireccion(idPersona: number, direccion: Direccion): Observable<Direccion> {
-    const createUrl = this.apiUrl + "persona/" + idPersona + "/direcciones";
+    const createUrl = this.apiUrl + "/" + idPersona + "/direcciones";
     return this.http.post<Direccion>(createUrl, direccion, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -32,17 +32,17 @@ export class DireccionService {
   }
 
   getConfiguracionUbigeo() {
-    let configUbigeoUrl = this.apiUrl + "configuracion/ubigeo";
+    let configUbigeoUrl = this.apiUrl + "/configuracion-ubigeo";
     return this.http.get<ConfiguracionUbigeo>(configUbigeoUrl);
   }
 
   findAllDireccionesByIdPersona(idPersona: number) {
-    const findAllUrl = this.apiUrl + "persona/" + idPersona + "/direcciones";
+    const findAllUrl = this.apiUrl + "/" + idPersona + "/direcciones";
     return this.http.get<Direccion[]>(findAllUrl);
   }
 
   deleteDireccion(idPersona: number, idDireccion: number){
-    const deleteUrl = this.apiUrl + "persona/" + idPersona + "/direcciones/" + idDireccion;
+    const deleteUrl = this.apiUrl + "/" + idPersona + "/direcciones/" + idDireccion;
     return this.http.delete(deleteUrl, httpOptions)
       .pipe(
         catchError(this.handleError)
