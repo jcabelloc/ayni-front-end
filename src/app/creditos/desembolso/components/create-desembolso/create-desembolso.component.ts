@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { SearchClienteComponent } from '../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 import { ClienteService } from '../../../../clientes/adm-cliente/services/cliente.service';
 import { Cliente } from '../../../../clientes/adm-cliente/models/Cliente';
+import { CreditoService } from '../../services/credito.service';
 
 export interface Option {
   value: string;
@@ -48,7 +49,8 @@ export class CreateDesembolsoComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
-              private clienteService: ClienteService) 
+              private clienteService: ClienteService,
+              private creditoService: CreditoService) 
   { }
 
   ngOnInit() {
@@ -71,8 +73,9 @@ export class CreateDesembolsoComponent implements OnInit {
   }
 
   onSubmitStep1({value, valid}: {value: Credito, valid: boolean}){
-    this.credito = { 
+    this.credito = {
       montoDesembolso: value.montoDesembolso,
+      moneda: '1',
       frecuencia: value.frecuencia,
       tem: value.tem,
       nroCuotas:  value.nroCuotas,
@@ -156,6 +159,12 @@ export class CreateDesembolsoComponent implements OnInit {
     });
   }
   desembolsarCredito(){
-    console.log(this.credito);
+    this.creditoService.createCredito(this.credito)
+      .subscribe(
+        credito => {
+          console.log(credito);
+        },
+        err => console.log(err)
+      );
   }
 }

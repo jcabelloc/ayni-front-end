@@ -17,6 +17,7 @@ export interface Option {
 export class DatosSimulacionCreditoComponent implements OnInit {
   credito: Credito = {
     montoDesembolso: null,
+    moneda: '1',
     frecuencia: null,
     tem: null,
     nroCuotas: null,
@@ -86,6 +87,7 @@ export class DatosSimulacionCreditoComponent implements OnInit {
      
     this.creditoForChild = {
       montoDesembolso: this.credito.montoDesembolso,
+      moneda: this.credito.moneda,
       frecuencia: this.credito.frecuencia,
       tem: this.credito.tem,
       nroCuotas: this.credito.nroCuotas,
