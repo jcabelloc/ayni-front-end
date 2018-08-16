@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Credito } from '../../models/Credito';
 import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
+import { DesembolsoCredito } from '../../../../operaciones/creditos/desembolso-credito/models/DesembolsoCredito';
 
 export interface TableElement {
   nroCuota: number;
@@ -20,7 +20,7 @@ export interface TableElement {
 export class SimulacionCronogramaComponent implements OnInit {
   
   @Input()  
-  credito: Credito;
+  desembolsoCredito: DesembolsoCredito;
 
   dataTable: TableElement[];
 
@@ -32,8 +32,8 @@ export class SimulacionCronogramaComponent implements OnInit {
 
   }
   ngOnChanges(){
-    if (this.isComplete(this.credito)) {
-      this.simulacionCreditoService.getSimulacionCronograma(this.credito)
+    if (this.isComplete(this.desembolsoCredito)) {
+      this.simulacionCreditoService.getSimulacionCronograma(this.desembolsoCredito)
       .subscribe(
         detallesCronogramaCredito => {
           this.dataTable = [];
@@ -48,9 +48,10 @@ export class SimulacionCronogramaComponent implements OnInit {
     }
   }
 
-  isComplete(credito: Credito): boolean {
-    if (credito === undefined) return false;
-    if (credito.fechaDesembolso && credito.montoDesembolso && credito.fechaPrimeraCuota && credito.frecuencia && credito.nroCuotas && credito.tem) {
+  isComplete(desembolsoCredito: DesembolsoCredito): boolean {
+    if (desembolsoCredito === undefined) return false;
+    if (desembolsoCredito.fechaDesembolso && desembolsoCredito.montoDesembolso && desembolsoCredito.fechaPrimeraCuota && 
+        desembolsoCredito.frecuencia && desembolsoCredito.nroCuotas && desembolsoCredito.tem) {
       return true;
     }
     return false;

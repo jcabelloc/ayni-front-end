@@ -3,11 +3,11 @@
 
     <mat-form-field class="mat-form-field" appearance="standard">
       <mat-label>Monto S/</mat-label>
-      <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="credito.montoDesembolso" name="montoDesembolso" required>
+      <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="desembolsoCredito.montoDesembolso" name="montoDesembolso" required>
     </mat-form-field>
 
     <mat-form-field class="mat-form-field"  >
-      <mat-select placeholder="Frecuencia" [(ngModel)]="credito.frecuencia" name="frecuencia" (selectionChange)="onFrecuenciaSelection($event)" required >
+      <mat-select placeholder="Frecuencia" [(ngModel)]="desembolsoCredito.frecuencia" name="frecuencia" (selectionChange)="onFrecuenciaSelection($event)" required >
         <mat-option *ngFor="let frecuencia of frecuencias" [value]="frecuencia.value">
           {{frecuencia.viewValue}}
         </mat-option>
@@ -16,22 +16,22 @@
 
     <mat-form-field class="mat-form-field" appearance="standard">
       <mat-label>Tasa Mensual(TEM) en %</mat-label>
-      <input type="number" step="0.1" matInput placeholder="Ingresar aqui.." [(ngModel)]="credito.tem" name="tem" required>
+      <input type="number" step="0.1" matInput placeholder="Ingresar aqui.." [(ngModel)]="desembolsoCredito.tem" name="tem" required>
     </mat-form-field>
 
     <mat-form-field class="mat-form-field" appearance="standard">
       <mat-label>Nro. de Cuotas</mat-label>
-      <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="credito.nroCuotas" name="nroCuotas" required>
+      <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="desembolsoCredito.nroCuotas" name="nroCuotas" required>
     </mat-form-field>
     
     <mat-form-field class="mat-form-field" appearance="standard">
       <mat-label>Fecha de Desembolso</mat-label>
-      <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="credito.fechaDesembolso" (blur)=onFechaDesembolsoBlur() name="fechaDesembolso" required>
+      <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="desembolsoCredito.fechaDesembolso" (blur)=onFechaDesembolsoBlur() name="fechaDesembolso" required>
     </mat-form-field>
 
     <mat-form-field class="mat-form-field" appearance="standard">
       <mat-label>Fecha Primera Cuota</mat-label>
-      <input type="date" matInput placeholder="Ingresar aqui.."  [(ngModel)]="credito.fechaPrimeraCuota" name="fechaPrimeraCuota" required>
+      <input type="date" matInput placeholder="Ingresar aqui.."  [(ngModel)]="desembolsoCredito.fechaPrimeraCuota" name="fechaPrimeraCuota" required>
     </mat-form-field>
     <button type = "submit" mat-button color="primary">GENERAR</button>
   </form>
@@ -39,4 +39,4 @@
 
 <mat-divider></mat-divider>
 <br><br>
-<app-simulacion-cronograma [credito]="creditoForChild"></app-simulacion-cronograma>
+<app-simulacion-cronograma [desembolsoCredito]="desembolsoCreditoForChild"></app-simulacion-cronograma>

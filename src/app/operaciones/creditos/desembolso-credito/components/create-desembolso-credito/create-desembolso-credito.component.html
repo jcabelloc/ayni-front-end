@@ -1,4 +1,4 @@
-  <mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" #formStep1="ngForm" (ngSubmit)="onSubmitStep1(formStep1)">
         <ng-template matStepLabel>Datos del Credito</ng-template>
@@ -43,7 +43,7 @@
       </form>
       <mat-divider></mat-divider>
       <br><br>
-      <app-simulacion-cronograma [credito]="credito"></app-simulacion-cronograma>
+      <app-simulacion-cronograma [desembolsoCredito]="desembolsoCredito"></app-simulacion-cronograma>
 
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
@@ -97,8 +97,8 @@
 
       <mat-divider></mat-divider>
       <br><br>
-      <app-datos-desembolso [credito] = "credito" [step]=2></app-datos-desembolso>
-      <app-simulacion-cronograma [credito]="credito"></app-simulacion-cronograma>
+      <app-datos-desembolso-credito [desembolsoCredito] = "desembolsoCredito" [step]=2></app-datos-desembolso-credito>
+      <app-simulacion-cronograma [desembolsoCredito]="desembolsoCredito"></app-simulacion-cronograma>
 
 
     </mat-step>
@@ -112,7 +112,7 @@
       </div>
       <mat-divider></mat-divider>
       <br><br>
-      <app-datos-desembolso [credito] = "credito" [step]=3></app-datos-desembolso>
-      <app-simulacion-cronograma [credito]="credito"></app-simulacion-cronograma>
+      <app-datos-desembolso-credito [desembolsoCredito] = "desembolsoCredito" [step]=3></app-datos-desembolso-credito>
+      <app-simulacion-cronograma [desembolsoCredito]="desembolsoCredito"></app-simulacion-cronograma>
     </mat-step>
   </mat-horizontal-stepper>

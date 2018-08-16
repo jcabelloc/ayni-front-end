@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Credito } from '../../simulacion-credito/models/Credito';
-import { environment } from '../../../../environments/environment'
+import { environment } from '../../../../../environments/environment'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { DesembolsoCredito } from '../models/DesembolsoCredito';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -11,17 +11,18 @@ const httpOptions = {
   })
 };
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class CreditoService {
-  readonly apiUrl: string = environment.apiUrl + "creditos";
+export class DesembolsoCreditoService {
+  readonly apiUrl: string = environment.apiUrl + "operaciones/creditos/desembolsos";
 
   constructor(private http: HttpClient) { }
 
-  createCredito(credito: Credito) {
+  createDesembolso(desembolsoCredito: DesembolsoCredito) {
     let createUrl = this.apiUrl; 
-    return this.http.post<Credito>(createUrl, credito, httpOptions) 
+    return this.http.post<DesembolsoCredito>(createUrl, desembolsoCredito, httpOptions) 
       .pipe(
         catchError(this.handleError)
       );

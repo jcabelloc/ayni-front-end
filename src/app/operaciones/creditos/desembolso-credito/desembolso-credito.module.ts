@@ -11,20 +11,19 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { DesembolsoCreditoRoutingModule } from './desembolso-credito-routing.module';
+import { AdmDesembolsoCreditoComponent } from './components/adm-desembolso-credito/adm-desembolso-credito.component';
+import { CreateDesembolsoCreditoComponent } from './components/create-desembolso-credito/create-desembolso-credito.component';
+import { DatosDesembolsoCreditoComponent } from './components/datos-desembolso-credito/datos-desembolso-credito.component';
 
 
-import { DesembolsoRoutingModule } from './desembolso-routing.module';
-import { AdmDesembolsoComponent } from './components/adm-desembolso/adm-desembolso.component';
-import { CreateDesembolsoComponent } from './components/create-desembolso/create-desembolso.component';
-import { DatosDesembolsoComponent } from './components/datos-desembolso/datos-desembolso.component';
-
-import { SimulacionCreditoModule } from '../simulacion-credito/simulacion-credito.module' 
-import { SharedClienteModule} from '../../clientes/shared-cliente/shared-cliente.module'
+import { SimulacionCreditoModule } from '../../../creditos/simulacion-credito/simulacion-credito.module';
+import { SharedClienteModule } from '../../../clientes/shared-cliente/shared-cliente.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    DesembolsoRoutingModule,
+    DesembolsoCreditoRoutingModule,
     MatButtonModule,
     MatStepperModule,
     FormsModule,
@@ -32,12 +31,12 @@ import { SharedClienteModule} from '../../clientes/shared-cliente/shared-cliente
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-    SimulacionCreditoModule,
     MatSelectModule,
     MatIconModule,
     MatDialogModule,
+    SimulacionCreditoModule,
     SharedClienteModule,
   ],
-  declarations: [AdmDesembolsoComponent, CreateDesembolsoComponent, DatosDesembolsoComponent]
+  declarations: [AdmDesembolsoCreditoComponent, CreateDesembolsoCreditoComponent, DatosDesembolsoCreditoComponent]
 })
-export class DesembolsoModule { }
+export class DesembolsoCreditoModule { }

@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { Credito } from '../../../simulacion-credito/models/Credito';
-import { MatSelectChange } from '@angular/material';
-import { MatDialog } from '@angular/material';
-import { SearchClienteComponent } from '../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
-import { ClienteService } from '../../../../clientes/adm-cliente/services/cliente.service';
-import { Cliente } from '../../../../clientes/adm-cliente/models/Cliente';
-import { CreditoService } from '../../services/credito.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DesembolsoCredito } from '../../models/DesembolsoCredito';
+import { Cliente } from '../../../../../clientes/adm-cliente/models/Cliente';
+import { MatDialog, MatSelectChange } from '@angular/material';
+import { ClienteService } from '../../../../../clientes/adm-cliente/services/cliente.service';
+import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
+import { DesembolsoCreditoService } from '../../services/desembolso-credito.service';
 
 export interface Option {
   value: string;
   viewValue: string;
 }
 
+
 @Component({
-  selector: 'app-create-desembolso',
-  templateUrl: './create-desembolso.component.html',
-  styleUrls: ['./create-desembolso.component.css']
+  selector: 'app-create-desembolso-credito',
+  templateUrl: './create-desembolso-credito.component.html',
+  styleUrls: ['./create-desembolso-credito.component.css']
 })
-export class CreateDesembolsoComponent implements OnInit {
+export class CreateDesembolsoCreditoComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  credito: Credito;
+  desembolsoCredito: DesembolsoCredito;
   cliente: Cliente;
 
   viasDesembolso: Option[] = [
@@ -50,7 +50,7 @@ export class CreateDesembolsoComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
               private clienteService: ClienteService,
-              private creditoService: CreditoService) 
+              private desembolsoCreditoService: DesembolsoCreditoService) 
   { }
 
   ngOnInit() {
@@ -72,8 +72,8 @@ export class CreateDesembolsoComponent implements OnInit {
     });
   }
 
-  onSubmitStep1({value, valid}: {value: Credito, valid: boolean}){
-    this.credito = {
+  onSubmitStep1({value, valid}: {value: DesembolsoCredito, valid: boolean}){
+    this.desembolsoCredito = {
       montoDesembolso: value.montoDesembolso,
       moneda: '1',
       frecuencia: value.frecuencia,
@@ -85,10 +85,10 @@ export class CreateDesembolsoComponent implements OnInit {
     }
   }
 
-  onSubmitStep2({value, valid}: {value: Credito, valid: boolean}){
-    this.credito.cliente = this.cliente;
-    this.credito.usuarioAprobador = value.usuarioAprobador;
-    this.credito.viaDesembolso = value.viaDesembolso;
+  onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){
+    this.desembolsoCredito.cliente = this.cliente;
+    this.desembolsoCredito.usuarioAprobador = value.usuarioAprobador;
+    this.desembolsoCredito.viaDesembolso = value.viaDesembolso;
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
@@ -159,12 +159,13 @@ export class CreateDesembolsoComponent implements OnInit {
     });
   }
   desembolsarCredito(){
-    this.creditoService.createCredito(this.credito)
+    this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
-        credito => {
-          console.log(credito);
+        desembolsoCredito => {
+          console.log(desembolsoCredito);
         },
         err => console.log(err)
       );
   }
+
 }
