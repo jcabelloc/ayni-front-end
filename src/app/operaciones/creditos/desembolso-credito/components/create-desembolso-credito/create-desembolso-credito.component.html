@@ -75,8 +75,28 @@
         
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Cliente</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." formControlName="cliente" readonly>
+          <input type="text" matInput placeholder="Ingresar aqui.." formControlName="nombre" readonly>
         </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Via Desembolso" formControlName="viaDesembolso" (selectionChange)="onViaDesembolsoSelection($event)" required>
+            <mat-option *ngFor="let viaDesembolso of viasDesembolso" [value]="viaDesembolso.value">
+              {{viaDesembolso.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Cuenta Desembolso" formControlName="idCuentaDesembolso" required >
+            <mat-option *ngFor="let cuentaDesembolso of cuentasDesembolso" [value]="cuentaDesembolso.idCuenta">
+              {{cuentaDesembolso.idCuenta}} - {{cuentaDesembolso.descripcion}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
 
         <mat-form-field class="mat-form-field"  >
           <mat-select placeholder="Usuario Aprobador" formControlName="usuarioAprobador" required >
@@ -86,13 +106,6 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="mat-form-field"  >
-          <mat-select placeholder="Via Desembolso" formControlName="viaDesembolso" required >
-            <mat-option *ngFor="let viaDesembolso of viasDesembolso" [value]="viaDesembolso.value">
-              {{viaDesembolso.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
       </form>
 
       <mat-divider></mat-divider>

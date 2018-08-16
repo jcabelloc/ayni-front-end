@@ -6,6 +6,7 @@ import { MatDialog, MatSelectChange } from '@angular/material';
 import { ClienteService } from '../../../../../clientes/adm-cliente/services/cliente.service';
 import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 import { DesembolsoCreditoService } from '../../services/desembolso-credito.service';
+import { CuentaDesembolso } from '../../models/CuentaDesembolso';
 
 export interface Option {
   value: string;
@@ -29,6 +30,8 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     {value: 'EFECTIVO', viewValue: 'EFECTIVO'},
     {value: 'BANCO', viewValue: 'BANCO'},
   ];
+
+  cuentasDesembolso: CuentaDesembolso[];
 
   frecuencias: Option[] = [
     {value: 'SEMANAL', viewValue: 'SEMANAL'},
@@ -64,11 +67,12 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     });
 
     this.secondFormGroup = this._formBuilder.group({
-      cliente: ['', Validators.required],
+      nombre: ['', Validators.required],
       tipoIdentificacion: ['DNI',Validators.required],
       nroIdentificacion: ['',Validators.required],
-      usuarioAprobador:['', Validators.required],
       viaDesembolso: ['', Validators.required],
+      idCuentaDesembolso: ['', Validators.required],
+      usuarioAprobador:['', Validators.required],
     });
   }
 
@@ -81,18 +85,37 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       nroCuotas:  value.nroCuotas,
       fechaDesembolso: value.fechaDesembolso,
       fechaPrimeraCuota: value.fechaPrimeraCuota,
-      cliente: this.cliente,
     }
   }
 
   onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){
+    this.desembolsoCredito.idCliente = this.cliente.id;
     this.desembolsoCredito.cliente = this.cliente;
-    this.desembolsoCredito.usuarioAprobador = value.usuarioAprobador;
     this.desembolsoCredito.viaDesembolso = value.viaDesembolso;
+    this.desembolsoCredito.idCuentaDesembolso = +value.idCuentaDesembolso;
+    this.desembolsoCredito.cuentaDesembolsoDescripcion = this.cuentasDesembolso.find(e=> e.idCuenta == value.idCuentaDesembolso).descripcion;
+    this.desembolsoCredito.usuarioAprobador = value.usuarioAprobador;
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
     this.updateFechaPrimeraCuota();
+  }
+
+  onViaDesembolsoSelection(viaDesembolso: MatSelectChange) {
+    if(viaDesembolso.value == 'BANCO') {
+      this.cuentasDesembolso = [
+        {idCuenta: 10001, descripcion: 'BCP - 1234-18830-28983'},
+        {idCuenta: 10002, descripcion: 'IBK - 2183-9999-282821983'}
+      ];
+      
+    }
+    else if (viaDesembolso.value == 'EFECTIVO') {
+      this.cuentasDesembolso = [
+        {idCuenta: 10003, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
+        {idCuenta: 10004, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
+      ];
+    
+    }
   }
 
   getStringLocalDate(fecha: Date): string {
@@ -149,7 +172,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
           .subscribe (
             cliente => {
               this.cliente = cliente;
-              this.secondFormGroup.patchValue({cliente: cliente.personaNatural.nombre});
+              this.secondFormGroup.patchValue({nombre: cliente.personaNatural.nombre});
               this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
               this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
             }
@@ -159,6 +182,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     });
   }
   desembolsarCredito(){
+    console.log(this.desembolsoCredito);
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
         desembolsoCredito => {

@@ -1,35 +1,45 @@
 <div class="child">
     <form novalidate (ngSubmit)="onSubmit()">
+      <div *ngIf="step > 2">
+        <mat-form-field class="mat-form-field-small" appearance="standard">
+          <mat-label>Tipo Identificacion</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.tipoIdentificacion" disabled>
+        </mat-form-field>
 
-      <mat-form-field *ngIf="step > 2" class="mat-form-field-small" appearance="standard">
-        <mat-label>Tipo Identificacion</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.tipoIdentificacion" disabled>
-      </mat-form-field>
+        <mat-form-field class="mat-form-field-nroIdentificacion" appearance="standard">
+          <mat-label>Nro. Identificacion</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nroIdentificacion" disabled>
+        </mat-form-field>
+        
+        <button mat-icon-button color="primary" disabled>
+            <mat-icon>search</mat-icon>
+        </button>
 
-      <mat-form-field *ngIf="step > 2" class="mat-form-field-nroIdentificacion" appearance="standard">
-        <mat-label>Nro. Identificacion</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nroIdentificacion" disabled>
-      </mat-form-field>
-      
-      <button *ngIf="step > 2" mat-icon-button color="primary" disabled>
-          <mat-icon>search</mat-icon>
-      </button>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Cliente</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nombre" disabled>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Via Desembolso</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.viaDesembolso" disabled>
+        </mat-form-field>
 
-      <mat-form-field *ngIf="step > 2" class="mat-form-field" appearance="standard">
-        <mat-label>Cliente</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nombre" disabled>
-      </mat-form-field>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Cuenta Desembolso</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.idCuentaDesembolso + ' - ' + desembolsoCredito?.cuentaDesembolsoDescripcion" disabled>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
 
-      <mat-form-field *ngIf="step > 2" class="mat-form-field" appearance="standard">
-        <mat-label>Usuario Aprobador</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.usuarioAprobador" disabled>
-      </mat-form-field>
-
-      <mat-form-field *ngIf="step > 2" class="mat-form-field" appearance="standard">
-        <mat-label>Via Desembolso</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.viaDesembolso" disabled>
-      </mat-form-field>
-
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Usuario Aprobador</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.usuarioAprobador" disabled>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <br><br>
+      </div>
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Monto</mat-label>
         <input type="number" matInput [value] = "desembolsoCredito?.montoDesembolso" disabled>

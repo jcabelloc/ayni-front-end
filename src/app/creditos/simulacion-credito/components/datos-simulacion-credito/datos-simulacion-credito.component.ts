@@ -28,9 +28,9 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   desembolsoCreditoForChild: DesembolsoCredito;
 
   frecuencias: Option[] = [
-    {value: 'SEMANAL', viewValue: 'Semanal'},
-    {value: 'MENSUAL', viewValue: 'Mensual'},
-    {value: 'DIARIA', viewValue: 'Diaria'},
+    {value: 'SEMANAL', viewValue: 'SEMANAL'},
+    {value: 'MENSUAL', viewValue: 'MENSUAL'},
+    {value: 'DIARIA', viewValue: 'DIARIA'},
   ];
 
   constructor() { }
