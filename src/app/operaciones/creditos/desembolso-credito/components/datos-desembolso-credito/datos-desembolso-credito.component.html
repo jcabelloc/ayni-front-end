@@ -35,7 +35,7 @@
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Usuario Aprobador</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.usuarioAprobador" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.usuarioAprobador?.toUpperCase()" disabled>
         </mat-form-field>
         <mat-divider></mat-divider>
         <br><br>

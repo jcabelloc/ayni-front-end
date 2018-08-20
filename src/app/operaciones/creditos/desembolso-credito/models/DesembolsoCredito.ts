@@ -14,4 +14,5 @@ export interface DesembolsoCredito {
     idCuentaDesembolso?: number;
     cuentaDesembolsoDescripcion?: string;
     usuarioAprobador?: string;
+    idResponsableCuenta?: number;
 }

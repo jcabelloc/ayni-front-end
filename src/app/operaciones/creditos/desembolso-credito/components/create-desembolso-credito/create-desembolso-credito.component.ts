@@ -27,7 +27,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   cliente: Cliente;
 
   viasDesembolso: Option[] = [
-    {value: 'EFECTIVO', viewValue: 'EFECTIVO'},
+    {value: 'CAJA', viewValue: 'CAJA'},
     {value: 'BANCO', viewValue: 'BANCO'},
   ];
 
@@ -44,10 +44,10 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   ];
 
   aprobadores: Option[] = [
-    {value: 'GRIOS', viewValue: 'GRIOS'},
-    {value: 'EPREZ', viewValue: 'EPEREZ'},
-    {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
-
+    {value: 'grios', viewValue: 'GRIOS'},
+    {value: 'eperez', viewValue: 'EPEREZ'},
+    {value: 'mfernandez', viewValue: 'MFERNANDEZ'},
+    {value: 'oajon', viewValue: 'OAJON'},
   ];
 
   constructor(private _formBuilder: FormBuilder, 
@@ -109,10 +109,10 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       ];
       
     }
-    else if (viaDesembolso.value == 'EFECTIVO') {
+    else if (viaDesembolso.value == 'CAJA') {
       this.cuentasDesembolso = [
-        {idCuenta: 10003, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
-        {idCuenta: 10004, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
+        {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
+        {idCuenta: 10000999, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
       ];
     
     }
@@ -183,6 +183,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
   desembolsarCredito(){
     console.log(this.desembolsoCredito);
+    this.desembolsoCredito.idResponsableCuenta = 1001; //TODO
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
         desembolsoCredito => {
