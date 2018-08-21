@@ -29,20 +29,18 @@ export class DesembolsoCreditoService {
       );
   }
 
-  Blob
-  createReporteSolicitudCredito (desembolsoCredito: DesembolsoCredito) {
-    const createReporte = this.apiUrl + "/createReporteSolicitudCredito1";
+  
+  buildReporteSolicitud (desembolsoCredito: DesembolsoCredito) {
+    const buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";
     let headers = new HttpHeaders({
         'Content-Type':  'application/json',
-      });
-    
-    return this.http.post(createReporte, desembolsoCredito, {headers:headers,  responseType: "blob"})
+    });
+    return this.http.post(buildReporteUrl, desembolsoCredito, {headers:headers,  responseType: "blob"})
       .pipe(
         catchError(this.handleError)
       );
     
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
