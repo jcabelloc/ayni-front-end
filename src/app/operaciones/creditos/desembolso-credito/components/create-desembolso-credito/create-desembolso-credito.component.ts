@@ -192,5 +192,21 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
         err => console.log(err)
       );
   }
+  solicitudCredito(){
+    console.log(this.desembolsoCredito);
+    this.desembolsoCredito.idResponsableCuenta = 1001; //TODO
+    this.desembolsoCreditoService.createReporteSolicitudCredito(this.desembolsoCredito)
+    
+      .subscribe(
+        res => {
+          console.log(res);
+          var url = window.URL.createObjectURL(res);
+          window.open(url);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
 
 }
