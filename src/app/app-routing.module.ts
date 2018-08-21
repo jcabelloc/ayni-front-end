@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: './operaciones/creditos/desembolso-credito/desembolso-credito.module#DesembolsoCreditoModule'
   },
   {
+    path: 'operaciones/creditos/amortizacion-credito',
+    loadChildren: './operaciones/creditos/amortizacion-credito/amortizacion-credito.module#AmortizacionCreditoModule'
+  },
+  {
     path: '',
     redirectTo: 'inicio/ingreso',
     pathMatch: 'full'
