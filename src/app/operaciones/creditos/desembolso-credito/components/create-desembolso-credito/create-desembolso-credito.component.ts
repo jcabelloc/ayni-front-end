@@ -7,6 +7,7 @@ import { ClienteService } from '../../../../../clientes/adm-cliente/services/cli
 import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 import { DesembolsoCreditoService } from '../../services/desembolso-credito.service';
 import { CuentaDesembolso } from '../../models/CuentaDesembolso';
+import { DatosSimulacionCredito } from '../../../../../creditos/simulacion-credito/models/DatosSimulacionCredito';
 
 export interface Option {
   value: string;
@@ -24,6 +25,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   desembolsoCredito: DesembolsoCredito;
+  datosSimulacionCredito: DatosSimulacionCredito; 
   cliente: Cliente;
 
   viasDesembolso: Option[] = [
@@ -60,7 +62,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       montoDesembolso: [null, Validators.required],
       frecuencia: ['SEMANAL', Validators.required],
-      tem: [14.5, Validators.required],
+      tem: [12.5, Validators.required],
       nroCuotas: [null, Validators.required],
       fechaDesembolso: [this.getStringLocalDate(new Date()), Validators.required],
       fechaPrimeraCuota: [this.getFechaPrimeraCuota(this.getStringLocalDate(new Date()), 'SEMANAL'), Validators.required],
@@ -85,7 +87,15 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       nroCuotas:  value.nroCuotas,
       fechaDesembolso: value.fechaDesembolso,
       fechaPrimeraCuota: value.fechaPrimeraCuota,
-    }
+    };
+    this.datosSimulacionCredito = {
+      montoDesembolso: value.montoDesembolso,
+      frecuencia: value.frecuencia,
+      tem: value.tem,
+      nroCuotas:  value.nroCuotas,
+      fechaDesembolso: value.fechaDesembolso,
+      fechaPrimeraCuota: value.fechaPrimeraCuota,
+    };
   }
 
   onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
-import { DesembolsoCredito } from '../../../../operaciones/creditos/desembolso-credito/models/DesembolsoCredito';
+import { DatosSimulacionCredito } from '../../models/DatosSimulacionCredito';
 
 export interface TableElement {
   nroCuota: number;
@@ -20,7 +20,7 @@ export interface TableElement {
 export class SimulacionCronogramaComponent implements OnInit {
   
   @Input()  
-  desembolsoCredito: DesembolsoCredito;
+  datosSimulacionCredito: DatosSimulacionCredito;
 
   dataTable: TableElement[];
 
@@ -29,11 +29,11 @@ export class SimulacionCronogramaComponent implements OnInit {
   constructor(private simulacionCreditoService: SimulacionCreditoService) { }
 
   ngOnInit() {
-
+ 
   }
   ngOnChanges(){
-    if (this.isComplete(this.desembolsoCredito)) {
-      this.simulacionCreditoService.getSimulacionCronograma(this.desembolsoCredito)
+    if (this.isComplete(this.datosSimulacionCredito)) {
+      this.simulacionCreditoService.getSimulacionCronograma(this.datosSimulacionCredito)
       .subscribe(
         detallesCronogramaCredito => {
           this.dataTable = [];
@@ -48,10 +48,10 @@ export class SimulacionCronogramaComponent implements OnInit {
     }
   }
 
-  isComplete(desembolsoCredito: DesembolsoCredito): boolean {
-    if (desembolsoCredito === undefined) return false;
-    if (desembolsoCredito.fechaDesembolso && desembolsoCredito.montoDesembolso && desembolsoCredito.fechaPrimeraCuota && 
-        desembolsoCredito.frecuencia && desembolsoCredito.nroCuotas && desembolsoCredito.tem) {
+  isComplete(datosSimulacionCredito: DatosSimulacionCredito): boolean {
+    if (datosSimulacionCredito === undefined) return false;
+    if (datosSimulacionCredito.fechaDesembolso && datosSimulacionCredito.montoDesembolso && datosSimulacionCredito.fechaPrimeraCuota && 
+      datosSimulacionCredito.frecuencia && datosSimulacionCredito.nroCuotas && datosSimulacionCredito.tem) {
       return true;
     }
     return false;
