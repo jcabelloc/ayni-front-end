@@ -16,7 +16,8 @@ export interface Credito {
     fechaPrimeraCuota: string;
     usuarioAprobador: string;
     nroCondicion: number;
-    responsableCuenta: string;
+    usuarioResponsable: string;
     cliente: Cliente;
+    saldoCapital: number;
 }
 

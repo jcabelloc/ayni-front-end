@@ -14,7 +14,7 @@ export class ConsultaCreditoService {
   constructor(private http: HttpClient) { }
 
   findCreditoById(idCuenta: number): Observable<Credito> {
-    let findByIdUrl = this.apiUrl + "/idCuenta"; 
+    let findByIdUrl = this.apiUrl + "/" + idCuenta; 
     return this.http.get<Credito>(findByIdUrl);
   }
 

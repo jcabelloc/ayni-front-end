@@ -9,10 +9,11 @@ interface Option {
 
 interface TableElement {
   posicion: number;
+  idCuenta: number;
+  saldoCapital: number;
   nombre: string;
   tipoIdentificacion: string;
   nroIdentificacion: string;
-  id: number;
 }
 
 
@@ -41,15 +42,26 @@ export class AdmAmortizacionCreditoComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit({value, valid}: {value: any, valid: boolean}){
-    if (value.option == "DNI-CLIENTE") {
+    if (value.option == "CUENTA") {
       this.consultaCreditoService.findCreditoById(value.searchInput)
         .subscribe(
-          credito => {
-            //TODO
+          cred => {
+            this.data = [];
+            if (cred != null) {
+              this.data.push({
+                posicion : 1, 
+                idCuenta: cred.idCuenta, 
+                saldoCapital: cred.saldoCapital,
+                nombre: cred.cliente.nombre, 
+                tipoIdentificacion: cred.cliente.tipoIdentificacion,
+                nroIdentificacion: cred.cliente.nroIdentificacion
+              });
+            }
+            this.dataSource.data = this.data
           },
           err => console.log(err)
         );
-    } else if(value.option == "CUENTA"){
+    } else if(value.option == "DNI-CLIENTE"){
       this.consultaCreditoService.findCreditoByDniCliente(value.searchInput);
     }
 

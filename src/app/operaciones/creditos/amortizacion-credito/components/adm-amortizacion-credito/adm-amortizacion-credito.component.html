@@ -32,13 +32,13 @@
           </ng-container>
       
           <ng-container matColumnDef="idCuenta">
-            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <th mat-header-cell *matHeaderCellDef> Nro. Cuenta </th>
             <td mat-cell *matCellDef="let element"> {{element.idCuenta}} </td>
           </ng-container>
       
           <ng-container matColumnDef="saldoCapital">
             <th mat-header-cell *matHeaderCellDef> Saldo Capital </th>
-            <td mat-cell *matCellDef="let element"> {{element.saldoCapital}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.saldoCapital | number: '1.2-2'}} </td>
           </ng-container>
       
           <ng-container matColumnDef="nombre">
