@@ -1,6 +1,8 @@
 interface Cliente {
     id: number;
     nombre: string;
+    tipoIdentificacion: string;
+    nroIdentificacion: string;
 }
 
 export interface Credito {
@@ -13,8 +15,8 @@ export interface Credito {
     fechaDesembolso: string;
     fechaPrimeraCuota: string;
     usuarioAprobador: string;
-    idCliente: number;
-    idResponsableCuenta: number;
+    nroCondicion: number;
+    responsableCuenta: string;
     cliente: Cliente;
 }
 

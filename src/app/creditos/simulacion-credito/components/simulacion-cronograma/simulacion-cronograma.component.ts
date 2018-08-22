@@ -33,7 +33,7 @@ export class SimulacionCronogramaComponent implements OnInit {
   }
   ngOnChanges(){
     if (this.isComplete(this.datosSimulacionCredito)) {
-      this.simulacionCreditoService.getSimulacionCronograma(this.datosSimulacionCredito)
+      this.simulacionCreditoService.calculateCronograma(this.datosSimulacionCredito)
       .subscribe(
         detallesCronogramaCredito => {
           this.dataTable = [];
