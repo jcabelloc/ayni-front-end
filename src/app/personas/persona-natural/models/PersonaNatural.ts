@@ -11,7 +11,6 @@ export interface PersonaNatural {
     fechaNacimiento: string;
 	email: string;
     estadoCivil: string;
-    esCliente?: string;
     idCliente?: number;
 
 }

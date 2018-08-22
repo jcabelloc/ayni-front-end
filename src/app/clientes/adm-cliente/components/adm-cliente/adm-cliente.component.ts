@@ -46,7 +46,7 @@ export class AdmClienteComponent implements OnInit {
           e => {
             posicion = posicion + 1;
             this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, 
-              nroIdentificacion: e.nroIdentificacion, esCliente: e.esCliente?'Si':'No', id: e.id});
+              nroIdentificacion: e.nroIdentificacion, esCliente: e.idCliente==null?'No':'Si', id: e.id});
           }
         );
         this.dataSource.data = this.data
@@ -66,7 +66,8 @@ export class AdmClienteComponent implements OnInit {
             e => {
               posicion = posicion + 1;
               this.data.push({posicion : posicion, nombre : e.nombre, tipoIdentificacion: e.tipoIdentificacion, 
-                nroIdentificacion: e.nroIdentificacion, esCliente: e.esCliente?'Si':'No', id: e.id});
+                nroIdentificacion: e.nroIdentificacion, esCliente: e.idCliente==null?'No':'Si', id: e.id});
+
             }
           );
         this.dataSource.data = this.data
