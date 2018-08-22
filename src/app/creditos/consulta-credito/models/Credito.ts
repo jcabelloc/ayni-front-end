@@ -1,3 +1,8 @@
+interface Cliente {
+    id: number;
+    nombre: string;
+}
+
 export interface Credito {
     idCuenta: number,
     montoDesembolso: number;
@@ -10,4 +15,6 @@ export interface Credito {
     usuarioAprobador: string;
     idCliente: number;
     idResponsableCuenta: number;
+    cliente: Cliente;
 }
+

@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class PersonaNaturalService {
 
-  apiUrl = environment.apiUrl + "personas-naturales";
+  readonly apiUrl: string = environment.apiUrl + "personas-naturales";
 
   constructor(private http: HttpClient) { }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DesembolsoCredito } from '../../models/DesembolsoCredito';
-import { Cliente } from '../../../../../clientes/adm-cliente/models/Cliente';
+import { DesembolsoCredito, Cliente } from '../../models/DesembolsoCredito';
 import { MatDialog, MatSelectChange } from '@angular/material';
 import { ClienteService } from '../../../../../clientes/adm-cliente/services/cliente.service';
 import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
@@ -99,7 +98,6 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
 
   onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){
-    this.desembolsoCredito.idCliente = this.cliente.id;
     this.desembolsoCredito.cliente = this.cliente;
     this.desembolsoCredito.viaDesembolso = value.viaDesembolso;
     this.desembolsoCredito.idCuentaDesembolso = +value.idCuentaDesembolso;
@@ -181,7 +179,12 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
         this.clienteService.findClienteById(idCliente)
           .subscribe (
             cliente => {
-              this.cliente = cliente;
+              this.cliente = { 
+                id : cliente.id, 
+                nombre: cliente.personaNatural.nombre, 
+                tipoIdentificacion: cliente.personaNatural.tipoIdentificacion,
+                nroIdentificacion: cliente.personaNatural.nroIdentificacion 
+              };
               this.secondFormGroup.patchValue({nombre: cliente.personaNatural.nombre});
               this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
               this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
@@ -193,7 +196,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
   desembolsarCredito(){
     console.log(this.desembolsoCredito);
-    this.desembolsoCredito.idResponsableCuenta = 1001; //TODO
+    this.desembolsoCredito.responsableCuenta = "oajon"; //TODO
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
         desembolsoCredito => {
@@ -204,7 +207,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
 
   showReporteSolicitud(){
-    this.desembolsoCredito.idResponsableCuenta = 1001; //TODO
+    this.desembolsoCredito.responsableCuenta = "oajon"; //TODO
     this.desembolsoCreditoService.buildReporteSolicitud(this.desembolsoCredito)
       .subscribe(
         res => {

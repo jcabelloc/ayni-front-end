@@ -3,7 +3,7 @@ import { environment } from '../../../../../environments/environment'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DesembolsoCredito } from '../models/DesembolsoCredito';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,7 +21,7 @@ export class DesembolsoCreditoService {
 
   constructor(private http: HttpClient) { }
 
-  createDesembolso(desembolsoCredito: DesembolsoCredito) {
+  createDesembolso(desembolsoCredito: DesembolsoCredito): Observable<DesembolsoCredito> {
     let createUrl = this.apiUrl; 
     return this.http.post<DesembolsoCredito>(createUrl, desembolsoCredito, httpOptions) 
       .pipe(
@@ -31,7 +31,7 @@ export class DesembolsoCreditoService {
 
   
   buildReporteSolicitud (desembolsoCredito: DesembolsoCredito) {
-    const buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";
+    let buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";
     let headers = new HttpHeaders({
         'Content-Type':  'application/json',
     });

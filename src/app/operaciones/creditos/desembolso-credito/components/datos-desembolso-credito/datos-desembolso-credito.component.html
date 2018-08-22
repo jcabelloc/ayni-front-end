@@ -3,12 +3,12 @@
       <div *ngIf="step > 2">
         <mat-form-field class="mat-form-field-small" appearance="standard">
           <mat-label>Tipo Identificacion</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.tipoIdentificacion" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.tipoIdentificacion" disabled>
         </mat-form-field>
 
         <mat-form-field class="mat-form-field-nroIdentificacion" appearance="standard">
           <mat-label>Nro. Identificacion</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nroIdentificacion" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.nroIdentificacion" disabled>
         </mat-form-field>
         
         <button mat-icon-button color="primary" disabled>
@@ -17,7 +17,7 @@
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Cliente</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.personaNatural.nombre" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.cliente?.nombre" disabled>
         </mat-form-field>
         <mat-divider></mat-divider>
         <br><br>

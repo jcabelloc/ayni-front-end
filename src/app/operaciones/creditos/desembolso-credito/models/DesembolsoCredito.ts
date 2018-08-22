@@ -1,4 +1,9 @@
-import { Cliente } from "../../../../clientes/adm-cliente/models/Cliente";
+export interface Cliente {
+    id: number;
+    nombre: string;
+    tipoIdentificacion: string;
+    nroIdentificacion: string;
+} 
 
 export interface DesembolsoCredito {
     montoDesembolso: number;
@@ -8,11 +13,10 @@ export interface DesembolsoCredito {
     nroCuotas: number;
     fechaDesembolso: string;
     fechaPrimeraCuota: string;
-    idCliente?: number;
     cliente?: Cliente;
     viaDesembolso?: string; 
     idCuentaDesembolso?: number;
     cuentaDesembolsoDescripcion?: string;
     usuarioAprobador?: string;
-    idResponsableCuenta?: number;
+    responsableCuenta?: string;
 }
