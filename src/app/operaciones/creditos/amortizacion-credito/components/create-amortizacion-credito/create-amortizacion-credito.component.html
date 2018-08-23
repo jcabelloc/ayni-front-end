@@ -1,0 +1,48 @@
+<div class="container">
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <app-show-cuotas-pendientes [idCuenta]="idCuenta"></app-show-cuotas-pendientes>
+      <form [formGroup]="firstFormGroup" #formStep1="ngForm" (ngSubmit)="onSubmitStep1(formStep1)">
+        <ng-template matStepLabel>Monto a Amortizar</ng-template>
+
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Monto S/</mat-label>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoAmortizacion" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext >Siguiente</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+
+      <form [formGroup]="secondFormGroup" #formStep2="ngForm" (ngSubmit)="onSubmitStep2(formStep2)">
+        <ng-template matStepLabel>Confirmar Amortizacion</ng-template>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Via Recaudo" formControlName="viaRecaudo" (selectionChange)="onViaRecaudoSelection($event)" required>
+            <mat-option *ngFor="let viaRecaudo of viasRecaudo" [value]="viaRecaudo.value">
+              {{viaRecaudo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Cuenta Recaudo" formControlName="idCuentaRecaudo" required >
+            <mat-option *ngFor="let cuentaRecaudo of cuentasRecaudo" [value]="cuentaRecaudo.idCuenta">
+              {{cuentaRecaudo.idCuenta}} - {{cuentaRecaudo.descripcion}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <div>
+          <button mat-button matStepperPrevious>Atras</button>
+          <button mat-button matStepperNext >Confirmar</button>
+        </div>
+        
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

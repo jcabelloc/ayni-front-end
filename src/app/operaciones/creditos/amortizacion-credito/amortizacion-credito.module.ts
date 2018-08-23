@@ -10,9 +10,13 @@ import { FormsModule }   from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatStepperModule} from '@angular/material/stepper';
+import { ReactiveFormsModule }   from '@angular/forms';
 
 import { AmortizacionCreditoRoutingModule } from './amortizacion-credito-routing.module';
 import { AdmAmortizacionCreditoComponent } from './components/adm-amortizacion-credito/adm-amortizacion-credito.component';
+import { CreateAmortizacionCreditoComponent } from './components/create-amortizacion-credito/create-amortizacion-credito.component';
+import { ShowCuotasPendientesComponent } from './components/show-cuotas-pendientes/show-cuotas-pendientes.component';
 
 @NgModule({
   imports: [
@@ -27,7 +31,9 @@ import { AdmAmortizacionCreditoComponent } from './components/adm-amortizacion-c
     MatPaginatorModule,
     MatIconModule,
     MatTableModule,
+    MatStepperModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AdmAmortizacionCreditoComponent]
+  declarations: [AdmAmortizacionCreditoComponent, CreateAmortizacionCreditoComponent, ShowCuotasPendientesComponent]
 })
 export class AmortizacionCreditoModule { }

@@ -35,11 +35,11 @@ export class SimulacionCronogramaComponent implements OnInit {
     if (this.isComplete(this.datosSimulacionCredito)) {
       this.simulacionCreditoService.calculateCronograma(this.datosSimulacionCredito)
       .subscribe(
-        detallesCronogramaCredito => {
+        cuotasCronogramaCredito => {
           this.dataTable = [];
-          detallesCronogramaCredito.filter(e => e.nroCuota > 0).forEach(
+          cuotasCronogramaCredito.filter(e => e.nroCuota > 0).forEach(
             e => {
-              this.dataTable.push({  nroCuota: e.nroCuota, fechaVencimiento: e.fechaVencimiento, saldoCapital: e.saldoCapital, capital: e.capital, interes: e.interes, montoCuota: e.montoCuota});
+              this.dataTable.push({  nroCuota: e.nroCuota, fechaVencimiento: e.fechaVencimiento, saldoCapital: e.capitalCredito, capital: e.capitalProgramado, interes: e.interesProgramado, montoCuota: e.montoCuota});
             }
           );
         },

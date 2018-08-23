@@ -1,0 +1,54 @@
+<table mat-table [dataSource]="dataTable" class="mat-elevation-z8 full-width">
+  <ng-container matColumnDef="nroCuota">
+    <th mat-header-cell *matHeaderCellDef> Nro.</th>
+    <td mat-cell *matCellDef="let element"> {{element.nroCuota}} </td>
+  </ng-container>
+    
+  <ng-container matColumnDef="fechaVencimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha <br/>Vencimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="capitalCredito">
+    <th mat-header-cell *matHeaderCellDef> Capital <br/>Cred. </th>
+    <td mat-cell *matCellDef="let element"> {{element.capitalCredito | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="capitalProgramado">
+    <th mat-header-cell *matHeaderCellDef> Capital <br/>Prog. </th>
+    <td mat-cell *matCellDef="let element"> {{element.capitalProgramado | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="interesProgramado">
+    <th mat-header-cell *matHeaderCellDef> Interes <br/>Prog. </th>
+    <td mat-cell *matCellDef="let element"> {{element.interesProgramado | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="capitalPagado">
+    <th mat-header-cell *matHeaderCellDef> Capital <br/>Pag. </th>
+    <td mat-cell *matCellDef="let element"> {{element.capitalPagado | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="interesPagado">
+    <th mat-header-cell *matHeaderCellDef> Interes <br/>Pag. </th>
+    <td mat-cell *matCellDef="let element"> {{element.interesPagado | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldoCapital">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Capital </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoCapital | number: '1.2-2'}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="saldoInteres">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Interes </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoInteres | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldoCuota">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Cuota </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoCuota | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
