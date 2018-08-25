@@ -1,0 +1,54 @@
+<table mat-table [dataSource]="dataTable" class="mat-elevation-z8 full-width">
+  <ng-container matColumnDef="nroCuota">
+    <th mat-header-cell *matHeaderCellDef> Nro.</th>
+    <td mat-cell *matCellDef="let element"> {{element.nroCuota}} </td>
+  </ng-container>
+    
+  <ng-container matColumnDef="fechaVencimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha <br/>Vencimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldoCapital">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Capital </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoCapital | number: '1.2-2'}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="saldoInteres">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Interes </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoInteres | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldoCuota">
+    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Cuota </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldoCuota | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amortizacionCapital">
+    <th mat-header-cell *matHeaderCellDef> Amortiz. <br/>Capital </th>
+    <td mat-cell *matCellDef="let element"> {{element.amortizacionCapital | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amortizacionInteres">
+    <th mat-header-cell *matHeaderCellDef> Amortiz. <br/>Interes </th>
+    <td mat-cell *matCellDef="let element"> {{element.amortizacionInteres | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nuevoSaldoCapital">
+    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Capital </th>
+    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoCapital | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nuevoSaldoInteres">
+    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Interes </th>
+    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoInteres | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nuevoSaldoCuota">
+    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Cuota </th>
+    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoCuota | number: '1.2-2'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

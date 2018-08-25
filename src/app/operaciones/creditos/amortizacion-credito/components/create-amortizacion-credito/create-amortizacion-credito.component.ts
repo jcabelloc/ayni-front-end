@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
+import { DatosSimulacionAmortizacion } from '../../models/DatosSimulacionAmortizacion';
 
 interface Option {
   value: string;
@@ -23,6 +24,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   idCuenta: number;
+  datosSimulacionAmortizacion: DatosSimulacionAmortizacion;
 
   viasRecaudo: Option[] = [
     {value: 'CAJA', viewValue: 'CAJA'},
@@ -66,6 +68,10 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   }
   onSubmitStep1({value, valid}: {value: any, valid: boolean}){
     console.log(value);
+    this.datosSimulacionAmortizacion = {
+      idCuenta: this.idCuenta,
+      montoAmortizacion: this.firstFormGroup.value.montoAmortizacion,
+    }
   }
 
   onSubmitStep2({value, valid}: {value: any, valid: boolean}){
