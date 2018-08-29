@@ -35,11 +35,33 @@ export class SimularAmortizacionCuotasComponent implements OnInit {
   }
 
   ngOnChanges(){
-    this.amortizacionCreditoService.calculateAmortizacion(this.datosSimulacionAmortizacion)
+    if (this.datosSimulacionAmortizacion != null) {
+      this.amortizacionCreditoService.calculateAmortizacion(this.datosSimulacionAmortizacion)
       .subscribe(
-        data => console.log(data),
+        cuotasSimulacionAmortizacion => {
+          this.dataTable = [];
+          console.log(cuotasSimulacionAmortizacion);
+          cuotasSimulacionAmortizacion.forEach(
+            e => {
+              this.dataTable.push({
+                nroCuota: e.nroCuota,
+                fechaVencimiento: e.fechaVencimiento,
+                saldoCapital: e.capitalProgramado - e.capitalPagado,
+                saldoInteres: e.interesProgramado - e.interesPagado,
+                saldoCuota: e.capitalProgramado - e.capitalPagado + e.interesProgramado - e.interesPagado,
+                amortizacionCapital: e.amortizacionCapital,
+                amortizacionInteres: e.amortizacionInteres,
+                nuevoSaldoCapital: e.capitalProgramado - e.capitalPagado - e.amortizacionCapital,
+                nuevoSaldoInteres: e.interesProgramado - e.interesPagado - e.amortizacionInteres,
+                nuevoSaldoCuota: e.capitalProgramado - e.capitalPagado - e.amortizacionCapital + e.interesProgramado - e.interesPagado - e.amortizacionInteres 
+              })
+            }
+          )
+        },
         err => console.log(err)
       )
+
+    }
   }
 
 }

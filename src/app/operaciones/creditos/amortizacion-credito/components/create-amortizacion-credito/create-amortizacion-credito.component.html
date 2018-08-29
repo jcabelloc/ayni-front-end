@@ -20,7 +20,7 @@
       <app-simular-amortizacion-cuotas [datosSimulacionAmortizacion]="datosSimulacionAmortizacion"></app-simular-amortizacion-cuotas>
       <form [formGroup]="secondFormGroup" #formStep2="ngForm" (ngSubmit)="onSubmitStep2(formStep2)">
         <ng-template matStepLabel>Confirmar Amortizacion</ng-template>
-
+        <br>
         <mat-form-field class="mat-form-field"  >
           <mat-select placeholder="Via Recaudo" formControlName="viaRecaudo" (selectionChange)="onViaRecaudoSelection($event)" required>
             <mat-option *ngFor="let viaRecaudo of viasRecaudo" [value]="viaRecaudo.value">

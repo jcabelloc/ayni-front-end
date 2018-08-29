@@ -1,4 +1,5 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<div class="container">
+  <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" #formStep1="ngForm" (ngSubmit)="onSubmitStep1(formStep1)">
         <ng-template matStepLabel>Datos del Credito</ng-template>
@@ -130,3 +131,4 @@
       <app-simulacion-cronograma [datosSimulacionCredito]="datosSimulacionCredito"></app-simulacion-cronograma>
     </mat-step>
   </mat-horizontal-stepper>
+</div>

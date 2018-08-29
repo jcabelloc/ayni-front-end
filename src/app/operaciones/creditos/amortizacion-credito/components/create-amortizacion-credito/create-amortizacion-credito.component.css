@@ -4,3 +4,13 @@
     width: 100%;
   
   }
+
+  
+  .mat-form-field {
+    width: 48%;
+    min-width: 340px;
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+
+  
