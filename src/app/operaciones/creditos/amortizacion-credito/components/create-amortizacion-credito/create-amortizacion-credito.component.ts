@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { DatosSimulacionAmortizacion } from '../../models/DatosSimulacionAmortizacion';
+import { AmortizacionCredito } from '../../models/AmortizacionCredito';
+import { AmortizacionCreditoService } from '../../services/amortizacion-credito.service';
 
 interface Option {
   value: string;
@@ -25,6 +27,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
 
   idCuenta: number;
   datosSimulacionAmortizacion: DatosSimulacionAmortizacion;
+  amortizacionCredito: AmortizacionCredito;
 
   viasRecaudo: Option[] = [
     {value: 'CAJA', viewValue: 'CAJA'},
@@ -35,7 +38,8 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private amortizacionCreditoService: AmortizacionCreditoService,
   ) { }
 
   ngOnInit() {
@@ -66,16 +70,32 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     
     }
   }
-  onSubmitStep1({value, valid}: {value: any, valid: boolean}){
-    console.log(value);
+  onSubmitStep1({value, valid}: {value: AmortizacionCredito, valid: boolean}){
     this.datosSimulacionAmortizacion = {
       idCuenta: this.idCuenta,
-      montoAmortizacion: this.firstFormGroup.value.montoAmortizacion,
-    }
+      montoAmortizacion: value.montoAmortizacion,
+    };
+    this.amortizacionCredito = {
+      idCuenta: this.idCuenta,
+      montoAmortizacion: value.montoAmortizacion,
+    };
   }
 
-  onSubmitStep2({value, valid}: {value: any, valid: boolean}){
-    console.log(value);
+  onSubmitStep2({value, valid}: {value: AmortizacionCredito, valid: boolean}){
+    
+    this.amortizacionCredito.viaRecaudo = value.viaRecaudo;
+    this.amortizacionCredito.idCuentaRecaudo = value.idCuentaRecaudo;
+    this.amortizarCredito(this.amortizacionCredito);
+    
+  }
+
+  amortizarCredito(amortizacionCredito: AmortizacionCredito) {
+    console.log(amortizacionCredito);
+    this.amortizacionCreditoService.createAmortizacion(amortizacionCredito)
+      .subscribe(
+        amortizacionCredito => console.log(amortizacionCredito),
+        err => console.log(err)
+      );
   }
 
 }
