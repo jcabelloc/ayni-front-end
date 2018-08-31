@@ -77,6 +77,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     };
     this.amortizacionCredito = {
       idCuenta: this.idCuenta,
+      moneda: '1', //TODO
       montoAmortizacion: value.montoAmortizacion,
     };
   }

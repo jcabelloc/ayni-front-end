@@ -35,12 +35,13 @@ export class SimularAmortizacionCuotasComponent implements OnInit {
   }
 
   ngOnChanges(){
-    this.dataTable = [];
+    
     if (this.datosSimulacionAmortizacion != null) {
       this.amortizacionCreditoService.calculateAmortizacion(this.datosSimulacionAmortizacion)
       .subscribe(
         cuotasSimulacionAmortizacion => {
           console.log(cuotasSimulacionAmortizacion);
+          this.dataTable = [];
           cuotasSimulacionAmortizacion.forEach(
             e => {
               this.dataTable.push({

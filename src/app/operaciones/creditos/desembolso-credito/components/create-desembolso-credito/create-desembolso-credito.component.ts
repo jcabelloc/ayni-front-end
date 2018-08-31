@@ -80,7 +80,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   onSubmitStep1({value, valid}: {value: DesembolsoCredito, valid: boolean}){
     this.desembolsoCredito = {
       montoDesembolso: value.montoDesembolso,
-      moneda: '1',
+      moneda: '1', //TODO
       frecuencia: value.frecuencia,
       tem: value.tem,
       nroCuotas:  value.nroCuotas,
