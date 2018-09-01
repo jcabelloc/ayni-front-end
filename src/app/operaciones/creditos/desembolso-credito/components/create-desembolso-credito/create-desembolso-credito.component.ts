@@ -6,7 +6,7 @@ import { ClienteService } from '../../../../../clientes/adm-cliente/services/cli
 import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/components/search-cliente/search-cliente.component';
 import { DesembolsoCreditoService } from '../../services/desembolso-credito.service';
 import { CuentaDesembolso } from '../../models/CuentaDesembolso';
-import { DatosSimulacionCredito } from '../../../../../creditos/simulacion-credito/models/DatosSimulacionCredito';
+import { SimulacionCredito } from '../../../../../creditos/simulacion-credito/models/SimulacionCredito';
 
 export interface Option {
   value: string;
@@ -24,7 +24,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   desembolsoCredito: DesembolsoCredito;
-  datosSimulacionCredito: DatosSimulacionCredito; 
+  simulacionCredito: SimulacionCredito; 
   cliente: Cliente;
 
   viasDesembolso: Option[] = [
@@ -87,7 +87,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       fechaDesembolso: value.fechaDesembolso,
       fechaPrimeraCuota: value.fechaPrimeraCuota,
     };
-    this.datosSimulacionCredito = {
+    this.simulacionCredito = {
       montoDesembolso: value.montoDesembolso,
       frecuencia: value.frecuencia,
       tem: value.tem,

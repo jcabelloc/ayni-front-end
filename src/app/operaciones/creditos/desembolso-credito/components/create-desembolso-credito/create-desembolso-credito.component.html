@@ -44,7 +44,7 @@
       </form>
       <mat-divider></mat-divider>
       <br><br>
-      <app-simulacion-cronograma [datosSimulacionCredito]="datosSimulacionCredito"></app-simulacion-cronograma>
+      <app-simulacion-cronograma [simulacionCredito]="simulacionCredito"></app-simulacion-cronograma>
 
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
@@ -112,7 +112,7 @@
       <mat-divider></mat-divider>
       <br><br>
       <app-datos-desembolso-credito [desembolsoCredito] = "desembolsoCredito" [step]=2></app-datos-desembolso-credito>
-      <app-simulacion-cronograma [datosSimulacionCredito]="datosSimulacionCredito"></app-simulacion-cronograma>
+      <app-simulacion-cronograma [simulacionCredito]="simulacionCredito"></app-simulacion-cronograma>
 
 
     </mat-step>
@@ -128,7 +128,7 @@
       <mat-divider></mat-divider>
       <br><br>
       <app-datos-desembolso-credito [desembolsoCredito] = "desembolsoCredito" [step]=3></app-datos-desembolso-credito>
-      <app-simulacion-cronograma [datosSimulacionCredito]="datosSimulacionCredito"></app-simulacion-cronograma>
+      <app-simulacion-cronograma [simulacionCredito]="simulacionCredito"></app-simulacion-cronograma>
     </mat-step>
   </mat-horizontal-stepper>
 </div>

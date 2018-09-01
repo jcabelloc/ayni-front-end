@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { DatosSimulacionAmortizacion } from '../models/DatosSimulacionAmortizacion';
-import { CuotaSimulacionAmortizacion } from '../models/CuotaSimulacionAmortizacion';
+import { SimulacionAmortizacion } from '../models/SimulacionAmortizacion';
+import { AmortizacionCuota } from '../models/AmortizacionCuota';
 import { Observable, throwError } from 'rxjs';
 import { AmortizacionCredito } from '../models/AmortizacionCredito';
 import { catchError } from 'rxjs/operators';
@@ -24,11 +24,11 @@ export class AmortizacionCreditoService {
   constructor(private http: HttpClient) { }
 
 
-  calculateAmortizacion(datosSimulacionAmortizacion: DatosSimulacionAmortizacion) : Observable<CuotaSimulacionAmortizacion[]> {
+  calculateAmortizacion(simulacionAmortizacion: SimulacionAmortizacion) : Observable<AmortizacionCuota[]> {
     let calculateUrl = this.apiUrl + "/simular-amortizacion?idCuenta=" + 
-      datosSimulacionAmortizacion.idCuenta + "&montoAmortizacion=" + 
-      datosSimulacionAmortizacion.montoAmortizacion;
-    return this.http.get<CuotaSimulacionAmortizacion[]>(calculateUrl);
+      simulacionAmortizacion.idCuenta + "&montoAmortizacion=" + 
+      simulacionAmortizacion.montoAmortizacion;
+    return this.http.get<AmortizacionCuota[]>(calculateUrl);
   }
 
   createAmortizacion(amortizacionCredito: AmortizacionCredito): Observable<AmortizacionCredito> {

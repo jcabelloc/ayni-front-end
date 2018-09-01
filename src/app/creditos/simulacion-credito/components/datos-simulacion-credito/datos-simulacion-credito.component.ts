@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
-import { DatosSimulacionCredito } from '../../models/DatosSimulacionCredito';
+import { SimulacionCredito } from '../../models/SimulacionCredito';
 
 export interface Option {
   value: string;
@@ -15,7 +15,7 @@ export interface Option {
   styleUrls: ['./datos-simulacion-credito.component.css']
 })
 export class DatosSimulacionCreditoComponent implements OnInit {
-  datosSimulacionCredito: DatosSimulacionCredito = {
+  simulacionCredito: SimulacionCredito = {
     montoDesembolso: null,
     frecuencia: null,
     tem: null,
@@ -33,14 +33,14 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.datosSimulacionCredito.tem = 12.5;
-    this.datosSimulacionCredito.frecuencia = 'SEMANAL';
-    this.datosSimulacionCredito.fechaDesembolso = this.getStringLocalDate(new Date());
-    this.setFechaPrimeraCuota(this.datosSimulacionCredito.fechaDesembolso, this.datosSimulacionCredito.frecuencia);
+    this.simulacionCredito.tem = 12.5;
+    this.simulacionCredito.frecuencia = 'SEMANAL';
+    this.simulacionCredito.fechaDesembolso = this.getStringLocalDate(new Date());
+    this.setFechaPrimeraCuota(this.simulacionCredito.fechaDesembolso, this.simulacionCredito.frecuencia);
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
-    this.setFechaPrimeraCuota(this.datosSimulacionCredito.fechaDesembolso, this.datosSimulacionCredito.frecuencia);
+    this.setFechaPrimeraCuota(this.simulacionCredito.fechaDesembolso, this.simulacionCredito.frecuencia);
   }
 
   getStringLocalDate(fecha: Date): string {
@@ -50,7 +50,7 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   }
 
   onFechaDesembolsoBlur() {
-    this.setFechaPrimeraCuota(this.datosSimulacionCredito.fechaDesembolso, this.datosSimulacionCredito.frecuencia);
+    this.setFechaPrimeraCuota(this.simulacionCredito.fechaDesembolso, this.simulacionCredito.frecuencia);
   }
 
   setFechaPrimeraCuota(fechaDesembolso: string, frecuencia: string) {
@@ -77,17 +77,17 @@ export class DatosSimulacionCreditoComponent implements OnInit {
         break;
       }
     }
-    this.datosSimulacionCredito.fechaPrimeraCuota = this.getStringLocalDate(fechaPrimeraCuotaDate);
+    this.simulacionCredito.fechaPrimeraCuota = this.getStringLocalDate(fechaPrimeraCuotaDate);
   }
 
   onSubmit() {
-   this.datosSimulacionCredito = {
-    montoDesembolso: this.datosSimulacionCredito.montoDesembolso,
-    frecuencia: this.datosSimulacionCredito.frecuencia,
-    tem: this.datosSimulacionCredito.tem,
-    nroCuotas: this.datosSimulacionCredito.nroCuotas,
-    fechaDesembolso: this.datosSimulacionCredito.fechaDesembolso,
-    fechaPrimeraCuota: this.datosSimulacionCredito.fechaPrimeraCuota,
+   this.simulacionCredito = {
+    montoDesembolso: this.simulacionCredito.montoDesembolso,
+    frecuencia: this.simulacionCredito.frecuencia,
+    tem: this.simulacionCredito.tem,
+    nroCuotas: this.simulacionCredito.nroCuotas,
+    fechaDesembolso: this.simulacionCredito.fechaDesembolso,
+    fechaPrimeraCuota: this.simulacionCredito.fechaPrimeraCuota,
   };
   }
 

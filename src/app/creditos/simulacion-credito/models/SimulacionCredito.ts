@@ -1,4 +1,4 @@
-export interface DatosSimulacionCredito {
+export interface SimulacionCredito {
     montoDesembolso: number;
     frecuencia: string;
     tem: number;

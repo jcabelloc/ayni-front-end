@@ -17,7 +17,7 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
-      <app-simular-amortizacion-cuotas [datosSimulacionAmortizacion]="datosSimulacionAmortizacion"></app-simular-amortizacion-cuotas>
+      <app-simular-amortizacion-cuotas [simulacionAmortizacion]="simulacionAmortizacion"></app-simular-amortizacion-cuotas>
       <form [formGroup]="secondFormGroup" #formStep2="ngForm" (ngSubmit)="onSubmitStep2(formStep2)">
         <ng-template matStepLabel>Confirmar Amortizacion</ng-template>
         <br>

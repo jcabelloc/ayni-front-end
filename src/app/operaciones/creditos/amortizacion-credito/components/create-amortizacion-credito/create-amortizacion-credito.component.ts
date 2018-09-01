@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
-import { DatosSimulacionAmortizacion } from '../../models/DatosSimulacionAmortizacion';
+import { SimulacionAmortizacion } from '../../models/SimulacionAmortizacion';
 import { AmortizacionCredito } from '../../models/AmortizacionCredito';
 import { AmortizacionCreditoService } from '../../services/amortizacion-credito.service';
 
@@ -26,7 +26,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   idCuenta: number;
-  datosSimulacionAmortizacion: DatosSimulacionAmortizacion;
+  simulacionAmortizacion: SimulacionAmortizacion;
   amortizacionCredito: AmortizacionCredito;
 
   viasRecaudo: Option[] = [
@@ -71,7 +71,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     }
   }
   onSubmitStep1({value, valid}: {value: AmortizacionCredito, valid: boolean}){
-    this.datosSimulacionAmortizacion = {
+    this.simulacionAmortizacion = {
       idCuenta: this.idCuenta,
       montoAmortizacion: value.montoAmortizacion,
     };

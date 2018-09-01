@@ -1,4 +1,4 @@
-export interface CuotaCronogramaCredito {
+export interface CuotaCredito {
     id?: number;
     idCuenta?: number;
     nroCuota: number;

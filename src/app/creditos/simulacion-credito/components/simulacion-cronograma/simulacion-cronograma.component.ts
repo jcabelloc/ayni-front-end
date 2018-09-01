@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
-import { DatosSimulacionCredito } from '../../models/DatosSimulacionCredito';
+import { SimulacionCredito } from '../../models/SimulacionCredito';
 
 export interface TableElement {
   nroCuota: number;
@@ -20,7 +20,7 @@ export interface TableElement {
 export class SimulacionCronogramaComponent implements OnInit {
   
   @Input()  
-  datosSimulacionCredito: DatosSimulacionCredito;
+  simulacionCredito: SimulacionCredito;
 
   dataTable: TableElement[];
 
@@ -32,12 +32,12 @@ export class SimulacionCronogramaComponent implements OnInit {
  
   }
   ngOnChanges(){
-    if (this.isComplete(this.datosSimulacionCredito)) {
-      this.simulacionCreditoService.calculateCronograma(this.datosSimulacionCredito)
+    if (this.isComplete(this.simulacionCredito)) {
+      this.simulacionCreditoService.calculateCuotas(this.simulacionCredito)
       .subscribe(
-        cuotasCronogramaCredito => {
+        cuotasCredito => {
           this.dataTable = [];
-          cuotasCronogramaCredito.filter(e => e.nroCuota > 0).forEach(
+          cuotasCredito.filter(e => e.nroCuota > 0).forEach(
             e => {
               this.dataTable.push({  nroCuota: e.nroCuota, fechaVencimiento: e.fechaVencimiento, saldoCapital: e.capitalCredito, capital: e.capitalProgramado, interes: e.interesProgramado, montoCuota: e.montoCuota});
             }
@@ -48,10 +48,10 @@ export class SimulacionCronogramaComponent implements OnInit {
     }
   }
 
-  isComplete(datosSimulacionCredito: DatosSimulacionCredito): boolean {
-    if (datosSimulacionCredito === undefined) return false;
-    if (datosSimulacionCredito.fechaDesembolso && datosSimulacionCredito.montoDesembolso && datosSimulacionCredito.fechaPrimeraCuota && 
-      datosSimulacionCredito.frecuencia && datosSimulacionCredito.nroCuotas && datosSimulacionCredito.tem) {
+  isComplete(simulacionCredito: SimulacionCredito): boolean {
+    if (simulacionCredito === undefined) return false;
+    if (simulacionCredito.fechaDesembolso && simulacionCredito.montoDesembolso && simulacionCredito.fechaPrimeraCuota && 
+      simulacionCredito.frecuencia && simulacionCredito.nroCuotas && simulacionCredito.tem) {
       return true;
     }
     return false;

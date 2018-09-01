@@ -30,12 +30,12 @@ export class ShowCuotasPendientesComponent implements OnInit {
   constructor(private consultaCreditoService: ConsultaCreditoService) { }
 
   ngOnInit() {
-    this.consultaCreditoService.findCuotasCronogramaByIdCuentaAndEstado(this.idCuenta, "PENDIENTE")
+    this.consultaCreditoService.findCuotasByIdCuentaAndEstado(this.idCuenta, "PENDIENTE")
     .subscribe(
-      cuotasCronogramaCredito => {
-        console.log(cuotasCronogramaCredito);
+      cuotasCredito => {
+        console.log(cuotasCredito);
         this.dataTable = [];
-        cuotasCronogramaCredito.forEach(
+        cuotasCredito.forEach(
           e => {
             this.dataTable.push({
               nroCuota: e.nroCuota, 

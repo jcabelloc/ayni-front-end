@@ -1,4 +1,4 @@
-export interface DatosSimulacionAmortizacion {
+export interface SimulacionAmortizacion {
     idCuenta: number;
     montoAmortizacion: number;
 }

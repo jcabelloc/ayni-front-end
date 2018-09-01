@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment'
 import { HttpClient } from '@angular/common/http';
-import { DatosSimulacionCredito } from '../models/DatosSimulacionCredito';
-import { CuotaCronogramaCredito } from '../../consulta-credito/models/CuotaCronogramaCredito';
+import { SimulacionCredito } from '../models/SimulacionCredito';
+import { CuotaCredito } from '../../consulta-credito/models/CuotaCredito';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +13,16 @@ export class SimulacionCreditoService {
 
   constructor(private http: HttpClient) { }
 
-  calculateCronograma(datosSimulacionCredito: DatosSimulacionCredito) {
+  calculateCuotas(simulacionCredito: SimulacionCredito) {
 
-    const calculateUrl =  this.apiUrl + "creditos/simular-cronograma?" 
-                            + "montoDesembolso=" + datosSimulacionCredito.montoDesembolso
-                            + "&frecuencia=" + datosSimulacionCredito.frecuencia 
-                            + "&tem=" + datosSimulacionCredito.tem 
-                            + "&nroCuotas=" +  datosSimulacionCredito.nroCuotas
-                            + "&fechaDesembolso=" + datosSimulacionCredito.fechaDesembolso 
-                            + "&fechaPrimeraCuota=" + datosSimulacionCredito.fechaPrimeraCuota;
+    const calculateUrl =  this.apiUrl + "creditos/simular-cuotas?" 
+                            + "montoDesembolso=" + simulacionCredito.montoDesembolso 
+                            + "&frecuencia=" + simulacionCredito.frecuencia 
+                            + "&tem=" + simulacionCredito.tem 
+                            + "&nroCuotas=" +  simulacionCredito.nroCuotas
+                            + "&fechaDesembolso=" + simulacionCredito.fechaDesembolso 
+                            + "&fechaPrimeraCuota=" + simulacionCredito.fechaPrimeraCuota;
 
-    return this.http.get<CuotaCronogramaCredito[]>(calculateUrl);
+    return this.http.get<CuotaCredito[]>(calculateUrl);
   }
 }

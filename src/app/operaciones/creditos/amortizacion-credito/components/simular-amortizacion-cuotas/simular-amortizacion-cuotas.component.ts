@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DatosSimulacionAmortizacion } from '../../models/DatosSimulacionAmortizacion';
+import { SimulacionAmortizacion } from '../../models/SimulacionAmortizacion';
 import { AmortizacionCreditoService } from '../../services/amortizacion-credito.service';
 
 export interface TableElement {
@@ -23,7 +23,7 @@ export interface TableElement {
 })
 export class SimularAmortizacionCuotasComponent implements OnInit {
   @Input()  
-  datosSimulacionAmortizacion: DatosSimulacionAmortizacion;
+  simulacionAmortizacion: SimulacionAmortizacion;
 
   dataTable: TableElement[];
 
@@ -36,13 +36,13 @@ export class SimularAmortizacionCuotasComponent implements OnInit {
 
   ngOnChanges(){
     
-    if (this.datosSimulacionAmortizacion != null) {
-      this.amortizacionCreditoService.calculateAmortizacion(this.datosSimulacionAmortizacion)
+    if (this.simulacionAmortizacion != null) {
+      this.amortizacionCreditoService.calculateAmortizacion(this.simulacionAmortizacion)
       .subscribe(
-        cuotasSimulacionAmortizacion => {
-          console.log(cuotasSimulacionAmortizacion);
+        amortizacionesCuotas => {
+          console.log(amortizacionesCuotas);
           this.dataTable = [];
-          cuotasSimulacionAmortizacion.forEach(
+          amortizacionesCuotas.forEach(
             e => {
               this.dataTable.push({
                 nroCuota: e.nroCuota,
