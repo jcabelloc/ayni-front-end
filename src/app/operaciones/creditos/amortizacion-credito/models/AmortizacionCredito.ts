@@ -3,7 +3,7 @@ export interface AmortizacionCredito {
     idCuenta: number;
     moneda: string;
     montoAmortizacion: number;
-    viaRecaudo?: string;
+    tipoCuentaRecaudo?: string;
     idCuentaRecaudo?: number;
 
 }

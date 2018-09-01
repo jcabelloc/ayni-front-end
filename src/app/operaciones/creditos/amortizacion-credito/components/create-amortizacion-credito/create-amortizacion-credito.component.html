@@ -22,9 +22,9 @@
         <ng-template matStepLabel>Confirmar Amortizacion</ng-template>
         <br>
         <mat-form-field class="mat-form-field"  >
-          <mat-select placeholder="Via Recaudo" formControlName="viaRecaudo" (selectionChange)="onViaRecaudoSelection($event)" required>
-            <mat-option *ngFor="let viaRecaudo of viasRecaudo" [value]="viaRecaudo.value">
-              {{viaRecaudo.viewValue}}
+          <mat-select placeholder="Via Recaudo" formControlName="tipoCuentaRecaudo" (selectionChange)="onTipoCuentaRecaudoSelection($event)" required>
+            <mat-option *ngFor="let tipoCuentaRecaudo of tiposCuentaRecaudo" [value]="tipoCuentaRecaudo.value">
+              {{tipoCuentaRecaudo.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
