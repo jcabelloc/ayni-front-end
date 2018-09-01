@@ -14,7 +14,7 @@ export interface DesembolsoCredito {
     fechaDesembolso: string;
     fechaPrimeraCuota: string;
     cliente?: Cliente;
-    viaDesembolso?: string; 
+    tipoCuentaDesembolso?: string; 
     idCuentaDesembolso?: number;
     cuentaDesembolsoDescripcion?: string;
     usuarioAprobador?: string;

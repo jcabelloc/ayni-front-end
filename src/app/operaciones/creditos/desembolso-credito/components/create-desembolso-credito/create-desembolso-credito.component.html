@@ -82,9 +82,9 @@
         <br><br>
 
         <mat-form-field class="mat-form-field"  >
-          <mat-select placeholder="Via Desembolso" formControlName="viaDesembolso" (selectionChange)="onViaDesembolsoSelection($event)" required>
-            <mat-option *ngFor="let viaDesembolso of viasDesembolso" [value]="viaDesembolso.value">
-              {{viaDesembolso.viewValue}}
+          <mat-select placeholder="Tipo Desembolso" formControlName="tipoCuentaDesembolso" (selectionChange)="onTipoCuentaDesembolsoSelection($event)" required>
+            <mat-option *ngFor="let tipoCuentaDesembolso of tiposCuentaDesembolso" [value]="tipoCuentaDesembolso.value">
+              {{tipoCuentaDesembolso.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>

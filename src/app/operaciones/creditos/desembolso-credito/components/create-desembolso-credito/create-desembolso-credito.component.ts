@@ -71,7 +71,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       nombre: ['', Validators.required],
       tipoIdentificacion: ['DNI',Validators.required],
       nroIdentificacion: ['',Validators.required],
-      viaDesembolso: ['', Validators.required],
+      tipoCuentaDesembolso: ['', Validators.required],
       idCuentaDesembolso: ['', Validators.required],
       usuarioAprobador:['', Validators.required],
     });
@@ -99,7 +99,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
 
   onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){
     this.desembolsoCredito.cliente = this.cliente;
-    this.desembolsoCredito.viaDesembolso = value.viaDesembolso;
+    this.desembolsoCredito.tipoCuentaDesembolso = value.tipoCuentaDesembolso;
     this.desembolsoCredito.idCuentaDesembolso = +value.idCuentaDesembolso;
     this.desembolsoCredito.cuentaDesembolsoDescripcion = this.cuentasDesembolso.find(e=> e.idCuenta == value.idCuentaDesembolso).descripcion;
     this.desembolsoCredito.usuarioAprobador = value.usuarioAprobador;
@@ -109,15 +109,15 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     this.updateFechaPrimeraCuota();
   }
 
-  onViaDesembolsoSelection(viaDesembolso: MatSelectChange) {
-    if(viaDesembolso.value == 'BANCO') {
+  onTipoCuentaDesembolsoSelection(tipoCuentaDesembolso: MatSelectChange) {
+    if(tipoCuentaDesembolso.value == 'BANCOS') {
       this.cuentasDesembolso = [
         {idCuenta: 10001, descripcion: 'BCP - 1234-18830-28983'},
         {idCuenta: 10002, descripcion: 'IBK - 2183-9999-282821983'}
       ];
       
     }
-    else if (viaDesembolso.value == 'CAJA') {
+    else if (tipoCuentaDesembolso.value == 'CAJA') {
       this.cuentasDesembolso = [
         {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
         {idCuenta: 10000999, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
