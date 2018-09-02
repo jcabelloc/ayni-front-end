@@ -27,7 +27,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   simulacionCredito: SimulacionCredito; 
   cliente: Cliente;
 
-  viasDesembolso: Option[] = [
+  tiposCuentaDesembolso: Option[] = [
     {value: 'CAJA', viewValue: 'CAJA'},
     {value: 'BANCO', viewValue: 'BANCO'},
   ];
