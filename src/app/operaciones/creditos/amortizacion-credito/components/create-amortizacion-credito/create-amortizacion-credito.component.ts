@@ -28,6 +28,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   idCuenta: number;
   simulacionAmortizacion: SimulacionAmortizacion;
   amortizacionCredito: AmortizacionCredito;
+  isRecaudoBanco: boolean = false;
 
   tiposCuentaRecaudo: Option[] = [
     {value: 'CAJA', viewValue: 'CAJA'},
@@ -51,21 +52,26 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       tipoCuentaRecaudo: ['', Validators.required],
       idCuentaRecaudo: ['', Validators.required],
+      nroOperacion: ['', Validators.required],
+      fechaOperacion: ['', Validators.required],
+      montoOperacion: ['', Validators.required],
     });
   }
 
   onTipoCuentaRecaudoSelection(tipoCuentaRecaudo: MatSelectChange) {
+
+    this.isRecaudoBanco = false;
     if(tipoCuentaRecaudo.value == 'BANCOS') {
+      this.isRecaudoBanco = true;
       this.cuentasRecaudo = [
-        {idCuenta: 10001, descripcion: 'BCP - 1234-18830-28983'},
-        {idCuenta: 10002, descripcion: 'IBK - 2183-9999-282821983'}
+        {idCuenta: 10000002, descripcion: 'BCP - 123-4567-890'},
       ];
-      
+      this.secondFormGroup.patchValue({fechaOperacion: this.getStringLocalDate(new Date())}) ;
+      this.secondFormGroup.patchValue({montoOperacion: this.amortizacionCredito.montoAmortizacion}) ;
     }
     else if (tipoCuentaRecaudo.value == 'CAJA') {
       this.cuentasRecaudo = [
         {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
-        {idCuenta: 10000999, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
       ];
     
     }
@@ -82,10 +88,11 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     };
   }
 
-  onSubmitStep2({value, valid}: {value: AmortizacionCredito, valid: boolean}){
-    
+  onSubmitStep2({value, valid}: {value: any, valid: boolean}){
+    // "value: any" since value cannot be parsed to nested object (.detalleBanco)
     this.amortizacionCredito.tipoCuentaRecaudo = value.tipoCuentaRecaudo;
     this.amortizacionCredito.idCuentaRecaudo = value.idCuentaRecaudo;
+    this.amortizacionCredito.detalleBanco = { fechaOperacion: value.fechaOperacion, nroOperacion: value.nroOperacion, montoOperacion: value.montoOperacion};
     this.amortizarCredito(this.amortizacionCredito);
     
   }
@@ -97,6 +104,12 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
         amortizacionCredito => console.log(amortizacionCredito),
         err => console.log(err)
       );
+  }
+
+  getStringLocalDate(fecha: Date): string {
+    let fechaString: string;
+    fechaString = fecha.getFullYear() + "-" + (fecha.getMonth() + 1).toString().padStart(2,"0") + "-" + fecha.getDate().toString().padStart(2,"0");
+    return fechaString;
   }
 
 }

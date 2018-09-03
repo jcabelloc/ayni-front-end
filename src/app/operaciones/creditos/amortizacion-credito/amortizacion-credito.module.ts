@@ -12,6 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ReactiveFormsModule }   from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 import { AmortizacionCreditoRoutingModule } from './amortizacion-credito-routing.module';
 import { AdmAmortizacionCreditoComponent } from './components/adm-amortizacion-credito/adm-amortizacion-credito.component';
@@ -34,6 +36,7 @@ import { SimularAmortizacionCuotasComponent } from './components/simular-amortiz
     MatTableModule,
     MatStepperModule,
     ReactiveFormsModule,
+    MatExpansionModule,
   ],
   declarations: [AdmAmortizacionCreditoComponent, CreateAmortizacionCreditoComponent, ShowCuotasPendientesComponent, SimularAmortizacionCuotasComponent]
 })

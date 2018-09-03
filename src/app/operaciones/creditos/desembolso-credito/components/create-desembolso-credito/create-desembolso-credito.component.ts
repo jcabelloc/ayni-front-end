@@ -196,7 +196,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
   desembolsarCredito(){
     console.log(this.desembolsoCredito);
-    this.desembolsoCredito.responsableCuenta = "oajon"; //TODO
+    this.desembolsoCredito.responsableCuenta = "OAJON"; //TODO
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
         desembolsoCredito => {
@@ -207,7 +207,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
 
   showReporteSolicitud(){
-    this.desembolsoCredito.responsableCuenta = "oajon"; //TODO
+    this.desembolsoCredito.responsableCuenta = "OAJON"; //TODO
     this.desembolsoCreditoService.buildReporteSolicitud(this.desembolsoCredito)
       .subscribe(
         res => {

@@ -1,3 +1,10 @@
+interface DetalleBanco {
+    id?: number;
+    nroOperacion: string;
+    fechaOperacion: string;
+    montoOperacion: number;
+}
+
 export interface AmortizacionCredito {
     idOperacion?: number;
     idCuenta: number;
@@ -5,5 +12,6 @@ export interface AmortizacionCredito {
     montoAmortizacion: number;
     tipoCuentaRecaudo?: string;
     idCuentaRecaudo?: number;
+    detalleBanco?: DetalleBanco;
 
 }
