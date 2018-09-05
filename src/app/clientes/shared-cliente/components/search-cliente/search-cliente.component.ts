@@ -25,10 +25,6 @@ export class SearchClienteComponent implements OnInit {
   displayedColumns: string[] = ['posicion', 'nombre', 'tipoIdentificacion', 'nroIdentificacion', 'mas'];
   dataSource = new MatTableDataSource<TableElement>(this.data);
 
-
-  option: string;
-  searchInput: string;
-  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   options: Option[] = [
@@ -36,6 +32,9 @@ export class SearchClienteComponent implements OnInit {
     {value: 'DNI', viewValue: 'DNI'},
   ];
 
+  option: string = "NOMBRE";
+  searchInput: string;
+  
   constructor(private clienteService: ClienteService, public dialogRef: MatDialogRef<SearchClienteComponent>) { }
 
   ngOnInit() {
