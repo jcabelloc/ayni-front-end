@@ -30,7 +30,7 @@ export class AdmPersonaNaturalComponent implements OnInit {
     {value: 'DNI', viewValue: 'DNI'},
   ];
 
-  option: string;
+  option: string = 'NOMBRE';
   searchInput: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

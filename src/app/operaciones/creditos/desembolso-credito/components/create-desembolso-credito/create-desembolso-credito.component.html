@@ -4,9 +4,9 @@
       <form [formGroup]="firstFormGroup" #formStep1="ngForm" (ngSubmit)="onSubmitStep1(formStep1)">
         <ng-template matStepLabel>Datos del Credito</ng-template>
 
-        <div>
-          <button mat-button matStepperNext >Siguiente</button>
-        </div>
+        <button mat-button type="button" routerLink="../adm"color="warn">SALIR</button>
+        <button mat-button matStepperNext color="primary">SIGUIENTE</button>
+        <mat-divider></mat-divider>
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Monto S/</mat-label>
@@ -53,9 +53,10 @@
         <ng-template matStepLabel>Datos del Desembolso</ng-template>
 
         <div>
-          <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button matStepperNext >Siguiente</button>
+          <button mat-button matStepperPrevious color="primary">ATRAS</button>
+          <button mat-button matStepperNext color="primary">SIGUIENTE</button>
         </div>
+        <mat-divider></mat-divider>
 
         <mat-form-field class="mat-form-field-small" >
           <mat-select placeholder="Tipo Identificacion" formControlName="tipoIdentificacion" disabled>
@@ -118,12 +119,13 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Confirmar Desembolso</ng-template>
-      Verifique bien los datos antes de confirmar.
-      <button mat-button (click)="showReporteSolicitud()">Imprimir Solicitud</button>
+      <div  class="align-right">
+        <button mat-button (click)="showReporteSolicitud()" color="accent">IMPRIMIR SOLICITUD</button>
+      </div>
       <div>
-        <button mat-button matStepperPrevious>Atras</button>
-        <button mat-button (click)="stepper.reset()">Cancelar</button>
-        <button mat-button (click)="desembolsarCredito()">Desembolsar</button>
+        <button mat-button matStepperPrevious color="primary">ATRAS</button>
+        <button mat-button (click)="stepper.reset()" color="warn">REINICIAR</button>
+        <button mat-button (click)="desembolsarCredito()" color="primary">DESEMBOLSAR</button>
       </div>
       <mat-divider></mat-divider>
       <br><br>
