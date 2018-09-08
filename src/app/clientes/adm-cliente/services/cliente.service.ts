@@ -40,6 +40,14 @@ export class ClienteService {
     return this.http.get<Cliente>(findByIdUrl)
   }
 
+  updateCliente(id: number, cliente: Cliente) {
+    const updateUrl =  this.apiUrl + "/" + id;
+    return this.http.put<Cliente> (updateUrl, cliente)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

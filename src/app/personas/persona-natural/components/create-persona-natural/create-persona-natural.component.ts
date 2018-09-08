@@ -31,15 +31,15 @@ export class CreatePersonaNaturalComponent implements OnInit {
 
   personaNatural : PersonaNatural = {
     tipoIdentificacion: "DNI",
-    nroIdentificacion: "",
-    primerNombre: "",
-    segundoNombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
-    sexo: "",
-    fechaNacimiento: "",
-	  email: "",
-	  estadoCivil: "",
+    nroIdentificacion: null,
+    primerNombre: null,
+    segundoNombre: null,
+    apellidoPaterno: null,
+    apellidoMaterno: null,
+    sexo: null,
+    fechaNacimiento: null,
+	  email: null,
+	  estadoCivil: null,
   }
 
   constructor(private personaNaturalService: PersonaNaturalService, private router: Router) { }
@@ -47,13 +47,17 @@ export class CreatePersonaNaturalComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit({value, valid}: {value: PersonaNatural, valid: boolean}) {
-    this.personaNaturalService.createPersonaNatural(this.personaNatural)
+    if (valid) {
+      this.personaNaturalService.createPersonaNatural(this.personaNatural)
       .subscribe (
         personaNatural => { 
           this.router.navigate(['personas/persona-natural/update/' + personaNatural.id]); 
         },
         err => console.log(err)
       );
+
+    }
+    
       
   }
 

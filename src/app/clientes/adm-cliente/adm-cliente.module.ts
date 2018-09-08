@@ -12,6 +12,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 
+import { PersonaModule } from '../../personas/persona/persona.module';
 import { AdmClienteRoutingModule } from './adm-cliente-routing.module';
 import { AdmClienteComponent } from './components/adm-cliente/adm-cliente.component';
 import { CreateClienteComponent } from './components/create-cliente/create-cliente.component';
@@ -31,6 +32,7 @@ import { UpdateClienteComponent } from './components/update-cliente/update-clien
     MatPaginatorModule,
     MatIconModule,
     MatTableModule,
+    PersonaModule,
   ],
   declarations: [AdmClienteComponent, CreateClienteComponent, UpdateClienteComponent]
 })

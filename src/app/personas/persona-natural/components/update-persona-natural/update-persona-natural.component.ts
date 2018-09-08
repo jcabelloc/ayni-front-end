@@ -29,16 +29,16 @@ export class UpdatePersonaNaturalComponent implements OnInit {
 
   personaNatural : PersonaNatural = {
     id: null,
-    tipoIdentificacion: "",
-    nroIdentificacion: "",
-    primerNombre: "",
-    segundoNombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
-    sexo: "",
-    fechaNacimiento: "",
-	  email: "",
-	  estadoCivil: "",
+    tipoIdentificacion: "DNI",
+    nroIdentificacion: null,
+    primerNombre: null,
+    segundoNombre: null,
+    apellidoPaterno: null,
+    apellidoMaterno: null,
+    sexo: null,
+    fechaNacimiento: null,
+    email: null,
+    estadoCivil: null,
   }
 
   constructor(
@@ -58,12 +58,14 @@ export class UpdatePersonaNaturalComponent implements OnInit {
     
   }
   onSubmit({value, valid}: {value: PersonaNatural, valid: boolean}) {
-    this.personaNaturalService.updatePersonaNatural(this.personaNatural.id, this.personaNatural)
+    if (valid) {
+      this.personaNaturalService.updatePersonaNatural(this.personaNatural.id, this.personaNatural)
       .subscribe(
         personaNatural => {
           console.log(personaNatural);
         }
       )
+    }
   }
 
 

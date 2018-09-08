@@ -1,3 +1,94 @@
-<p>
-  update-cliente works!
-</p>
+<div class="container">
+    <form #clienteForm="ngForm" (ngSubmit)="onSubmit(clienteForm)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title><h2>Registro de Cliente</h2></mat-card-title>
+          <mat-card-subtitle *ngIf="cliente.id != null">Codigo Cliente: {{cliente.id}}</mat-card-subtitle>
+
+        </mat-card-header>
+  
+        <mat-card-content>
+            <mat-form-field class="mat-form-field" >
+              <mat-select placeholder="Tipo Identificacion" [(ngModel)]="cliente.personaNatural.tipoIdentificacion" name="tipoIdentificacion" disabled>
+                <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.value">
+                  {{tipoDoc.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Nro. de Identificacion</mat-label>
+              <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.nroIdentificacion" name="nroIdentificacion" required readonly>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Apellido Paterno</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.apellidoPaterno" name="apellidoPaterno" minlength="3" required>
+              <mat-hint>Min 3 letras</mat-hint>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Apellido Materno</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.apellidoMaterno" name="apellidoMaterno" minlength="3" required>
+              <mat-hint>Min 3 letras</mat-hint>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Primer Nombre</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.primerNombre" name="primerNombre" minlength="3" required>
+              <mat-hint>Min 3 letras</mat-hint>
+            </mat-form-field>
+            
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Segundo Nombre</mat-label>
+              <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.segundoNombre" name="segundoNombre" minlength="3" required>
+              <mat-hint>Min 3 letras</mat-hint>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field"  >
+              <mat-select placeholder="Sexo" [(ngModel)]="cliente.personaNatural.sexo" name="sexo" required >
+                <mat-option *ngFor="let sexo of sexos" [value]="sexo.value">
+                  {{sexo.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Fecha Nacimiento</mat-label>
+              <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.fechaNacimiento" name="fechaNacimiento" required>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field"  >
+              <mat-select placeholder="Estado Civil" [(ngModel)]="cliente.personaNatural.estadoCivil" name="estadoCivil" required>
+                <mat-option *ngFor="let estado of civilEstados" [value]="estado.value">
+                  {{estado.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="mat-form-field" appearance="standard">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput placeholder="usuario@email.com" [(ngModel)]="cliente.personaNatural.email" name="email" required>
+            </mat-form-field>
+            
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <button type = "submit" mat-button color="primary" [disabled]="!clienteForm.form.valid">GUARDAR</button>
+            <button type="button" routerLink="../../adm" mat-button color="warn">CANCELAR</button>
+          </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+
+  <div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h2>Mas Datos</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <app-adm-direccion [idPersona]="cliente.personaNatural.id"></app-adm-direccion>
+          <app-adm-telefono [idPersona]="cliente.personaNatural.id"></app-adm-telefono>
+      </mat-card-content>
+    </mat-card>
+  </div>

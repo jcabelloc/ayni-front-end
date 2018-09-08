@@ -1,5 +1,5 @@
 <div class="container">
-  <form novalidate #ppnnForm="ngForm" (ngSubmit)="onSubmit(ppnnForm)">
+  <form #ppnnForm="ngForm" (ngSubmit)="onSubmit(ppnnForm)">
     <mat-card>
       <mat-card-header>
         <mat-card-title><h2>Registro de Persona Natural</h2></mat-card-title>
@@ -13,6 +13,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          
 
           <mat-form-field class="mat-form-field" appearance="standard">
             <mat-label>Nro. de Identificacion</mat-label>
@@ -21,18 +22,20 @@
 
           <mat-form-field class="mat-form-field" appearance="standard">
             <mat-label>Apellido Paterno</mat-label>
-            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoPaterno" name="apellidoPaterno" required>
+            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoPaterno" name="apellidoPaterno"  minlength="3" required>
+            <mat-hint>Min 3 letras</mat-hint>
+          </mat-form-field>
+          
+          <mat-form-field class="mat-form-field" appearance="standard">
+            <mat-label>Apellido Materno</mat-label>
+            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoMaterno" name="apellidoMaterno" minlength="3" required>
             <mat-hint>Min 3 letras</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="mat-form-field" appearance="standard">
-            <mat-label>Apellido Materno</mat-label>
-            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.apellidoMaterno" name="apellidoMaterno">
-          </mat-form-field>
-
-          <mat-form-field class="mat-form-field" appearance="standard">
             <mat-label>Primer Nombre</mat-label>
-            <input type="text" matInput #input maxlength="12" placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.primerNombre" name="primerNombre" required>
+            <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.primerNombre" name="primerNombre"  minlength="3" required>
+            <mat-hint>Min 3 letras</mat-hint>
           </mat-form-field>
           
           <mat-form-field class="mat-form-field" appearance="standard">
@@ -65,13 +68,13 @@
 
           <mat-form-field class="mat-form-field" appearance="standard">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Ingresar aqui.." [(ngModel)]="personaNatural.email" name="email">
+            <input type="email" matInput placeholder="usuario@email.com" [(ngModel)]="personaNatural.email" name="email">
           </mat-form-field>
           
       </mat-card-content>
       
       <mat-card-actions>
-          <button type = "submit" mat-button color="primary">GUARDAR</button>
+          <button type = "submit" mat-button color="primary" [disabled]="!ppnnForm.form.valid">GUARDAR</button>
           <button type="button" routerLink="../adm" mat-button color="warn">CANCELAR</button>
         </mat-card-actions>
     </mat-card>

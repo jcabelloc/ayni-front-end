@@ -31,15 +31,15 @@ export class CreateClienteComponent implements OnInit {
   cliente : Cliente = {
     personaNatural : {
       tipoIdentificacion: "DNI",
-      nroIdentificacion: "",
-      primerNombre: "",
-      segundoNombre: "",
-      apellidoPaterno: "",
-      apellidoMaterno: "",
-      sexo: "",
-      fechaNacimiento: "",
-      email: "",
-      estadoCivil: "",
+      nroIdentificacion: null,
+      primerNombre: null,
+      segundoNombre: null,
+      apellidoPaterno: null,
+      apellidoMaterno: null,
+      sexo: null,
+      fechaNacimiento: null,
+      email: null,
+      estadoCivil: null,
     }
   }
   constructor(private clienteService: ClienteService, private router: Router) { }
@@ -48,15 +48,19 @@ export class CreateClienteComponent implements OnInit {
   }
 
   onSubmit({value, valid}: {value: Cliente, valid: boolean}) {
-    this.clienteService.createCliente(this.cliente)
+    if (valid) {
+      this.clienteService.createCliente(this.cliente)
       .subscribe (
         cliente => { 
           console.log(cliente);
-          // TODO Change to Update Cliente Path
-          this.router.navigate(['clientes/adm-cliente/adm']); 
+          
+          this.router.navigate(['clientes/adm-cliente/update/' + cliente.id]); 
+
         },
         err => console.log(err)
       );
+
+    }
       
   }
 }
