@@ -7,6 +7,7 @@ import { SearchClienteComponent } from '../../../../../clientes/shared-cliente/c
 import { DesembolsoCreditoService } from '../../services/desembolso-credito.service';
 import { CuentaDesembolso } from '../../models/CuentaDesembolso';
 import { SimulacionCredito } from '../../../../../creditos/simulacion-credito/models/SimulacionCredito';
+import { Router } from '@angular/router';
 
 export interface Option {
   value: string;
@@ -29,7 +30,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
 
   tiposCuentaDesembolso: Option[] = [
     {value: 'CAJA', viewValue: 'CAJA'},
-    {value: 'BANCO', viewValue: 'BANCO'},
+    /*{value: 'BANCOS', viewValue: 'BANCOS'},*/
   ];
 
   cuentasDesembolso: CuentaDesembolso[];
@@ -45,16 +46,17 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   ];
 
   aprobadores: Option[] = [
-    {value: 'grios', viewValue: 'GRIOS'},
-    {value: 'eperez', viewValue: 'EPEREZ'},
-    {value: 'mfernandez', viewValue: 'MFERNANDEZ'},
-    {value: 'oajon', viewValue: 'OAJON'},
+    {value: 'GRIOS', viewValue: 'GRIOS'},
+    {value: 'EPEREZ', viewValue: 'EPEREZ'},
+    {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
+    {value: 'OAJON', viewValue: 'OAJON'},
   ];
 
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
               private clienteService: ClienteService,
-              private desembolsoCreditoService: DesembolsoCreditoService) 
+              private desembolsoCreditoService: DesembolsoCreditoService,
+              private router: Router) 
   { }
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
 
   onTipoCuentaDesembolsoSelection(tipoCuentaDesembolso: MatSelectChange) {
+    /*
     if(tipoCuentaDesembolso.value == 'BANCOS') {
       this.cuentasDesembolso = [
         {idCuenta: 10001, descripcion: 'BCP - 1234-18830-28983'},
@@ -117,10 +120,9 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       ];
       
     }
-    else if (tipoCuentaDesembolso.value == 'CAJA') {
+    else */if (tipoCuentaDesembolso.value == 'CAJA') {
       this.cuentasDesembolso = [
-        {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
-        {idCuenta: 10000999, descripcion: 'CAJA NVA. CAJAMARCA - MARCO FERNADEZ'}
+        {idCuenta: 10000001, descripcion: 'Caja Nueva Cajamarca - OAJON'},
       ];
     
     }
@@ -201,6 +203,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       .subscribe(
         desembolsoCredito => {
           console.log(desembolsoCredito);
+          this.router.navigate(['operaciones/creditos/desembolso-credito/show/' + desembolsoCredito.id]); 
         },
         err => console.log(err)
       );

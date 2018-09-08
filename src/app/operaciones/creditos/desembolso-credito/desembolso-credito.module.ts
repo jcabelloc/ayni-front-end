@@ -10,6 +10,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+
 
 import { DesembolsoCreditoRoutingModule } from './desembolso-credito-routing.module';
 import { AdmDesembolsoCreditoComponent } from './components/adm-desembolso-credito/adm-desembolso-credito.component';
@@ -19,6 +21,7 @@ import { DatosDesembolsoCreditoComponent } from './components/datos-desembolso-c
 
 import { SimulacionCreditoModule } from '../../../creditos/simulacion-credito/simulacion-credito.module';
 import { SharedClienteModule } from '../../../clientes/shared-cliente/shared-cliente.module';
+import { ShowDesembolsoComponent } from './components/show-desembolso/show-desembolso.component';
 
 @NgModule({
   imports: [
@@ -36,7 +39,8 @@ import { SharedClienteModule } from '../../../clientes/shared-cliente/shared-cli
     MatDialogModule,
     SimulacionCreditoModule,
     SharedClienteModule,
+    MatCardModule,
   ],
-  declarations: [AdmDesembolsoCreditoComponent, CreateDesembolsoCreditoComponent, DatosDesembolsoCreditoComponent]
+  declarations: [AdmDesembolsoCreditoComponent, CreateDesembolsoCreditoComponent, DatosDesembolsoCreditoComponent, ShowDesembolsoComponent]
 })
 export class DesembolsoCreditoModule { }

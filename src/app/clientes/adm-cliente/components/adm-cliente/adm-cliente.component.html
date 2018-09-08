@@ -55,15 +55,24 @@
               <td mat-cell *matCellDef="let element"> {{element.esCliente}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="mas">
-              <th mat-header-cell *matHeaderCellDef> Mas... </th>
+            <ng-container  matColumnDef="editarCliente">
+              <th mat-header-cell *matHeaderCellDef> Editar<br>Cliente </th>
+              <td mat-cell *matCellDef="let element"> 
+                <a *ngIf="element.idCliente != null" routerLink="../update/{{element.idCliente}}" mat-icon-button color="primary">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="promoverACliente">
+              <th mat-header-cell *matHeaderCellDef> Promover<br>a Cliente </th>
               <td mat-cell *matCellDef="let element"> 
                 <a routerLink="../update/{{element.id}}" mat-icon-button color="primary">
                   <mat-icon>edit</mat-icon>
                 </a>
               </td>
             </ng-container>
-        
+  
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>

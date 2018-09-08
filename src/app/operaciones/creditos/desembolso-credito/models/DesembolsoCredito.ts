@@ -6,6 +6,7 @@ export interface Cliente {
 } 
 
 export interface DesembolsoCredito {
+    id?: number;
     montoDesembolso: number;
     moneda: string;
     frecuencia: string;
@@ -19,4 +20,8 @@ export interface DesembolsoCredito {
     cuentaDesembolsoDescripcion?: string;
     usuarioAprobador?: string;
     responsableCuenta?: string;
+    usuarioOperacion?: string;
+    fechaOperacion?: string;
+    horaOperacion?: string;
+    idCuenta?: number;
 }
