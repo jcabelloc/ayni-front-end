@@ -23,51 +23,51 @@
         <br><br>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Tipo Cuenta Desembolso</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.tipoCuentaDesembolso" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.operacion?.tipoCuentaDesembolso" disabled>
         </mat-form-field>
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Cuenta Desembolso</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.idCuentaDesembolso + ' - ' + desembolsoCredito?.cuentaDesembolsoDescripcion" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.operacion?.idCuentaDesembolso + ' - ' + desembolsoCredito?.operacion?.cuentaDesembolsoDescripcion" disabled>
         </mat-form-field>
         <mat-divider></mat-divider>
         <br><br>
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Usuario Aprobador</mat-label>
-          <input type="text" matInput [value] = "desembolsoCredito?.usuarioAprobador?.toUpperCase()" disabled>
+          <input type="text" matInput [value] = "desembolsoCredito?.credito?.usuarioAprobador" disabled>
         </mat-form-field>
         <mat-divider></mat-divider>
         <br><br>
       </div>
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Monto</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.montoDesembolso  | number: '1.2-2'" disabled>
+        <input type="text" matInput [value] = "desembolsoCredito?.credito.montoDesembolso  | number: '1.2-2'" disabled>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Frecuencia</mat-label>
-        <input type="text" matInput [value] = "desembolsoCredito?.frecuencia" disabled>
+        <input type="text" matInput [value] = "desembolsoCredito?.credito.frecuencia" disabled>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Tasa Mensual(TEM) en %</mat-label>
-        <input type="number" matInput [value] = "desembolsoCredito?.tem" disabled>
+        <input type="number" matInput [value] = "desembolsoCredito?.credito.tem" disabled>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Nro. de Cuotas</mat-label>
-        <input type="number" matInput [value] = "desembolsoCredito?.nroCuotas" disabled>
+        <input type="number" matInput [value] = "desembolsoCredito?.credito.nroCuotas" disabled>
       </mat-form-field>
         
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Fecha de Desembolso</mat-label>
-        <input type="date" matInput [value] = "desembolsoCredito?.fechaDesembolso" disabled>
+        <input type="date" matInput [value] = "desembolsoCredito?.credito.fechaDesembolso" disabled>
       </mat-form-field>
 
       <mat-form-field class="mat-form-field" appearance="standard">
         <mat-label>Fecha Primera Cuota</mat-label>
-        <input type="date" matInput [value] = "desembolsoCredito?.fechaPrimeraCuota" disabled>
+        <input type="date" matInput [value] = "desembolsoCredito?.credito.fechaPrimeraCuota" disabled>
       </mat-form-field>
   
     </form>

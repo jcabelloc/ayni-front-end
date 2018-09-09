@@ -1,3 +1,29 @@
+interface Credito {
+    idCuenta?: number;
+    montoDesembolso: number;
+    moneda: string; 
+    frecuencia: string;
+    tem: number;
+    nroCuotas: number;
+    fechaDesembolso: string;
+    fechaPrimeraCuota: string;
+    usuarioAprobador?: string;
+    usuarioResponsable?: string;
+}
+
+interface Operacion {
+    id?: number;
+    monto?: number;
+    moneda?: string;
+    fechaOperacion?: string;
+    horaOperacion?: string;
+    usuario?: string;
+    tipoOperacion?: string;
+    tipoCuentaDesembolso: string;
+    idCuentaDesembolso: number;
+    cuentaDesembolsoDescripcion: string;
+} 
+
 export interface Cliente {
     id: number;
     nombre: string;
@@ -6,22 +32,7 @@ export interface Cliente {
 } 
 
 export interface DesembolsoCredito {
-    id?: number;
-    montoDesembolso: number;
-    moneda: string;
-    frecuencia: string;
-    tem: number;
-    nroCuotas: number;
-    fechaDesembolso: string;
-    fechaPrimeraCuota: string;
+    credito: Credito;
     cliente?: Cliente;
-    tipoCuentaDesembolso?: string; 
-    idCuentaDesembolso?: number;
-    cuentaDesembolsoDescripcion?: string;
-    usuarioAprobador?: string;
-    responsableCuenta?: string;
-    usuarioOperacion?: string;
-    fechaOperacion?: string;
-    horaOperacion?: string;
-    idCuenta?: number;
+    operacion?: Operacion;
 }

@@ -29,6 +29,11 @@ export class DesembolsoCreditoService {
       );
   }
 
+  findDesembolsoById(id: number): Observable<DesembolsoCredito> {
+    let findByIdUrl = this.apiUrl + "/" + id;
+    return this.http.get<DesembolsoCredito>(findByIdUrl);
+  }
+
   
   buildReporteSolicitud (desembolsoCredito: DesembolsoCredito) {
     let buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";

@@ -79,15 +79,20 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     });
   }
 
-  onSubmitStep1({value, valid}: {value: DesembolsoCredito, valid: boolean}){
+  onSubmitStep1({value, valid}: {value: any, valid: boolean}){
+    // "value: any" since value cannot be parsed to nested objects
+
     this.desembolsoCredito = {
-      montoDesembolso: value.montoDesembolso,
-      moneda: '1', //TODO
-      frecuencia: value.frecuencia,
-      tem: value.tem,
-      nroCuotas:  value.nroCuotas,
-      fechaDesembolso: value.fechaDesembolso,
-      fechaPrimeraCuota: value.fechaPrimeraCuota,
+      credito: {
+        idCuenta: null,
+        montoDesembolso: value.montoDesembolso,
+        moneda: '1', //TODO
+        frecuencia: value.frecuencia,
+        tem: value.tem,
+        nroCuotas:  value.nroCuotas,
+        fechaDesembolso: value.fechaDesembolso,
+        fechaPrimeraCuota: value.fechaPrimeraCuota,
+      }
     };
     this.simulacionCredito = {
       montoDesembolso: value.montoDesembolso,
@@ -99,12 +104,11 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     };
   }
 
-  onSubmitStep2({value, valid}: {value: DesembolsoCredito, valid: boolean}){
+  onSubmitStep2({value, valid}: {value: any, valid: boolean}){
     this.desembolsoCredito.cliente = this.cliente;
-    this.desembolsoCredito.tipoCuentaDesembolso = value.tipoCuentaDesembolso;
-    this.desembolsoCredito.idCuentaDesembolso = +value.idCuentaDesembolso;
-    this.desembolsoCredito.cuentaDesembolsoDescripcion = this.cuentasDesembolso.find(e=> e.idCuenta == value.idCuentaDesembolso).descripcion;
-    this.desembolsoCredito.usuarioAprobador = value.usuarioAprobador;
+    this.desembolsoCredito.operacion = {tipoCuentaDesembolso: value.tipoCuentaDesembolso, idCuentaDesembolso: +value.idCuentaDesembolso, 
+      cuentaDesembolsoDescripcion: this.cuentasDesembolso.find(e=> e.idCuenta == value.idCuentaDesembolso).descripcion};
+    this.desembolsoCredito.credito.usuarioAprobador = value.usuarioAprobador;
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
@@ -198,19 +202,18 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
   desembolsarCredito(){
     console.log(this.desembolsoCredito);
-    this.desembolsoCredito.responsableCuenta = "OAJON"; //TODO
+    this.desembolsoCredito.credito.usuarioResponsable = "OAJON"; //TODO
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
         desembolsoCredito => {
-          console.log(desembolsoCredito);
-          this.router.navigate(['operaciones/creditos/desembolso-credito/show/' + desembolsoCredito.id]); 
+          this.router.navigate(['operaciones/creditos/desembolso-credito/show/' + desembolsoCredito.operacion.id]); 
         },
         err => console.log(err)
       );
   }
 
   showReporteSolicitud(){
-    this.desembolsoCredito.responsableCuenta = "OAJON"; //TODO
+    this.desembolsoCredito.credito.usuarioResponsable = "OAJON"; //TODO
     this.desembolsoCreditoService.buildReporteSolicitud(this.desembolsoCredito)
       .subscribe(
         res => {
