@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { SimulacionAmortizacion } from '../../models/SimulacionAmortizacion';
@@ -41,6 +41,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     private _formBuilder: FormBuilder, 
     private route: ActivatedRoute,
     private amortizacionCreditoService: AmortizacionCreditoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -67,7 +68,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
         {idCuenta: 10000002, descripcion: 'BCP - 123-4567-890'},
       ];
       this.secondFormGroup.patchValue({fechaOperacion: this.getStringLocalDate(new Date())}) ;
-      this.secondFormGroup.patchValue({montoOperacion: this.amortizacionCredito.montoAmortizacion}) ;
+      this.secondFormGroup.patchValue({montoOperacion: this.amortizacionCredito.operacion.monto}) ;
     }
     else if (tipoCuentaRecaudo.value == 'CAJA') {
       this.cuentasRecaudo = [
@@ -76,22 +77,21 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     
     }
   }
-  onSubmitStep1({value, valid}: {value: AmortizacionCredito, valid: boolean}){
+  onSubmitStep1({value, valid}: {value: any, valid: boolean}){
     this.simulacionAmortizacion = {
       idCuenta: this.idCuenta,
       montoAmortizacion: value.montoAmortizacion,
     };
     this.amortizacionCredito = {
       idCuenta: this.idCuenta,
-      moneda: '1', //TODO
-      montoAmortizacion: value.montoAmortizacion,
+      operacion: { moneda: '1', monto: value.montoAmortizacion}
     };
   }
 
   onSubmitStep2({value, valid}: {value: any, valid: boolean}){
     // "value: any" since value cannot be parsed to nested object (.detalleBanco)
-    this.amortizacionCredito.tipoCuentaRecaudo = value.tipoCuentaRecaudo;
-    this.amortizacionCredito.idCuentaRecaudo = value.idCuentaRecaudo;
+    this.amortizacionCredito.operacion.tipoCuentaRecaudo = value.tipoCuentaRecaudo;
+    this.amortizacionCredito.operacion.idCuentaRecaudo = value.idCuentaRecaudo;
     this.amortizacionCredito.detalleBanco = { fechaOperacion: value.fechaOperacion, nroOperacion: value.nroOperacion, montoOperacion: value.montoOperacion};
     this.amortizarCredito(this.amortizacionCredito);
     
@@ -101,7 +101,12 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     console.log(amortizacionCredito);
     this.amortizacionCreditoService.createAmortizacion(amortizacionCredito)
       .subscribe(
-        amortizacionCredito => console.log(amortizacionCredito),
+        amortizacionCredito => { 
+          console.log(amortizacionCredito);
+          this.router.navigate(['operaciones/creditos/amortizacion-credito/show/' ]); //+ amortizacionCredito.id
+          //this.router.navigate(['operaciones/creditos/desembolso-credito/show/' ]); //+ amortizacionCredito.id
+
+        },
         err => console.log(err)
       );
   }

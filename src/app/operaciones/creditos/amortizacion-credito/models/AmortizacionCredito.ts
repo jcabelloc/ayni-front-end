@@ -5,13 +5,29 @@ interface DetalleBanco {
     montoOperacion: number;
 }
 
-export interface AmortizacionCredito {
-    idOperacion?: number;
-    idCuenta: number;
-    moneda: string;
-    montoAmortizacion: number;
+interface Operacion {
+    id?: number;
+    monto?: number;
+    moneda?: string;
+    fechaOperacion?: string;
+    horaOperacion?: string;
+    usuario?: string;
+    tipoOperacion?: string;
     tipoCuentaRecaudo?: string;
     idCuentaRecaudo?: number;
+} 
+
+export interface Cliente {
+    id: number;
+    nombre: string;
+    tipoIdentificacion: string;
+    nroIdentificacion: string;
+} 
+
+export interface AmortizacionCredito {
+    idCuenta: number;
+    cliente?: Cliente;
+    operacion: Operacion;
     detalleBanco?: DetalleBanco;
 
 }

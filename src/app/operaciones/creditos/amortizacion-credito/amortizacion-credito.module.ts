@@ -20,6 +20,7 @@ import { AdmAmortizacionCreditoComponent } from './components/adm-amortizacion-c
 import { CreateAmortizacionCreditoComponent } from './components/create-amortizacion-credito/create-amortizacion-credito.component';
 import { ShowCuotasPendientesComponent } from './components/show-cuotas-pendientes/show-cuotas-pendientes.component';
 import { SimularAmortizacionCuotasComponent } from './components/simular-amortizacion-cuotas/simular-amortizacion-cuotas.component';
+import { ShowAmortizacionComponent } from './components/show-amortizacion/show-amortizacion.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,6 @@ import { SimularAmortizacionCuotasComponent } from './components/simular-amortiz
     ReactiveFormsModule,
     MatExpansionModule,
   ],
-  declarations: [AdmAmortizacionCreditoComponent, CreateAmortizacionCreditoComponent, ShowCuotasPendientesComponent, SimularAmortizacionCuotasComponent]
+  declarations: [AdmAmortizacionCreditoComponent, CreateAmortizacionCreditoComponent, ShowCuotasPendientesComponent, SimularAmortizacionCuotasComponent, ShowAmortizacionComponent]
 })
 export class AmortizacionCreditoModule { }
