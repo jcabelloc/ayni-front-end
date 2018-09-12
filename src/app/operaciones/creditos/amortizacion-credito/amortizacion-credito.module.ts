@@ -13,6 +13,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ReactiveFormsModule }   from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 
 import { AmortizacionCreditoRoutingModule } from './amortizacion-credito-routing.module';
@@ -38,6 +40,7 @@ import { ShowAmortizacionComponent } from './components/show-amortizacion/show-a
     MatStepperModule,
     ReactiveFormsModule,
     MatExpansionModule,
+    MatDividerModule
   ],
   declarations: [AdmAmortizacionCreditoComponent, CreateAmortizacionCreditoComponent, ShowCuotasPendientesComponent, SimularAmortizacionCuotasComponent, ShowAmortizacionComponent]
 })

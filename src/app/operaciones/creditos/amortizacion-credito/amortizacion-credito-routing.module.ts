@@ -7,7 +7,7 @@ import { ShowAmortizacionComponent } from './components/show-amortizacion/show-a
 const routes: Routes = [
   { path: 'adm', component: AdmAmortizacionCreditoComponent },
   { path: 'create', component: CreateAmortizacionCreditoComponent },
-  { path: 'show', component: ShowAmortizacionComponent },
+  { path: 'show/:id', component: ShowAmortizacionComponent },
 ]
 
 @NgModule({

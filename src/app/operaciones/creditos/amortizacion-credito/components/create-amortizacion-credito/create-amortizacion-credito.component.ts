@@ -103,9 +103,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
       .subscribe(
         amortizacionCredito => { 
           console.log(amortizacionCredito);
-          this.router.navigate(['operaciones/creditos/amortizacion-credito/show/' ]); //+ amortizacionCredito.id
-          //this.router.navigate(['operaciones/creditos/desembolso-credito/show/' ]); //+ amortizacionCredito.id
-
+          this.router.navigate(['operaciones/creditos/amortizacion-credito/show/' + amortizacionCredito.operacion.id ]); 
         },
         err => console.log(err)
       );

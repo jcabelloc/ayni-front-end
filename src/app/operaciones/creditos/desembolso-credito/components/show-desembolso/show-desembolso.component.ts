@@ -30,15 +30,6 @@ export class ShowDesembolsoComponent implements OnInit {
         },
         err => console.log(err)
       )
-    /*
-    this.desembolsoCredito = {
-      credito: { idCuenta: 1000012, montoDesembolso: 1500, moneda: '1', frecuencia: 'SEMANAL', tem: 12.5, nroCuotas:  12, fechaDesembolso: '2018-08-28',
-        fechaPrimeraCuota: '2018-09-05', usuarioResponsable: 'OAJON', usuarioAprobador: 'GRIOS',}, 
-      cliente: { id: 1000001, nombre: 'CABELLO CORAL JUAN JESUS', nroIdentificacion: '10681340', tipoIdentificacion: 'DNI' },
-      operacion: { tipoCuentaDesembolso: 'CAJA', idCuentaDesembolso: 1000001, cuentaDesembolsoDescripcion: 'Caja Nueva Cajamarca - OAJON',
-      usuario: 'OAJON', fechaOperacion: '2018-08-29', horaOperacion: '20:10:08', id: 100000125,
-      }
-    };*/
   }
 
 }
