@@ -25,7 +25,7 @@ export class SimularAmortizacionCuotasComponent implements OnInit {
   @Input()  
   simulacionAmortizacion: SimulacionAmortizacion;
 
-  dataTable: TableElement[];
+  dataTable: TableElement[] = [];
 
   displayedColumns: string[] = ['nroCuota', 'fechaVencimiento', 'saldoCapital', 'saldoInteres',
         'saldoCuota', 'amortizacionCapital', 'amortizacionInteres', 'nuevoSaldoCapital', 'nuevoSaldoInteres','nuevoSaldoCuota'];
@@ -63,6 +63,13 @@ export class SimularAmortizacionCuotasComponent implements OnInit {
       )
 
     }
+  }
+
+  getTotalAmortizacionCapital() {
+    return this.dataTable.map(t => t.amortizacionCapital).reduce((acc, value) => acc + value, 0);
+  }
+  getTotalAmortizacionInteres() {
+    return this.dataTable.map(t => t.amortizacionInteres).reduce((acc, value) => acc + value, 0);
   }
 
 }

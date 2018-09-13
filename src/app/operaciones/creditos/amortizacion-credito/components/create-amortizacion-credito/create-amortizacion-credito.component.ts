@@ -69,31 +69,48 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
       ];
       this.secondFormGroup.patchValue({fechaOperacion: this.getStringLocalDate(new Date())}) ;
       this.secondFormGroup.patchValue({montoOperacion: this.amortizacionCredito.operacion.monto}) ;
+      this.enableBanco(true);
     }
     else if (tipoCuentaRecaudo.value == 'CAJA') {
       this.cuentasRecaudo = [
         {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
       ];
-    
+      this.enableBanco(false);
+    }
+  }
+
+  enableBanco(isEnabled: boolean) {
+    if (isEnabled) {
+      this.secondFormGroup.get("nroOperacion").enable();
+      this.secondFormGroup.get("fechaOperacion").enable()
+      this.secondFormGroup.get("montoOperacion").enable()
+    } else {
+      this.secondFormGroup.get("nroOperacion").disable();
+      this.secondFormGroup.get("fechaOperacion").disable()
+      this.secondFormGroup.get("montoOperacion").disable()
     }
   }
   onSubmitStep1({value, valid}: {value: any, valid: boolean}){
-    this.simulacionAmortizacion = {
-      idCuenta: this.idCuenta,
-      montoAmortizacion: value.montoAmortizacion,
-    };
-    this.amortizacionCredito = {
-      idCuenta: this.idCuenta,
-      operacion: { moneda: '1', monto: value.montoAmortizacion}
-    };
+    if (valid) {
+      this.simulacionAmortizacion = {
+        idCuenta: this.idCuenta,
+        montoAmortizacion: value.montoAmortizacion,
+      };
+      this.amortizacionCredito = {
+        idCuenta: this.idCuenta,
+        operacion: { moneda: '1', monto: value.montoAmortizacion}
+      };
+    }
   }
 
   onSubmitStep2({value, valid}: {value: any, valid: boolean}){
     // "value: any" since value cannot be parsed to nested object (.detalleBanco)
-    this.amortizacionCredito.operacion.tipoCuentaRecaudo = value.tipoCuentaRecaudo;
-    this.amortizacionCredito.operacion.idCuentaRecaudo = value.idCuentaRecaudo;
-    this.amortizacionCredito.detalleBanco = { fechaOperacion: value.fechaOperacion, nroOperacion: value.nroOperacion, montoOperacion: value.montoOperacion};
-    this.amortizarCredito(this.amortizacionCredito);
+    if (valid) {
+      this.amortizacionCredito.operacion.tipoCuentaRecaudo = value.tipoCuentaRecaudo;
+      this.amortizacionCredito.operacion.idCuentaRecaudo = value.idCuentaRecaudo;
+      this.amortizacionCredito.detalleBanco = { fechaOperacion: value.fechaOperacion, nroOperacion: value.nroOperacion, montoOperacion: value.montoOperacion};
+      this.amortizarCredito(this.amortizacionCredito);
+    }
     
   }
 

@@ -2,3 +2,14 @@
     width: 100%;
 }
 
+.align-right {
+    text-align: right;
+}
+
+.warn-color {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
+}

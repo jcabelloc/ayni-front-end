@@ -10,7 +10,8 @@
           <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoAmortizacion" required>
         </mat-form-field>
         <div>
-          <button mat-button matStepperNext >Siguiente</button>
+          <button mat-button type="button" routerLink="../adm" color="warn">SALIR</button>
+          <button mat-button matStepperNext color="primary">SIGUIENTE</button>
         </div>
       </form>
 
@@ -64,8 +65,8 @@
         </mat-expansion-panel>
         <br>
         <div>
-          <button mat-button matStepperPrevious>Atras</button>
-          <button mat-button matStepperNext >Confirmar</button>
+          <button mat-button matStepperPrevious color="warn">ATRAS</button>
+          <button mat-button matStepperNext color="primary">CONFIRMAR</button>
         </div>
         
       </form>

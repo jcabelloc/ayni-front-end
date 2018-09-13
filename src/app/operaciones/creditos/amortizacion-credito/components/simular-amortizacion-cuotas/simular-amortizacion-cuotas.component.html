@@ -2,53 +2,75 @@
   <ng-container matColumnDef="nroCuota">
     <th mat-header-cell *matHeaderCellDef> Nro.</th>
     <td mat-cell *matCellDef="let element"> {{element.nroCuota}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color">  </td>
+
   </ng-container>
     
   <ng-container matColumnDef="fechaVencimiento">
-    <th mat-header-cell *matHeaderCellDef> Fecha <br/>Vencimiento </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento}} </td>
+    <th mat-header-cell *matHeaderCellDef> Fecha<br/>Vencimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento | date: 'dd/MM/yyyy'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color">  </td>
+
   </ng-container>
 
   <ng-container matColumnDef="saldoCapital">
-    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Capital </th>
-    <td mat-cell *matCellDef="let element"> {{element.saldoCapital | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right"> Sdo.<br/>Capital </th>
+    <td mat-cell *matCellDef="let element" class="align-right"> {{element.saldoCapital | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color">  </td>
+
   </ng-container>
   
   <ng-container matColumnDef="saldoInteres">
-    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Interes </th>
-    <td mat-cell *matCellDef="let element"> {{element.saldoInteres | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right"> Sdo.<br/>Interes </th>
+    <td mat-cell *matCellDef="let element" class="align-right"> {{element.saldoInteres | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> </td>
+
   </ng-container>
 
   <ng-container matColumnDef="saldoCuota">
-    <th mat-header-cell *matHeaderCellDef> Sdo. <br/>Cuota </th>
-    <td mat-cell *matCellDef="let element"> {{element.saldoCuota | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right"> Sdo.<br/>Cuota </th>
+    <td mat-cell *matCellDef="let element" class="align-right"> {{element.saldoCuota | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> </td>
+
   </ng-container>
 
   <ng-container matColumnDef="amortizacionCapital">
-    <th mat-header-cell *matHeaderCellDef> Amortiz. <br/>Capital </th>
-    <td mat-cell *matCellDef="let element"> {{element.amortizacionCapital | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right warn-color"> Amortiz.<br/>Capital </th>
+    <td mat-cell *matCellDef="let element" class="align-right warn-color" > {{element.amortizacionCapital | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> {{getTotalAmortizacionCapital() | number: '1.2-2' }} </td>
+
   </ng-container>
 
   <ng-container matColumnDef="amortizacionInteres">
-    <th mat-header-cell *matHeaderCellDef> Amortiz. <br/>Interes </th>
-    <td mat-cell *matCellDef="let element"> {{element.amortizacionInteres | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right warn-color"> Amortiz.<br/>Interes </th>
+    <td mat-cell *matCellDef="let element" class="align-right warn-color"> {{element.amortizacionInteres | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> {{getTotalAmortizacionInteres() | number: '1.2-2' }} </td>
+
   </ng-container>
 
   <ng-container matColumnDef="nuevoSaldoCapital">
-    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Capital </th>
-    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoCapital | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right"> Nvo.Sdo.<br/>Capital </th>
+    <td mat-cell *matCellDef="let element" class="align-right"> {{element.nuevoSaldoCapital | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> </td>
+
   </ng-container>
 
   <ng-container matColumnDef="nuevoSaldoInteres">
-    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Interes </th>
-    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoInteres | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right"> Nvo.Sdo.<br/>Interes </th>
+    <td mat-cell *matCellDef="let element" class="align-right"> {{element.nuevoSaldoInteres | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color"> </td>
+
   </ng-container>
 
   <ng-container matColumnDef="nuevoSaldoCuota">
-    <th mat-header-cell *matHeaderCellDef> Nvo.Sdo. <br/>Cuota </th>
-    <td mat-cell *matCellDef="let element"> {{element.nuevoSaldoCuota | number: '1.2-2'}} </td>
+    <th mat-header-cell *matHeaderCellDef class="align-right bold"> Nvo.Sdo.<br/>Cuota </th>
+    <td mat-cell *matCellDef="let element" class="align-right bold"> {{element.nuevoSaldoCuota | number: '1.2-2'}} </td>
+    <td mat-footer-cell *matFooterCellDef class="align-right warn-color">  </td>
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
 </table>
