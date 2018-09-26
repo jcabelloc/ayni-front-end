@@ -50,7 +50,8 @@ export class CreateTelefonoComponent implements OnInit {
   }
 
   onSubmit({value, valid}: {value: Telefono, valid: boolean}) {
-    this.telefonoService.createTelefono(this.idPersona, this.telefono)
+    if(valid) {
+      this.telefonoService.createTelefono(this.idPersona, this.telefono)
       .subscribe (
         telefono => { 
           this.isCreated = true;
@@ -58,6 +59,8 @@ export class CreateTelefonoComponent implements OnInit {
         },
         err => console.log(err)
       );
+
+    }
       
   }
 }

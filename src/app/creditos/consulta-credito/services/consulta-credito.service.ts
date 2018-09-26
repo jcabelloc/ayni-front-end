@@ -18,10 +18,11 @@ export class ConsultaCreditoService {
     let findByIdUrl = this.apiUrl + "/" + idCuenta; 
     return this.http.get<Credito>(findByIdUrl);
   }
+  //let findByUrl =  this.apiUrl + "?by=" + by + "&input=" + input;
 
-  findCreditoByDniCliente(dni: string): Observable<Credito> {
-    let findByDniUrl = this.apiUrl + '?dni-cliente=' + dni;
-    return this.http.get<Credito>(findByDniUrl)
+  findCreditosBy(by: string, input: string): Observable<Credito[]> {
+    let findBy = this.apiUrl + "?by=" + by + "&input=" + input
+    return this.http.get<Credito[]>(findBy)
   }
 
   findCuotasByIdCuentaAndEstado(idCuenta: number, estado: string): Observable<CuotaCredito[]> {

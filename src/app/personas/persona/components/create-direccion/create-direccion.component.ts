@@ -86,7 +86,8 @@ export class CreateDireccionComponent implements OnInit {
   }
 
   onSubmit({value, valid}: {value: Direccion, valid: boolean}) {
-    this.direccionService.createDireccion(this.idPersona, this.direccion)
+    if(valid) {
+      this.direccionService.createDireccion(this.idPersona, this.direccion)
       .subscribe (
         direccion => { 
           this.isCreated = true;
@@ -94,6 +95,8 @@ export class CreateDireccionComponent implements OnInit {
         },
         err => console.log(err)
       );
+    }
+    
       
   }
 

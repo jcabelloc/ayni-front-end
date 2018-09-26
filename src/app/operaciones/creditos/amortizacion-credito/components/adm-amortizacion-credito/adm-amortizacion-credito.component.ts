@@ -24,12 +24,12 @@ interface TableElement {
 })
 export class AdmAmortizacionCreditoComponent implements OnInit {
   data: TableElement[]= new Array(); 
-  displayedColumns: string[] = ['posicion', 'idCuenta', 'saldoCapital', 'nombre', 'tipoIdentificacion', 'nroIdentificacion', 'mas'];
+  displayedColumns: string[] = ['posicion', 'idCuenta', 'nombre', 'tipoIdentificacion', 'nroIdentificacion', 'saldoCapital', 'mas'];
   dataSource = new MatTableDataSource<TableElement>(this.data);
   
   options: Option[] = [
     {value: 'CUENTA', viewValue: 'Nro. Cuenta'},
-    {value: 'DNI-CLIENTE', viewValue: 'DNI Cliente'},
+    {value: 'DNI', viewValue: 'DNI Cliente'},
   ];
 
   option: string;
@@ -61,8 +61,31 @@ export class AdmAmortizacionCreditoComponent implements OnInit {
           },
           err => console.log(err)
         );
-    } else if(value.option == "DNI-CLIENTE"){
-      this.consultaCreditoService.findCreditoByDniCliente(value.searchInput);
+    } else if(value.option == "DNI"){
+      this.consultaCreditoService.findCreditosBy(value.option, value.searchInput)
+        .subscribe(
+          creditos => {
+            this.data = [];
+            if (creditos.length > 0) {
+              let pos = 0;
+              creditos.forEach( 
+                cred => {
+                  pos = pos + 1;
+                  this.data.push({
+                    posicion : pos, 
+                    idCuenta: cred.idCuenta, 
+                    saldoCapital: cred.saldoCapital,
+                    nombre: cred.cliente.nombre, 
+                    tipoIdentificacion: cred.cliente.tipoIdentificacion,
+                    nroIdentificacion: cred.cliente.nroIdentificacion
+                  });
+              })
+            }
+          this.dataSource.data = this.data
+          },
+          err => console.log(err)
+
+        )
     }
 
   }
