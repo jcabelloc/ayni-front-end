@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { SimulacionAmortizacion } from '../../models/SimulacionAmortizacion';
 import { AmortizacionCredito } from '../../models/AmortizacionCredito';
@@ -36,6 +36,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   ];
 
   cuentasRecaudo: CuentaRecaudo[];
+  saldoDeuda: number;
 
   constructor(
     private _formBuilder: FormBuilder, 
@@ -47,7 +48,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   ngOnInit() {
     this.idCuenta = parseInt(this.route.snapshot.paramMap.get('idCuenta'));
     this.firstFormGroup = this._formBuilder.group({
-      montoAmortizacion: [null, Validators.required],
+      montoAmortizacion: [null, [Validators.required]],
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -57,6 +58,13 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
       fechaOperacion: ['', Validators.required],
       montoOperacion: ['', Validators.required],
     });
+  }
+  montoValidator(saldoDeuda: number): ValidatorFn{
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      let montoAmortizacion = control.value.montoAmortizacion;
+      return ((montoAmortizacion > saldoDeuda)|| montoAmortizacion<=0)? {'montoInvalido': {value: control.value}}:null;
+    }
+
   }
 
   onTipoCuentaRecaudoSelection(tipoCuentaRecaudo: MatSelectChange) {
@@ -115,11 +123,9 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   }
 
   amortizarCredito(amortizacionCredito: AmortizacionCredito) {
-    console.log(amortizacionCredito);
     this.amortizacionCreditoService.createAmortizacion(amortizacionCredito)
       .subscribe(
         amortizacionCredito => { 
-          console.log(amortizacionCredito);
           this.router.navigate(['operaciones/creditos/amortizacion-credito/show/' + amortizacionCredito.operacion.id ]); 
         },
         err => console.log(err)
@@ -130,6 +136,11 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     let fechaString: string;
     fechaString = fecha.getFullYear() + "-" + (fecha.getMonth() + 1).toString().padStart(2,"0") + "-" + fecha.getDate().toString().padStart(2,"0");
     return fechaString;
+  }
+
+  onDeuda(saldoDeuda: number) {
+    this.saldoDeuda = saldoDeuda;
+    this.firstFormGroup.setValidators([Validators.required, this.montoValidator(this.saldoDeuda)]);
   }
 
 }

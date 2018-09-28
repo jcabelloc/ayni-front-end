@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ConsultaCreditoService } from '../../../../../creditos/consulta-credito/services/consulta-credito.service';
 
 export interface TableElement {
@@ -20,8 +20,8 @@ export interface TableElement {
   styleUrls: ['./show-cuotas-pendientes.component.css']
 })
 export class ShowCuotasPendientesComponent implements OnInit {
-  @Input()  
-  idCuenta: number;
+  @Output() deudaTotal = new EventEmitter<number>();
+  @Input() idCuenta: number;
 
   dataTable: TableElement[];
 
@@ -33,7 +33,6 @@ export class ShowCuotasPendientesComponent implements OnInit {
     this.consultaCreditoService.findCuotasByIdCuentaAndEstado(this.idCuenta, "PENDIENTE")
     .subscribe(
       cuotasCredito => {
-        console.log(cuotasCredito);
         this.dataTable = [];
         cuotasCredito.forEach(
           e => {
@@ -51,6 +50,8 @@ export class ShowCuotasPendientesComponent implements OnInit {
             });
           }
         );
+        let saldoDeuda = this.dataTable.map(e => e.saldoCuota).reduce((acc, value) => acc + value, 0);
+        this.deudaTotal.emit(saldoDeuda);
       },
       err => console.log(err)
     );

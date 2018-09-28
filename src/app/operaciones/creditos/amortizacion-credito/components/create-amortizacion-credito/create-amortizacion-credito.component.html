@@ -1,13 +1,13 @@
 <div class="container">
   <mat-vertical-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <app-show-cuotas-pendientes [idCuenta]="idCuenta"></app-show-cuotas-pendientes>
+      <app-show-cuotas-pendientes (deudaTotal)="onDeuda($event)" [idCuenta]="idCuenta"></app-show-cuotas-pendientes>
       <form [formGroup]="firstFormGroup" #formStep1="ngForm" (ngSubmit)="onSubmitStep1(formStep1)">
         <ng-template matStepLabel>Monto a Amortizar</ng-template>
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Monto S/</mat-label>
-          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoAmortizacion" required>
+          <input id="montoAmortizacion" type="number" matInput placeholder="Ingresar aqui.." formControlName="montoAmortizacion" required>
         </mat-form-field>
         <div>
           <button mat-button type="button" routerLink="../adm" color="warn">SALIR</button>
