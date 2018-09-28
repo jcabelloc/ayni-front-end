@@ -43,7 +43,6 @@ export class AdmClienteComponent implements OnInit {
     .subscribe(
       personasNaturales => {
         let posicion = 0;
-        console.log(personasNaturales)
         personasNaturales.forEach(
           e => {
             posicion = posicion + 1;

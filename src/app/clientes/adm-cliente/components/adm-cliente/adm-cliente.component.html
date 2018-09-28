@@ -1,5 +1,6 @@
 <div class="menu-button">
     <a mat-raised-button routerLink="../create">Crear Cliente</a>
+
   </div>
     
   <div class="container">
@@ -67,7 +68,7 @@
             <ng-container matColumnDef="promoverACliente">
               <th mat-header-cell *matHeaderCellDef> Promover<br>a Cliente </th>
               <td mat-cell *matCellDef="let element"> 
-                <a routerLink="../update/{{element.id}}" mat-icon-button color="primary">
+                  <a [routerLink]="['../create', { idPersona: element.id }]" mat-icon-button color="primary">
                   <mat-icon>edit</mat-icon>
                 </a>
               </td>

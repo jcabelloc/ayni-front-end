@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../models/Cliente';
 import { ClienteService } from '../../services/cliente.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PersonaNaturalService } from '../../../../personas/persona-natural/services/persona-natural.service';
 
 
 export interface Option {
@@ -27,6 +28,7 @@ export class CreateClienteComponent implements OnInit {
   tipoDocs: Option[] = [
     {value: 'DNI', viewValue: 'DNI'}
   ];
+  existPPNN: boolean = false;
 
   cliente : Cliente = {
     personaNatural : {
@@ -42,9 +44,23 @@ export class CreateClienteComponent implements OnInit {
       estadoCivil: null,
     }
   }
-  constructor(private clienteService: ClienteService, private router: Router) { }
+  constructor(private clienteService: ClienteService, 
+              private router: Router, 
+              private route: ActivatedRoute,
+              private personaNaturalService: PersonaNaturalService ) { }
 
   ngOnInit() {
+    let idPersona = parseInt(this.route.snapshot.paramMap.get('idPersona'));
+    if (idPersona) {
+      this.existPPNN = true;
+      this.personaNaturalService.findPersonaNaturalById(idPersona)
+        .subscribe(
+          personaNatural => {
+            this.cliente.personaNatural = personaNatural;
+          },
+          err => console.log(err)
+        )
+    }
   }
 
   onSubmit({value, valid}: {value: Cliente, valid: boolean}) {
@@ -52,10 +68,7 @@ export class CreateClienteComponent implements OnInit {
       this.clienteService.createCliente(this.cliente)
       .subscribe (
         cliente => { 
-          console.log(cliente);
-          
           this.router.navigate(['clientes/adm-cliente/update/' + cliente.id]); 
-
         },
         err => console.log(err)
       );

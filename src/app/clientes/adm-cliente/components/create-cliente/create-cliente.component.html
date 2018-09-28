@@ -16,7 +16,7 @@
   
             <mat-form-field class="mat-form-field" appearance="standard">
               <mat-label>Nro. de Identificacion</mat-label>
-              <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.nroIdentificacion" name="nroIdentificacion" required>
+              <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="cliente.personaNatural.nroIdentificacion" name="nroIdentificacion" required [disabled]=existPPNN>
             </mat-form-field>
   
             <mat-form-field class="mat-form-field" appearance="standard">
