@@ -22,14 +22,14 @@ export class AppComponent implements OnDestroy {
   subTitle = "";
   modules: Module[] = [
     { name: "Personas", 
-      options: [{name: "Adm. Persona Nat.", path: "./personas/persona-natural/adm"}, {name: "Adm. Persona Jur.", path: "./personas/persona-natural/create"}]
+      options: [{name: "Adm. Persona Nat.", path: "./personas/persona-natural/adm"}]
     },
     { name: "Clientes", 
       options: [{name: "Adm. Clientes", path: "./clientes/adm-cliente/adm"}]
     },
     { name: "Creditos", 
       options: [
-        {name: "Consulta de Creditos", path: "."}, 
+        {name: "Consulta de Creditos", path: "/inicio/bienvenida"}, 
         {name: "Simulacion", path:"./creditos/simulacion-credito/simulacion"}
       ]
     },
@@ -37,7 +37,7 @@ export class AppComponent implements OnDestroy {
       options: [
         {name: "Desembolso de Credito", path: "./operaciones/creditos/desembolso-credito/adm"},
         {name: "Amortizacion de Credito", path: "/operaciones/creditos/amortizacion-credito/adm"}, 
-        {name: "Extorno de Cuotas", path: "."}
+        {name: "Extorno de Cuotas", path: "/inicio/bienvenida"}
       ]
 
     },
