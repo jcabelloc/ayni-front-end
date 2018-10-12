@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api/'
+  apiUrl: 'http://localhost:8080/api/',
+  reporteUrl: 'http://localhost:8080/reportes/',
   //apiUrl: 'https://ayni-desa.appspot.com/api/'
 };
 
