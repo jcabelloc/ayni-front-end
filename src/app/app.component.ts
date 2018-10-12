@@ -36,10 +36,15 @@ export class AppComponent implements OnDestroy {
     { name: "Operaciones", 
       options: [
         {name: "Desembolso de Credito", path: "./operaciones/creditos/desembolso-credito/adm"},
-        {name: "Amortizacion de Credito", path: "/operaciones/creditos/amortizacion-credito/adm"}, 
+        {name: "Amortizacion de Credito", path: "./operaciones/creditos/amortizacion-credito/adm"}, 
         {name: "Extorno de Cuotas", path: "/inicio/bienvenida"}
       ]
 
+    },
+    { name: "Reportes", 
+      options: [
+        {name: "Cartera de Creditos", path: "./reportes/reporte/cartera-creditos"}, 
+      ]
     },
   ];
 

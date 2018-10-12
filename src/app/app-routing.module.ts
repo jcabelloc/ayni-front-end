@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: './operaciones/creditos/amortizacion-credito/amortizacion-credito.module#AmortizacionCreditoModule'
   },
   {
+    path: 'reportes/reporte',
+    loadChildren: './reportes/reporte/reporte.module#ReporteModule'
+  },
+  {
     path: '',
     redirectTo: 'inicio/ingreso',
     pathMatch: 'full'
