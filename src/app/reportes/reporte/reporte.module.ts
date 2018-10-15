@@ -11,6 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 
 import { ReporteRoutingModule } from './reporte-routing.module';
 import { RptCarteraCreditosComponent } from './components/rpt-cartera-creditos/rpt-cartera-creditos.component';
+import { RptAmortizacionesComponent } from './components/rpt-amortizaciones/rpt-amortizaciones.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { RptCarteraCreditosComponent } from './components/rpt-cartera-creditos/r
     MatDividerModule,
     MatCardModule,
   ],
-  declarations: [RptCarteraCreditosComponent]
+  declarations: [RptCarteraCreditosComponent, RptAmortizacionesComponent]
 })
 export class ReporteModule { }
