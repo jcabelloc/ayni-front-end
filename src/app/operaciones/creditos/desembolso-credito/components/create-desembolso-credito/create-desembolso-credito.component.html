@@ -11,6 +11,7 @@
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Monto S/</mat-label>
           <input type="number" matInput placeholder="Ingresar aqui.." formControlName="montoDesembolso" required>
+          <mat-hint>Min 300, Max 2500</mat-hint>
         </mat-form-field>
 
         <mat-form-field class="mat-form-field">
@@ -23,7 +24,8 @@
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Tasa Mensual(TEM) en %</mat-label>
-          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="tem" required>
+          <input type="number" matInput placeholder="Ingresar aqui.." formControlName="tem" step="0.01" min="13" max="52"  required>
+          <mat-hint>Min 13%, Max 52%</mat-hint>
         </mat-form-field>
 
         <mat-form-field class="mat-form-field" appearance="standard">

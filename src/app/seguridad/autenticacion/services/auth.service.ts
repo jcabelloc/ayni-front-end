@@ -7,8 +7,9 @@ import { Usuario } from '../../inicio/models/Usuario';
   providedIn: 'root'
 })
 export class AuthService {
-  private authenticated: boolean;
+  private authenticated: boolean = false;
   apiUrl = environment.apiUrl;
+  hostUrl = environment.host;
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +35,8 @@ export class AuthService {
   }
 
   logout(){
-    return this.http.post('logout',{});
+    let logOut = this.hostUrl + 'logout';
+    return this.http.post(logOut,{});
     
   }
 

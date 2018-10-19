@@ -9,10 +9,13 @@
   
   <mat-sidenav-container class="sidenav-container"
                          [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav role="navigation" #snav class= "mat-sidenav" *ngIf="isAuthenticated()"
+
+    <mat-sidenav role="navigation" #snav class= "mat-sidenav" 
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [opened]="mobileQuery.matches ? false : true" 
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <div *ngIf="isAuthenticated()">
+
       <mat-nav-list >
 
         <mat-expansion-panel *ngFor="let module of modules" [expanded] = "true">
@@ -25,9 +28,9 @@
         </mat-expansion-panel>
         
       </mat-nav-list> 
-      
+    </div>
+   
     </mat-sidenav>
-
     <mat-sidenav-content role="main" class="main-content">
       <mat-toolbar *ngIf="isAuthenticated()">
         <span>{{ subTitle }}</span>
@@ -35,4 +38,6 @@
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
+
 </div>

@@ -62,6 +62,8 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
   montoValidator(saldoDeuda: number): ValidatorFn{
     return (control: AbstractControl): {[key: string]: any} | null => {
       let montoAmortizacion = control.value.montoAmortizacion;
+      console.log(montoAmortizacion);
+      console.log(saldoDeuda);
       return ((montoAmortizacion > saldoDeuda)|| montoAmortizacion<=0)? {'montoInvalido': {value: control.value}}:null;
     }
 

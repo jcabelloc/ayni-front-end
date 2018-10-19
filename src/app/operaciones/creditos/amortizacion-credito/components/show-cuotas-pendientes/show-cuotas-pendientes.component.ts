@@ -44,9 +44,9 @@ export class ShowCuotasPendientesComponent implements OnInit {
               interesProgramado: e.interesProgramado,
               capitalPagado: e.capitalPagado, 
               interesPagado: e.interesPagado,
-              saldoCapital: e.capitalProgramado - e.capitalPagado,
-              saldoInteres: e.interesProgramado - e.interesPagado,
-              saldoCuota: e.capitalProgramado - e.capitalPagado + e.interesProgramado - e.interesPagado,
+              saldoCapital: Number((e.capitalProgramado - e.capitalPagado).toFixed(2)),
+              saldoInteres: Number((e.interesProgramado - e.interesPagado).toFixed(2)),
+              saldoCuota: Number((e.capitalProgramado - e.capitalPagado + e.interesProgramado - e.interesPagado).toFixed(2)),
             });
           }
         );

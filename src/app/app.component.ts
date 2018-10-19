@@ -29,7 +29,6 @@ export class AppComponent implements OnDestroy {
     },
     { name: "Creditos", 
       options: [
-        {name: "Consulta de Creditos", path: "/inicio/bienvenida"}, 
         {name: "Simulacion", path:"./creditos/simulacion-credito/simulacion"}
       ]
     },
@@ -37,7 +36,6 @@ export class AppComponent implements OnDestroy {
       options: [
         {name: "Desembolso de Credito", path: "./operaciones/creditos/desembolso-credito/adm"},
         {name: "Amortizacion de Credito", path: "./operaciones/creditos/amortizacion-credito/adm"}, 
-        {name: "Extorno de Cuotas", path: "/inicio/bienvenida"}
       ]
 
     },

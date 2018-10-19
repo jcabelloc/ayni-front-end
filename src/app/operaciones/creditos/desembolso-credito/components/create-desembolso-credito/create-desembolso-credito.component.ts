@@ -63,7 +63,7 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       montoDesembolso: [null, Validators.required],
       frecuencia: ['SEMANAL', Validators.required],
-      tem: [12.5, Validators.required],
+      tem: [13.0, Validators.required],
       nroCuotas: [null, Validators.required],
       fechaDesembolso: [this.getStringLocalDate(new Date()), Validators.required],
       fechaPrimeraCuota: [this.getFechaPrimeraCuota(this.getStringLocalDate(new Date()), 'SEMANAL'), Validators.required],
