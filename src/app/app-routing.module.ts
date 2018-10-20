@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: './creditos/simulacion-credito/simulacion-credito.module#SimulacionCreditoModule'
   },
   {
+    path: 'creditos/consulta-credito',
+    loadChildren: './creditos/consulta-credito/consulta-credito.module#ConsultaCreditoModule'
+  },
+  {
     path: 'operaciones/creditos/desembolso-credito',
     loadChildren: './operaciones/creditos/desembolso-credito/desembolso-credito.module#DesembolsoCreditoModule'
   },

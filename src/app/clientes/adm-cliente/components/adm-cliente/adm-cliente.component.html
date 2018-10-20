@@ -67,10 +67,12 @@
 
             <ng-container matColumnDef="promoverACliente">
               <th mat-header-cell *matHeaderCellDef> Promover<br>a Cliente </th>
-              <td mat-cell *matCellDef="let element"> 
+              <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.esCliente=='No'?true:false">
                   <a [routerLink]="['../create', { idPersona: element.id }]" mat-icon-button color="primary">
-                  <mat-icon>edit</mat-icon>
-                </a>
+                    <mat-icon>arrow_upward</mat-icon>
+                  </a>
+                </div>
               </td>
             </ng-container>
   

@@ -18,7 +18,6 @@ export class ConsultaCreditoService {
     let findByIdUrl = this.apiUrl + "/" + idCuenta; 
     return this.http.get<Credito>(findByIdUrl);
   }
-  //let findByUrl =  this.apiUrl + "?by=" + by + "&input=" + input;
 
   findCreditosBy(by: string, input: string): Observable<Credito[]> {
     let findBy = this.apiUrl + "?by=" + by + "&input=" + input
@@ -29,4 +28,10 @@ export class ConsultaCreditoService {
     let findByIdCuentaAndEstadoUrl = this.apiUrl + "/" + idCuenta + '/cuotas-credito?estado=' + estado;
     return this.http.get<CuotaCredito[]>(findByIdCuentaAndEstadoUrl);
   }
+
+  findAllCuotasByIdCuenta(idCuenta: number): Observable<CuotaCredito[]> {
+    let findByIdCuenta = this.apiUrl + "/" + idCuenta + '/cuotas-credito';
+    return this.http.get<CuotaCredito[]>(findByIdCuenta);
+  }
+
 }

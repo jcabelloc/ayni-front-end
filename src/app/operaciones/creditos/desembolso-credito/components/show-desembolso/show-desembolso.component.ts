@@ -25,7 +25,6 @@ export class ShowDesembolsoComponent implements OnInit {
     this.desembolsoCreditoService.findDesembolsoById(id)
       .subscribe(
         desembolsoCredito => {
-          console.log(desembolsoCredito);
           this.desembolsoCredito = desembolsoCredito;
         },
         err => console.log(err)

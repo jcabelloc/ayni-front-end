@@ -1,0 +1,80 @@
+<div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><h2>Consulta del Credito</h2></mat-card-title>
+      </mat-card-header>
+  
+      <mat-card-content *ngIf="credito!=null">
+        <div>DATOS DEL CLIENTE</div>
+        <mat-divider></mat-divider>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Identificacion</mat-label>
+          <input type="text" matInput [value] = "credito.cliente.tipoIdentificacion + ': ' + credito.cliente.nroIdentificacion" disabled>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Cliente</mat-label>
+          <input type="text" matInput [value] = "credito.cliente.nombre" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Codigo de Cliente</mat-label>
+          <input type="text" matInput [value] = "credito.cliente.id" disabled>
+        </mat-form-field>
+
+        <div>DATOS DEL CREDITO</div>
+        <mat-divider></mat-divider>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Nro. Cuenta</mat-label>
+          <input type="text" matInput [value] = "credito.idCuenta" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Funcionario Responsable</mat-label>
+          <input type="text" matInput [value] = "credito.usuarioResponsable" disabled>
+        </mat-form-field>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Usuario Aprobador</mat-label>
+          <input type="text" matInput [value] = "credito.usuarioAprobador" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Monto</mat-label>
+          <input type="text" matInput [value] = "credito.montoDesembolso  | number: '1.2-2'" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Frecuencia</mat-label>
+          <input type="text" matInput [value] = "credito.frecuencia" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Tasa Mensual(TEM) en %</mat-label>
+          <input type="number" matInput [value] = "credito.tem" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Nro. de Cuotas</mat-label>
+          <input type="number" matInput [value] = "credito.nroCuotas" disabled>
+        </mat-form-field>
+          
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Fecha de Desembolso</mat-label>
+          <input type="date" matInput [value] = "credito.fechaDesembolso" disabled>
+        </mat-form-field>
+    
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Fecha Primera Cuota</mat-label>
+          <input type="date" matInput [value] = "credito.fechaPrimeraCuota" disabled>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="button" routerLink="../adm" mat-button color="warn">SALIR</button>
+      </mat-card-actions>
+      <mat-divider></mat-divider>
+      <br><br>
+      <app-show-cronograma [idCuenta]="idCuenta"></app-show-cronograma>
+    </mat-card>
+  </div>
+  
