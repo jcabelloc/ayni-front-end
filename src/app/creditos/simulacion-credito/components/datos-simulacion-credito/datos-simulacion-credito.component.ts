@@ -33,7 +33,7 @@ export class DatosSimulacionCreditoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.simulacionCredito.tem = 12.5;
+    this.simulacionCredito.tem = 13;
     this.simulacionCredito.frecuencia = 'SEMANAL';
     this.simulacionCredito.fechaDesembolso = this.getStringLocalDate(new Date());
     this.setFechaPrimeraCuota(this.simulacionCredito.fechaDesembolso, this.simulacionCredito.frecuencia);
