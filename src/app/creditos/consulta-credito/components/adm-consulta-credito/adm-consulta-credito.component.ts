@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConsultaCreditoService } from '../../services/consulta-credito.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 interface Option {
   value: string;
@@ -30,7 +30,12 @@ export class AdmConsultaCreditoComponent implements OnInit {
     {value: 'CUENTA', viewValue: 'Nro. Cuenta'},
     {value: 'DNI', viewValue: 'DNI Cliente'},
   ];
+  
+  option: string;
+  searchInput: string;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   constructor(private consultaCreditoService: ConsultaCreditoService) { }
 
   ngOnInit() {
