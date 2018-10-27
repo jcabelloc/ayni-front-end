@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: './operaciones/creditos/amortizacion-credito/amortizacion-credito.module#AmortizacionCreditoModule'
   },
   {
+    path: 'operaciones/administrativas/registro-gasto',
+    loadChildren: './operaciones/administrativas/registro-gasto/registro-gasto.module#RegistroGastoModule'
+  },
+  {
     path: 'reportes/reporte',
     loadChildren: './reportes/reporte/reporte.module#ReporteModule'
   },
