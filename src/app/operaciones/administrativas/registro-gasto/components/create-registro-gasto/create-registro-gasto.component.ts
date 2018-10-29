@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { SearchProveedorComponent } from '../../../../../proveedores/shared-proveedor/components/search-proveedor/search-proveedor.component';
 
 export interface Option {
   value: string;
@@ -73,9 +75,37 @@ export class CreateRegistroGastoComponent implements OnInit {
   ];
   isRecaudoBanco: boolean = true;
 
-  constructor() { }
+  constructor( public dialog: MatDialog ) { }
 
   ngOnInit() {
+  }
+
+  searchProveedor(): void {
+    const dialogRef = this.dialog.open(SearchProveedorComponent, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(idProveedor => {
+      if (idProveedor) {
+        console.log(idProveedor);
+        /*
+        this.clienteService.findClienteById(idCliente)
+          .subscribe (
+            cliente => {
+              this.cliente = { 
+                id : cliente.id, 
+                nombre: cliente.personaNatural.nombre, 
+                tipoIdentificacion: cliente.personaNatural.tipoIdentificacion,
+                nroIdentificacion: cliente.personaNatural.nroIdentificacion 
+              };
+              this.secondFormGroup.patchValue({nombre: cliente.personaNatural.nombre});
+              this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
+              this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
+            }
+          );
+        */
+      }
+    });
   }
 
 }

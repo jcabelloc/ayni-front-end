@@ -11,22 +11,12 @@ import { FormsModule }   from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { MatDialogModule } from '@angular/material';
 
-
-
-import { RegistroGastoRoutingModule } from './registro-gasto-routing.module';
-import { AdmRegistroGastoComponent } from './components/adm-registro-gasto/adm-registro-gasto.component';
-import { CreateRegistroGastoComponent } from './components/create-registro-gasto/create-registro-gasto.component';
-import { ShowRegistroGastoComponent } from './components/show-registro-gasto/show-registro-gasto.component';
-import { SharedProveedorModule } from '../../../proveedores/shared-proveedor/shared-proveedor.module';
-
+import { SearchProveedorComponent } from './components/search-proveedor/search-proveedor.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RegistroGastoRoutingModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,10 +27,9 @@ import { SharedProveedorModule } from '../../../proveedores/shared-proveedor/sha
     MatPaginatorModule,
     MatIconModule,
     MatTableModule,
-    MatExpansionModule,
-    MatDialogModule,
-    SharedProveedorModule,
+
   ],
-  declarations: [AdmRegistroGastoComponent, CreateRegistroGastoComponent, ShowRegistroGastoComponent]
+  entryComponents: [SearchProveedorComponent],
+  declarations: [SearchProveedorComponent]
 })
-export class RegistroGastoModule { }
+export class SharedProveedorModule { }

@@ -15,8 +15,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ClienteService {
-
-  apiUrl = environment.apiUrl + 'clientes';
+   
+  readonly apiUrl: string = environment.apiUrl + 'clientes';
 
   constructor(private http: HttpClient) { }
 
