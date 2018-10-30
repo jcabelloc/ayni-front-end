@@ -8,7 +8,7 @@
       <mat-card-content>
         <div>
           <mat-form-field class="mat-form-field"  >
-            <mat-select placeholder="Rubro del Gasto" [(ngModel)]="gasto.rubro" name="rubro" required >
+            <mat-select placeholder="Rubro del Gasto" [(ngModel)]="rubro" name="rubro"  (selectionChange)="onRubroSelection($event)" required >
               <mat-option *ngFor="let rubro of rubros" [value]="rubro.value">
                 {{rubro.viewValue}}
               </mat-option>
@@ -16,7 +16,7 @@
           </mat-form-field>
         </div>
         <mat-form-field class="mat-form-field-small" >
-          <mat-select placeholder="Tipo Identificacion" [(ngModel)]="proveedor.tipoIdentificacion" name="tipoIdentificacion"disabled>
+          <mat-select placeholder="Tipo Identificacion" [(ngModel)]="registroGasto.proveedor.tipoIdentificacion" name="tipoIdentificacion"disabled>
             <mat-option *ngFor="let tipoDoc of tipoDocs" [value]="tipoDoc.value">
               {{tipoDoc.viewValue}}
             </mat-option>
@@ -25,7 +25,7 @@
 
         <mat-form-field class="mat-form-field-nroIdentificacion" appearance="standard">
           <mat-label>Nro. de Identificacion</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="proveedor.nroIdentificacion" name="nroIdentificacion" readonly>
+          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.proveedor.nroIdentificacion" name="nroIdentificacion" readonly>
         </mat-form-field>
 
         <button type="button" mat-icon-button color="primary" (click)="searchProveedor()">
@@ -34,18 +34,18 @@
 
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Proveedor</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="proveedor.nombre" name="nombre" readonly>
+          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.proveedor.nombre" name="nombre" readonly>
         </mat-form-field>
       </mat-card-content>
       <mat-form-field class="mat-form-field"  >
-        <mat-select placeholder="Cuenta del Proveedor" [(ngModel)]="proveedor.cuenta" name="cuenta" required >
+        <mat-select placeholder="Cuenta del Proveedor" [(ngModel)]="registroGasto.operacion.idCuentaProveedor" name="idCuentaProveedor" required >
           <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta.value">
             {{cuenta.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="mat-form-field"  >
-        <mat-select placeholder="Autorizador del Gasto" [(ngModel)]="gasto.autorizador" name="autorizador" required >
+        <mat-select placeholder="Autorizador del Gasto" [(ngModel)]="registroGasto.operacion.autorizador" name="autorizador" required >
           <mat-option *ngFor="let autorizador of autorizadores" [value]="autorizador.value">
             {{autorizador.viewValue}}
           </mat-option>
@@ -53,24 +53,24 @@
       </mat-form-field>
       <mat-form-field class="mat-form-field-full" appearance="standard">
         <mat-label>Descripcion del Gasto</mat-label>
-        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="gasto.nota" name="nota" minlength="25" required>
+        <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.operacion.nota" name="nota" minlength="25" required>
         <mat-hint>Min 25 letras</mat-hint>
       </mat-form-field>
       <div>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Monto S/</mat-label>
-          <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="gasto.monto" name="monto" required>
+          <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.operacion.monto" name="monto" required>
         </mat-form-field>
       </div>    
       <mat-form-field class="mat-form-field"  >
-        <mat-select placeholder="Tipo de Cuenta Egreso" [(ngModel)]="gasto.tipoCuentaEgreso" name="tipoCuentaEgreso" required >
+        <mat-select placeholder="Tipo de Cuenta Egreso" [(ngModel)]="registroGasto.operacion.tipoCuentaEgreso" name="tipoCuentaEgreso" required >
           <mat-option *ngFor="let tipoCuentaEgreso of tiposCuentaEgreso" [value]="tipoCuentaEgreso.value">
             {{tipoCuentaEgreso.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="mat-form-field"  >
-        <mat-select placeholder="Cuenta de Egreso" [(ngModel)]="gasto.cuentaEgreso" name="cuentaEgreso" required >
+        <mat-select placeholder="Cuenta de Egreso" [(ngModel)]="registroGasto.operacion.idCuentaEgreso" name="idCuentaEgreso" required >
           <mat-option *ngFor="let cuentaEgreso of cuentasEgreso" [value]="cuentaEgreso.value">
             {{cuentaEgreso.viewValue}}
           </mat-option>
@@ -84,15 +84,15 @@
         </mat-expansion-panel-header>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Nro. Operacion o Voucher</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="gasto.nroOperacionBanco" name="nroOperacionBanco" required>
+          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.detalleBanco.nroOperacion" name="nroOperacion" required>
         </mat-form-field>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Fecha de la Operacion</mat-label>
-          <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="gasto.fechaOperacionBanco" name="fechaOperacionBanco" required readonly>
+          <input type="date" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.detalleBanco.fechaOperacion" name="fechaOperacion" required readonly>
         </mat-form-field>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Monto de la Operacion</mat-label>
-          <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="gasto.montoOperacionBanco" name="montoOperacionBanco" required readonly>
+          <input type="number" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.detalleBanco.montoOperacion" name="montoOperacion" required readonly>
         </mat-form-field>
       </mat-expansion-panel>
       <mat-divider></mat-divider>

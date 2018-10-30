@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSelectChange } from '@angular/material';
 import { SearchProveedorComponent } from '../../../../../proveedores/shared-proveedor/components/search-proveedor/search-proveedor.component';
+import { ProveedorService } from '../../../../../proveedores/adm-proveedor/services/proveedor.service';
+import { Proveedor } from '../../../../../proveedores/shared-proveedor/models/Proveedor';
+import { RegistroGasto } from '../../models/RegistroGasto';
+import { CuentaGastoService } from '../../../../../gastos/adm-cuenta-gasto/services/cuenta-gasto.service';
+import { CuentaGasto } from '../../../../../gastos/adm-cuenta-gasto/models/CuentaGasto';
 
 export interface Option {
   value: string;
   viewValue: string;
 }
-
+/*
 export interface Proveedor {
   tipoIdentificacion: string;
   nroIdentificacion: string;
@@ -14,11 +19,13 @@ export interface Proveedor {
   cuenta: string;
 }
 
+*/
+/*
 export interface Gasto {
   rubro: string,
   nota: string,
 }
-
+*/
 
 @Component({
   selector: 'app-create-registro-gasto',
@@ -26,17 +33,16 @@ export interface Gasto {
   styleUrls: ['./create-registro-gasto.component.css']
 })
 export class CreateRegistroGastoComponent implements OnInit {
-  
-  proveedor: Proveedor = {
-    tipoIdentificacion: 'RUC',
-    nroIdentificacion: '2003728693',
-    nombre: 'LINDLEY SAC',
-    cuenta: '',
+
+  registroGasto: RegistroGasto = {
+    proveedor: {},
+    operacion: {},
+    detalleBanco: {},
   };
-  gasto: Gasto = {
-    rubro: '',
-    nota: '',
-  }
+  rubro: string;
+
+  cuentasGasto: CuentaGasto[];
+
   rubros: Option[] = [
     {value: 'HONORARIOS', viewValue: 'Honorarios'},
     {value: 'ALQUILERES', viewValue: 'Alquileres'},
@@ -51,10 +57,7 @@ export class CreateRegistroGastoComponent implements OnInit {
     {value: 'RUC', viewValue: 'RUC'},
   ];
 
-  cuentas: Option[] = [
-    {value: '10000053', viewValue: '10000053'},
-    {value: '10000189', viewValue: '10000189'},
-  ];
+  cuentas: Option[];
 
   autorizadores: Option[] = [
     {value: 'GRIOS', viewValue: 'grios'},
@@ -73,9 +76,15 @@ export class CreateRegistroGastoComponent implements OnInit {
     {value: '10000053', viewValue: '10000053'},
     {value: '10000189', viewValue: '10000189'},
   ];
+
+  
   isRecaudoBanco: boolean = true;
 
-  constructor( public dialog: MatDialog ) { }
+  constructor( public dialog: MatDialog, 
+    private proveedorService: ProveedorService,
+    private cuentaGastoService: CuentaGastoService,
+    ) 
+    { }
 
   ngOnInit() {
   }
@@ -88,24 +97,45 @@ export class CreateRegistroGastoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(idProveedor => {
       if (idProveedor) {
         console.log(idProveedor);
-        /*
-        this.clienteService.findClienteById(idCliente)
+        
+        this.proveedorService.findProveedorById(idProveedor)
           .subscribe (
-            cliente => {
-              this.cliente = { 
-                id : cliente.id, 
-                nombre: cliente.personaNatural.nombre, 
-                tipoIdentificacion: cliente.personaNatural.tipoIdentificacion,
-                nroIdentificacion: cliente.personaNatural.nroIdentificacion 
+            proveedor => {
+              this.registroGasto.proveedor = { 
+                id : proveedor.id, 
+                nombre: proveedor.nombre, 
+                tipoIdentificacion: proveedor.tipoIdentificacion,
+                nroIdentificacion: proveedor.nroIdentificacion,
+                tipoPersona: proveedor.tipoPersona,
               };
-              this.secondFormGroup.patchValue({nombre: cliente.personaNatural.nombre});
-              this.secondFormGroup.patchValue({tipoIdentificacion: cliente.personaNatural.tipoIdentificacion});
-              this.secondFormGroup.patchValue({nroIdentificacion: cliente.personaNatural.nroIdentificacion});
+            },
+            err => {
+              console.log(err);
             }
           );
-        */
+        this.cuentaGastoService.findCuentasGastoByIdProveedor(idProveedor)
+          .subscribe(
+            cuentasGasto => {
+              this.cuentasGasto = cuentasGasto;
+            },
+            err => {
+              console.log(err);
+            }
+          );
       }
     });
+  }
+
+  onRubroSelection(rubro: MatSelectChange) {
+    this.cuentas = [];
+    this.cuentasGasto
+      .filter(e => e.tipoCuenta == rubro.value)
+      .forEach (
+        e => {
+          this.cuentas.push({value: String(e.idCuenta), viewValue: String(e.idCuenta)}
+          )
+        }
+      );
   }
 
 }

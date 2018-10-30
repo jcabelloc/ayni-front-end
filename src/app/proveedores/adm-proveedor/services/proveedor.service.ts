@@ -21,4 +21,9 @@ export class ProveedorService {
     return this.http.get<Proveedor[]>(findByUrl);
   }
 
+  findProveedorById(id: number): Observable<Proveedor> {
+    let findByIdUrl = this.apiUrl + "/" + id;
+    return this.http.get<Proveedor>(findByIdUrl);
+  }
+
 }
