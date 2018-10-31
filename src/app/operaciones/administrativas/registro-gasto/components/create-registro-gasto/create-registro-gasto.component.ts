@@ -11,21 +11,12 @@ export interface Option {
   value: string;
   viewValue: string;
 }
-/*
-export interface Proveedor {
-  tipoIdentificacion: string;
-  nroIdentificacion: string;
-  nombre: string;
-  cuenta: string;
-}
 
-*/
-/*
-export interface Gasto {
-  rubro: string,
-  nota: string,
+
+interface CuentaEgreso {
+  idCuenta: number;
+  descripcion: string;
 }
-*/
 
 @Component({
   selector: 'app-create-registro-gasto',
@@ -51,6 +42,13 @@ export class CreateRegistroGastoComponent implements OnInit {
     {value: 'REPARACION_MANTENIMIENTO', viewValue: 'Reparacion y Mantenimiento'},
     {value: 'OTROS_SERVICIOS', viewValue: 'Otros Servicios'},
   ];
+  
+  tiposComprobante: Option[] = [
+    {value: 'BOLETA', viewValue: 'Boleta'},
+    {value: 'FACTURA', viewValue: 'Factura'},
+    {value: 'TICKET', viewValue: 'Ticket'},
+    {value: 'RECIBO', viewValue: 'Recibo'},
+  ];
 
   tipoDocs: Option[] = [
     {value: 'DNI', viewValue: 'DNI'},
@@ -72,13 +70,10 @@ export class CreateRegistroGastoComponent implements OnInit {
     {value: 'BANCOS', viewValue: 'BANCOS'},
   ];
 
-  cuentasEgreso: Option[] = [
-    {value: '10000053', viewValue: '10000053'},
-    {value: '10000189', viewValue: '10000189'},
-  ];
+  cuentasEgreso: CuentaEgreso[];
 
   
-  isRecaudoBanco: boolean = true;
+  isRecaudoBanco: boolean = false;
 
   constructor( public dialog: MatDialog, 
     private proveedorService: ProveedorService,
@@ -87,6 +82,15 @@ export class CreateRegistroGastoComponent implements OnInit {
     { }
 
   ngOnInit() {
+    this.cuentaGastoService.findAllCuentasGasto()
+    .subscribe(
+      cuentasGasto => {
+        this.cuentasGasto = cuentasGasto;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   searchProveedor(): void {
@@ -113,15 +117,7 @@ export class CreateRegistroGastoComponent implements OnInit {
               console.log(err);
             }
           );
-        this.cuentaGastoService.findCuentasGastoByIdProveedor(idProveedor)
-          .subscribe(
-            cuentasGasto => {
-              this.cuentasGasto = cuentasGasto;
-            },
-            err => {
-              console.log(err);
-            }
-          );
+
       }
     });
   }
@@ -136,6 +132,30 @@ export class CreateRegistroGastoComponent implements OnInit {
           )
         }
       );
+  }
+
+  onTipoCuentaEgresoSelection(tipoCuentaEgreso: MatSelectChange){
+    this.isRecaudoBanco = false;
+    this.registroGasto.operacion.idCuentaEgreso = null;
+    this.registroGasto.detalleBanco = {};
+    if(tipoCuentaEgreso.value == 'BANCOS') {
+      this.isRecaudoBanco = true;
+      this.cuentasEgreso = [
+        {idCuenta: 10000002, descripcion: 'BCP - 123-4567-890'},
+      ];
+      this.registroGasto.detalleBanco.fechaOperacion = this.getStringLocalDate(new Date());
+      this.registroGasto.detalleBanco.montoOperacion = this.registroGasto.operacion.monto;
+    }
+    else if (tipoCuentaEgreso.value == 'CAJA') {
+      this.cuentasEgreso = [
+        {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - OAJON'},
+      ];
+    }
+  }
+  getStringLocalDate(fecha: Date): string {
+    let fechaString: string;
+    fechaString = fecha.getFullYear() + "-" + (fecha.getMonth() + 1).toString().padStart(2,"0") + "-" + fecha.getDate().toString().padStart(2,"0");
+    return fechaString;
   }
 
 }

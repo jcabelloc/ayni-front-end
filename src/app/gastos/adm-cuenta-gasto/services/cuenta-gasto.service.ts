@@ -14,8 +14,8 @@ export class CuentaGastoService {
   constructor(private http: HttpClient) { }
 
     
-  findCuentasGastoByIdProveedor(idProveedor): Observable<CuentaGasto[]> {
-    let findByIdProveedorUrl =  this.apiUrl + "?idProveedor=" + idProveedor;
+  findAllCuentasGasto(): Observable<CuentaGasto[]> {
+    let findByIdProveedorUrl =  this.apiUrl;
     return this.http.get<CuentaGasto[]>(findByIdProveedorUrl);
   }
 

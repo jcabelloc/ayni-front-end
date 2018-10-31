@@ -13,7 +13,7 @@ interface Operacion {
     horaOperacion?: string;
     usuario?: string;
     tipoOperacion?: string;
-    idCuentaProveedor?: number;
+    idCuentaGasto?: number;
     tipoCuentaEgreso?: string;
     idCuentaEgreso?: number;
     autorizador?: string;
@@ -29,8 +29,12 @@ interface Proveedor {
 } 
 
 export interface RegistroGasto {
+    id?: number;
+    fecha?: string;
+    tipoComprobante?: string;
+    nroComprobante?: string;
     proveedor: Proveedor;
     operacion: Operacion;
-    detalleBanco: DetalleBanco;
+    detalleBanco?: DetalleBanco;
 
 }

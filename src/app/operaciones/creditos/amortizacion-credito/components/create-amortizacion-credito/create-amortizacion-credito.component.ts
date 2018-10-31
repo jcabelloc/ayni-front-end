@@ -83,7 +83,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     }
     else if (tipoCuentaRecaudo.value == 'CAJA') {
       this.cuentasRecaudo = [
-        {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - ORFITA AJON'},
+        {idCuenta: 10000001, descripcion: 'CAJA NVA. CAJAMARCA - OAJON'},
       ];
       this.enableBanco(false);
     }
