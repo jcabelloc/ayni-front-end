@@ -34,7 +34,7 @@ export class DesembolsoCreditoService {
     return this.http.get<DesembolsoCredito>(findByIdUrl);
   }
 
-  
+  // Deprecated
   buildReporteSolicitud (desembolsoCredito: DesembolsoCredito) {
     let buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";
     let headers = new HttpHeaders({

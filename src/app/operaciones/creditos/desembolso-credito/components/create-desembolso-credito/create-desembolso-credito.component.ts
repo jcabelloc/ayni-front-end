@@ -8,6 +8,8 @@ import { DesembolsoCreditoService } from '../../services/desembolso-credito.serv
 import { CuentaDesembolso } from '../../models/CuentaDesembolso';
 import { SimulacionCredito } from '../../../../../creditos/simulacion-credito/models/SimulacionCredito';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../../environments/environment';
+
 
 export interface Option {
   value: string;
@@ -21,6 +23,9 @@ export interface Option {
   styleUrls: ['./create-desembolso-credito.component.css']
 })
 export class CreateDesembolsoCreditoComponent implements OnInit {
+
+  readonly reporteUrl: string = environment.reporteUrl;
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -212,7 +217,8 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       );
   }
 
-  showReporteSolicitud(){
+  // Deprecated
+  showReporteSolicitudDeprecated(){
     this.desembolsoCredito.credito.usuarioResponsable = "OAJON"; //TODO
     this.desembolsoCreditoService.buildReporteSolicitud(this.desembolsoCredito)
       .subscribe(
@@ -224,6 +230,24 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+  showReporteSolicitud(){
+    let monto = this.desembolsoCredito.credito.montoDesembolso;
+    let fechaDesembolso = this.desembolsoCredito.credito.fechaDesembolso;
+    let idCliente = this.desembolsoCredito.cliente.id;
+    let frecuencia = this.desembolsoCredito.credito.frecuencia;
+    let tem = this.desembolsoCredito.credito.tem;
+    let fechaPrimeraCuota = this.desembolsoCredito.credito.fechaPrimeraCuota;
+    let nroCuotas = this.desembolsoCredito.credito.nroCuotas;
+    let rptUrl = this.reporteUrl + "solicitud-credito?monto=" + monto 
+        + "&fechaDesembolso=" + fechaDesembolso 
+        + "&idCliente=" + idCliente
+        + "&frecuencia=" + frecuencia
+        + "&tem=" + tem
+        + "&fechaPrimeraCuota=" + fechaPrimeraCuota
+        + "&nroCuotas=" + nroCuotas;
+
+    window.open(rptUrl);
   }
 
 }

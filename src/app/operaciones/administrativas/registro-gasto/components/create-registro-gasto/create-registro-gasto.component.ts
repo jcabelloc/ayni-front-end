@@ -6,6 +6,7 @@ import { Proveedor } from '../../../../../proveedores/shared-proveedor/models/Pr
 import { RegistroGasto } from '../../models/RegistroGasto';
 import { CuentaGastoService } from '../../../../../gastos/adm-cuenta-gasto/services/cuenta-gasto.service';
 import { CuentaGasto } from '../../../../../gastos/adm-cuenta-gasto/models/CuentaGasto';
+import { RegistroGastoService } from '../../services/registro-gasto.service';
 
 export interface Option {
   value: string;
@@ -27,7 +28,7 @@ export class CreateRegistroGastoComponent implements OnInit {
 
   registroGasto: RegistroGasto = {
     proveedor: {},
-    operacion: {},
+    operacion: {moneda: '1'},
     detalleBanco: {},
   };
   rubro: string;
@@ -78,6 +79,7 @@ export class CreateRegistroGastoComponent implements OnInit {
   constructor( public dialog: MatDialog, 
     private proveedorService: ProveedorService,
     private cuentaGastoService: CuentaGastoService,
+    private registroGastoService: RegistroGastoService,
     ) 
     { }
 
@@ -156,6 +158,23 @@ export class CreateRegistroGastoComponent implements OnInit {
     let fechaString: string;
     fechaString = fecha.getFullYear() + "-" + (fecha.getMonth() + 1).toString().padStart(2,"0") + "-" + fecha.getDate().toString().padStart(2,"0");
     return fechaString;
+  }
+
+  onSubmit({value, valid}: {value: RegistroGasto, valid: boolean}){
+    if (valid) {
+      this.registroGastoService.createGasto(this.registroGasto)
+        .subscribe(
+          registroGasto => {
+            console.log(registroGasto);
+          },
+          err => {
+            console.log(err);
+          }
+
+        )
+        
+    }
+    
   }
 
 }

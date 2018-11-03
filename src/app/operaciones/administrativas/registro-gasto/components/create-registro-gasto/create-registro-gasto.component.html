@@ -69,7 +69,7 @@
         <mat-divider></mat-divider>
         
         <mat-form-field class="mat-form-field"  >
-          <mat-select placeholder="Autorizador del Gasto" [(ngModel)]="registroGasto.operacion.autorizador" name="autorizador" required >
+          <mat-select placeholder="Autorizador del Gasto" [(ngModel)]="registroGasto.autorizador" name="autorizador" required >
             <mat-option *ngFor="let autorizador of autorizadores" [value]="autorizador.value">
               {{autorizador.viewValue}}
             </mat-option>

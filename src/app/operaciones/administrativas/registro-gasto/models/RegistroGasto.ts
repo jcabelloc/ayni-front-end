@@ -16,7 +16,6 @@ interface Operacion {
     idCuentaGasto?: number;
     tipoCuentaEgreso?: string;
     idCuentaEgreso?: number;
-    autorizador?: string;
     nota?: string;
 } 
 
@@ -33,6 +32,7 @@ export interface RegistroGasto {
     fecha?: string;
     tipoComprobante?: string;
     nroComprobante?: string;
+    autorizador?: string;
     proveedor: Proveedor;
     operacion: Operacion;
     detalleBanco?: DetalleBanco;
