@@ -24,7 +24,6 @@ export class ShowAmortizacionComponent implements OnInit {
     this.amortizacionCreditoService.findAmortizacionById(id)
       .subscribe(
         amortizacion => {
-          console.log(amortizacion);
           this.amortizacion = amortizacion;
         },
         err => console.log(err)

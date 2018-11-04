@@ -58,11 +58,11 @@
         </mat-form-field>
         <mat-form-field class="mat-form-field" appearance="standard">
           <mat-label>Nro. de Comprobante</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.nroComprobante" name="nroComprobante" minlength="2" required>
+          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.nroComprobante" name="nroComprobante" minlength="2" maxlength="25" required>
         </mat-form-field>
         <mat-form-field class="mat-form-field-full" appearance="standard">
           <mat-label>Descripcion del Gasto</mat-label>
-          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.operacion.nota" name="nota" minlength="15" required>
+          <input type="text" matInput placeholder="Ingresar aqui.." [(ngModel)]="registroGasto.operacion.nota" name="nota" minlength="15" maxlength="200" required>
           <mat-hint>Min 15 letras</mat-hint>
         </mat-form-field>
 

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RegistroGastoService } from '../../services/registro-gasto.service';
+import { RegistroGasto } from '../../models/RegistroGasto';
 
 @Component({
   selector: 'app-show-registro-gasto',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowRegistroGastoComponent implements OnInit {
 
-  constructor() { }
+  registroGasto: RegistroGasto = null;
+
+  constructor(private route: ActivatedRoute, private registroGastoService: RegistroGastoService,
+    ) { }
 
   ngOnInit() {
+    let id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.registroGastoService.findGastoById(id)
+    .subscribe(
+      registroGasto => {
+        console.log(registroGasto);
+        this.registroGasto = registroGasto;
+      },
+      err => console.log(err)
+    )
   }
 
 }

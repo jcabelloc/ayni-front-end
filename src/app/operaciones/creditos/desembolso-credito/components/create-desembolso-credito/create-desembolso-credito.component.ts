@@ -54,7 +54,6 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     {value: 'GRIOS', viewValue: 'GRIOS'},
     {value: 'EPEREZ', viewValue: 'EPEREZ'},
     {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
-    {value: 'OAJON', viewValue: 'OAJON'},
   ];
 
   constructor(private _formBuilder: FormBuilder, 
@@ -121,15 +120,8 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
   }
 
   onTipoCuentaDesembolsoSelection(tipoCuentaDesembolso: MatSelectChange) {
-    /*
-    if(tipoCuentaDesembolso.value == 'BANCOS') {
-      this.cuentasDesembolso = [
-        {idCuenta: 10001, descripcion: 'BCP - 1234-18830-28983'},
-        {idCuenta: 10002, descripcion: 'IBK - 2183-9999-282821983'}
-      ];
-      
-    }
-    else */if (tipoCuentaDesembolso.value == 'CAJA') {
+    
+    if (tipoCuentaDesembolso.value == 'CAJA') {
       this.cuentasDesembolso = [
         {idCuenta: 10000001, descripcion: 'Caja Nueva Cajamarca - OAJON'},
       ];

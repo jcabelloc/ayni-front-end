@@ -7,6 +7,7 @@ import { RegistroGasto } from '../../models/RegistroGasto';
 import { CuentaGastoService } from '../../../../../gastos/adm-cuenta-gasto/services/cuenta-gasto.service';
 import { CuentaGasto } from '../../../../../gastos/adm-cuenta-gasto/models/CuentaGasto';
 import { RegistroGastoService } from '../../services/registro-gasto.service';
+import { Router } from '@angular/router';
 
 export interface Option {
   value: string;
@@ -80,6 +81,7 @@ export class CreateRegistroGastoComponent implements OnInit {
     private proveedorService: ProveedorService,
     private cuentaGastoService: CuentaGastoService,
     private registroGastoService: RegistroGastoService,
+    private router: Router,
     ) 
     { }
 
@@ -143,7 +145,7 @@ export class CreateRegistroGastoComponent implements OnInit {
     if(tipoCuentaEgreso.value == 'BANCOS') {
       this.isRecaudoBanco = true;
       this.cuentasEgreso = [
-        {idCuenta: 10000002, descripcion: 'BCP - 123-4567-890'},
+        {idCuenta: 10000002, descripcion: 'BCP - 4352477093079'},
       ];
       this.registroGasto.detalleBanco.fechaOperacion = this.getStringLocalDate(new Date());
       this.registroGasto.detalleBanco.montoOperacion = this.registroGasto.operacion.monto;
@@ -165,6 +167,7 @@ export class CreateRegistroGastoComponent implements OnInit {
       this.registroGastoService.createGasto(this.registroGasto)
         .subscribe(
           registroGasto => {
+            this.router.navigate(['operaciones/administrativas/registro-gasto/show/' + registroGasto.id ]); 
             console.log(registroGasto);
           },
           err => {

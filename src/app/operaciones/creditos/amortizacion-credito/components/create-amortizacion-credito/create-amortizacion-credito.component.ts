@@ -75,7 +75,7 @@ export class CreateAmortizacionCreditoComponent implements OnInit {
     if(tipoCuentaRecaudo.value == 'BANCOS') {
       this.isRecaudoBanco = true;
       this.cuentasRecaudo = [
-        {idCuenta: 10000002, descripcion: 'BCP - 123-4567-890'},
+        {idCuenta: 10000002, descripcion: 'BCP - 4352477093079'},
       ];
       this.secondFormGroup.patchValue({fechaOperacion: this.getStringLocalDate(new Date())}) ;
       this.secondFormGroup.patchValue({montoOperacion: this.amortizacionCredito.operacion.monto}) ;

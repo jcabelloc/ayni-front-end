@@ -28,6 +28,10 @@ export class RegistroGastoService {
             );
   }
 
+  findGastoById(id: number): Observable<RegistroGasto> {
+    let findByIdUrl = this.apiUrl + "/" + id;
+    return this.http.get<RegistroGasto>(findByIdUrl);
+  }
   
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

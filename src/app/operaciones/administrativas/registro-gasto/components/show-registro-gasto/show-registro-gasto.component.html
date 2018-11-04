@@ -1,3 +1,112 @@
-<p>
-  show-registro-gasto works!
-</p>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h2>Datos del Registro de Gasto</h2></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content *ngIf="registroGasto!=null">
+      <div>DATOS DEL PROVEEDOR</div>
+      <mat-divider></mat-divider>
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Identificacion</mat-label>
+        <input type="text" matInput [value] = "registroGasto.proveedor.tipoIdentificacion + ': ' + registroGasto.proveedor.nroIdentificacion" disabled>
+      </mat-form-field>
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Proveedor</mat-label>
+        <input type="text" matInput [value] = "registroGasto.proveedor.nombre" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Codigo del Proveedor</mat-label>
+        <input type="text" matInput [value] = "registroGasto.proveedor.id" disabled>
+      </mat-form-field>
+
+      <div>DATOS DEL GASTO</div>
+      <mat-divider></mat-divider>
+      
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Nro. Registro del Gasto</mat-label>
+        <input type="text" matInput [value] = "registroGasto.id" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Fecha del Gasto</mat-label>
+        <input type="text" matInput [value] = "registroGasto.fecha" disabled>
+      </mat-form-field>
+      
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Tipo de Comprobante</mat-label>
+        <input type="text" matInput [value] = "registroGasto.tipoComprobante" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Nro. Comprobante</mat-label>
+        <input type="text" matInput [value] = "registroGasto.nroComprobante" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Autorizador</mat-label>
+        <input type="text" matInput [value] = "registroGasto.autorizador" disabled>
+      </mat-form-field>
+
+      <div>DATOS DE LA OPERACION</div>
+      <mat-divider></mat-divider>
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Nro. Operacion</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.id" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Monto S/</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.monto  | number: '1.2-2'" disabled>
+      </mat-form-field>
+
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Tipo Cuenta Egreso</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.tipoCuentaEgreso" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Cuenta Egreso</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.idCuentaEgreso" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Usuario de la Operacion</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.usuario" disabled>
+      </mat-form-field>
+  
+      <mat-form-field class="mat-form-field" appearance="standard">
+        <mat-label>Fecha - Hora Operacion</mat-label>
+        <input type="text" matInput [value] = "registroGasto.operacion.fechaOperacion + ' - ' + registroGasto.operacion.horaOperacion"disabled>
+      </mat-form-field>
+
+      <mat-expansion-panel *ngIf="registroGasto.detalleBanco!=null" [expanded] = "true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Datos de la Operacion de Bancos
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Nro. Operacion o Voucher</mat-label>
+          <input type="text" matInput [value] = "registroGasto.detalleBanco.nroOperacion" disabled>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Fecha de la Operacion</mat-label>
+          <input type="date" matInput [value]="registroGasto.detalleBanco.fechaOperacion" disabled>
+        </mat-form-field>
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Monto de la Operacion</mat-label>
+          <input type="text" matInput [value]="registroGasto.detalleBanco.montoOperacion" disabled>
+        </mat-form-field>
+      </mat-expansion-panel>
+  
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="button" routerLink="../../adm" mat-button color="warn">SALIR</button>
+    </mat-card-actions>
+    <mat-divider></mat-divider>
+    <br><br>
+  </mat-card>
+</div>
+
