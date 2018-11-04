@@ -7,7 +7,7 @@
 
       <mat-card-content>
         <mat-form-field class="mat-form-field"  >
-          <mat-select placeholder="Tipo de Traspaso" [(ngModel)]="tipoTraspaso" name="tipoTraspaso"  (selectionChange)="onTipoTraspasoSelection($event)" required >
+          <mat-select placeholder="Tipo de Traspaso" [(ngModel)]="tipoTraspaso" name="tipoTraspaso"  required >
             <mat-option *ngFor="let tipoTraspaso of tiposTraspaso" [value]="tipoTraspaso.value">
               {{tipoTraspaso.viewValue}}
             </mat-option>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SimulacionCreditoService } from '../../services/simulacion-credito.service';
 import { SimulacionCredito } from '../../models/SimulacionCredito';
 
-export interface TableElement {
+interface TableElement {
   nroCuota: number;
   fechaVencimiento: string;
   saldoCapital: number;

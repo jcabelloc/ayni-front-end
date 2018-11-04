@@ -5,6 +5,17 @@ interface DetalleBanco {
     montoOperacion?: number;
 }
 
+interface DetalleOperacion{
+    id: number;
+    nroDetalle: number; 
+    idCuenta: number; 
+    ctaContable: string; 
+    tipoCuenta: "BANCOS";
+    debito: number;
+    credito: number;
+
+}
+
 export interface TraspasoEfectivo {
     id?: number;
     monto?: number;
@@ -17,5 +28,6 @@ export interface TraspasoEfectivo {
     idCuentaCaja?: number;
     idCuentaBanco?: number;
     detalleBanco?: DetalleBanco;
+    detallesOperacion?: DetalleOperacion[];
 
 }

@@ -20,7 +20,6 @@ export class ShowRegistroGastoComponent implements OnInit {
     this.registroGastoService.findGastoById(id)
     .subscribe(
       registroGasto => {
-        console.log(registroGasto);
         this.registroGasto = registroGasto;
       },
       err => console.log(err)

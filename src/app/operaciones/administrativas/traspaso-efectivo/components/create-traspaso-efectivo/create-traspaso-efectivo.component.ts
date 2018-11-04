@@ -28,6 +28,8 @@ export class CreateTraspasoEfectivoComponent implements OnInit {
     {value: 'HABILITACION_CAJA', viewValue: 'Habilitacion de Caja'},
   ];
 
+  tipoTraspaso: string;
+
   traspaso: TraspasoEfectivo = {
     moneda: '1',
     detalleBanco:  {},
@@ -51,6 +53,7 @@ export class CreateTraspasoEfectivoComponent implements OnInit {
 
   onSubmit({value, valid}: {value: TraspasoEfectivo, valid: boolean}){
     if (valid) {
+      this.traspaso.tipoOperacion = this.tipoTraspaso;
       this.traspaso.detalleBanco.montoOperacion = this.traspaso.monto;
       this.traspasoEfectivoService.createTraspasoEfectivo(this.traspaso)
         .subscribe(
