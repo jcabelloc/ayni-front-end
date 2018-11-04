@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: './operaciones/administrativas/registro-gasto/registro-gasto.module#RegistroGastoModule'
   },
   {
+    path: 'operaciones/administrativas/traspaso-efectivo',
+    loadChildren: './operaciones/administrativas/traspaso-efectivo/traspaso-efectivo.module#TraspasoEfectivoModule'
+  },
+  {
     path: 'reportes/reporte',
     loadChildren: './reportes/reporte/reporte.module#ReporteModule'
   },

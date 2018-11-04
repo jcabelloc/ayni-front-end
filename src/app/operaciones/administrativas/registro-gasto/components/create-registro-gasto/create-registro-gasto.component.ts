@@ -9,7 +9,7 @@ import { CuentaGasto } from '../../../../../gastos/adm-cuenta-gasto/models/Cuent
 import { RegistroGastoService } from '../../services/registro-gasto.service';
 import { Router } from '@angular/router';
 
-export interface Option {
+interface Option {
   value: string;
   viewValue: string;
 }
@@ -168,7 +168,6 @@ export class CreateRegistroGastoComponent implements OnInit {
         .subscribe(
           registroGasto => {
             this.router.navigate(['operaciones/administrativas/registro-gasto/show/' + registroGasto.id ]); 
-            console.log(registroGasto);
           },
           err => {
             console.log(err);
