@@ -6,11 +6,13 @@
       </mat-card-header>
 
       <mat-card-content>
-          <mat-form-field class="mat-form-field" appearance="standard">
-            <mat-label>Fecha de Hoy</mat-label>
-            <input type="date" matInput placeholder="Ingresar aqui.." required>
-          </mat-form-field>
-          
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Estado del Credito" [(ngModel)]="estado" name="estado" required >
+            <mat-option *ngFor="let estado of estados" [value]="estado.value">
+              {{estado.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-card-content>
       
       <mat-card-actions>

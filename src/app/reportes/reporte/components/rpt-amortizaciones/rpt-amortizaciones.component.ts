@@ -36,7 +36,6 @@ export class RptAmortizacionesComponent implements OnInit {
   }
   onSubmit({value, valid}: {value: any, valid: boolean}) {
     if (valid) {
-      let dat  = new Date()
       let rptUrl = this.reporteUrl + "amortizaciones?month=" + this.mes 
       + "&year=" + this.year ;
       window.open(rptUrl);

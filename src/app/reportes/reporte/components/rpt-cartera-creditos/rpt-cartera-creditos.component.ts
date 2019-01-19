@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
 
+interface Option {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-rpt-cartera-creditos',
   templateUrl: './rpt-cartera-creditos.component.html',
@@ -8,6 +14,12 @@ import { environment } from '../../../../../environments/environment';
 })
 export class RptCarteraCreditosComponent implements OnInit {
   readonly reporteUrl: string = environment.reporteUrl;
+  estado: String = 'ACTIVO';
+  estados: Option[] = [
+    {value: 'ACTIVO', viewValue: 'Activo'}, 
+    {value: 'CANCELADO', viewValue: 'Cancelado'},
+    {value: 'TODOS', viewValue: 'Todos'},
+  ];
 
   constructor() { }
 
@@ -16,7 +28,8 @@ export class RptCarteraCreditosComponent implements OnInit {
 
   onSubmit({value, valid}: {value: any, valid: boolean}) {
     if (valid) {
-      let rptUrl = this.reporteUrl + "cartera-creditos";
+      this.estado = this.estado == 'TODOS'? '':this.estado;
+      let rptUrl = this.reporteUrl + "cartera-creditos?estado=" + this.estado;
       window.open(rptUrl);
     }
   }
