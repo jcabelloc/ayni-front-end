@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ReporteRoutingModule } from './reporte-routing.module';
 import { RptCarteraCreditosComponent } from './components/rpt-cartera-creditos/rpt-cartera-creditos.component';
 import { RptAmortizacionesComponent } from './components/rpt-amortizaciones/rpt-amortizaciones.component';
+import { RptOperacionesComponent } from './components/rpt-operaciones/rpt-operaciones.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { RptAmortizacionesComponent } from './components/rpt-amortizaciones/rpt-
     MatCardModule,
     MatSelectModule,
   ],
-  declarations: [RptCarteraCreditosComponent, RptAmortizacionesComponent]
+  declarations: [RptCarteraCreditosComponent, RptAmortizacionesComponent, RptOperacionesComponent]
 })
 export class ReporteModule { }

@@ -47,6 +47,7 @@ export class AppComponent implements OnDestroy {
       options: [
         {name: "Cartera de Creditos", path: "./reportes/reporte/cartera-creditos"}, 
         {name: "Amortizaciones", path: "./reportes/reporte/amortizaciones"}, 
+        {name: "Operaciones", path: "./reportes/reporte/operaciones"}, 
       ]
     },
   ];
