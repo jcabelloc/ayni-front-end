@@ -17,6 +17,15 @@
           <input type="date" matInput placeholder="Ingresar aqui.."  [(ngModel)]="hasta" name="hasta" required>
         </mat-form-field>
 
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Tipo de Operacion" [(ngModel)]="tipoOperacion" name="tipoOperacion" required >
+            <mat-option *ngFor="let tipoOperacion of tiposOperacion" [value]="tipoOperacion.value">
+              {{tipoOperacion.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
       </mat-card-content>
       
       
