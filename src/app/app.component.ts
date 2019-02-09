@@ -21,6 +21,9 @@ export class AppComponent implements OnDestroy {
   title = 'Systema Ayni';
   subTitle = "";
   modules: Module[] = [
+    { name: "Tableros", 
+      options: [{name: "Cartera", path: "./tableros/cartera/resumen"}]
+    },
     { name: "Personas", 
       options: [{name: "Adm. Persona Nat.", path: "./personas/persona-natural/adm"}]
     },

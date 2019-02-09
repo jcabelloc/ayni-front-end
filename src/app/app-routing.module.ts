@@ -43,6 +43,10 @@ const routes: Routes = [
     loadChildren: './reportes/reporte/reporte.module#ReporteModule'
   },
   {
+    path: 'tableros/cartera',
+    loadChildren: './tableros/cartera/cartera.module#CarteraModule'
+  },
+  {
     path: '',
     redirectTo: 'inicio/ingreso',
     pathMatch: 'full'
