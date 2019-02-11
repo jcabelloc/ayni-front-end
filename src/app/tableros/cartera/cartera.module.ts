@@ -5,6 +5,7 @@ import { CarteraRoutingModule } from './cartera-routing.module';
 import { TblResumenCarteraComponent } from './components/tbl-resumen-cartera/tbl-resumen-cartera.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { ChartSaldoCarteraComponent } from './components/chart-saldo-cartera/chart-saldo-cartera.component';
 
 
 @NgModule({
@@ -13,6 +14,6 @@ import { ChartsModule } from 'ng2-charts';
     CarteraRoutingModule,
     ChartsModule
   ],
-  declarations: [TblResumenCarteraComponent]
+  declarations: [TblResumenCarteraComponent, ChartSaldoCarteraComponent]
 })
 export class CarteraModule { }
