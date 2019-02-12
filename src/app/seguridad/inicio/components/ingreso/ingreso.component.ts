@@ -17,6 +17,6 @@ export class IngresoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.usuario, this.clave, () => { this.router.navigate(['inicio/bienvenida' ]) } );
+    this.authService.login(this.usuario, this.clave, () => { this.router.navigate(['/tableros/cartera/resumen' ]) } );
   }
 }
