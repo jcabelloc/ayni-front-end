@@ -9,13 +9,19 @@ import { XYSerie } from '../models/XYSerie';
   providedIn: 'root'
 })
 export class CarteraService {
+
   readonly apiUrl = environment.apiUrl + "tableros/cartera";
 
   constructor(private http: HttpClient) { }
 
-  queryCartera(valor: string, mes: string, groupBy: string): Observable<XYSerie> {
-    let queryUrl = this.apiUrl + "?valor=" + valor + 
-      "&mes=" + mes + "&groupBy=" + groupBy;
+  queryCarteraSaldo(mes: string, groupBy: string): Observable<XYSerie> {
+    let queryUrl = this.apiUrl + "/saldo/?mes=" + mes + "&groupBy=" + groupBy;
+    return this.http.get<XYSerie>(queryUrl);
+  }
+
+  queryCarteraAtrasada(diasAtrasoMayorA: number, mes: string, groupBy: string): Observable<XYSerie> {
+    let queryUrl = this.apiUrl + "/atrasada?diasAtrasoMayorA=" + diasAtrasoMayorA +  
+          "&mes=" + mes + "&groupBy=" + groupBy;
     return this.http.get<XYSerie>(queryUrl);
   }
   

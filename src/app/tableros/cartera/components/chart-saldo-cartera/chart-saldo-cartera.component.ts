@@ -11,12 +11,33 @@ export class ChartSaldoCarteraComponent implements OnInit {
 
   xSerie: string[] = [];
   ySerie: number[] = [];
-  bol: boolean = false;
+  meta: number = 21250;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    scales: {
+      yAxes: [{
+          ticks: {
+              min: 0
+          }
+      }]
+    }
+  };
+  public barChartLabels:string[] = this.xSerie;
+  
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+ 
+  public barChartData:any[] = [
+    {data: this.ySerie, label: 'Saldo de Cartera'},
+    {data: [], label: 'Meta Mes', type: 'line'},
+  ];
 
   constructor(private carteraService: CarteraService) { }
 
   ngOnInit() {
-    this.carteraService.queryCartera('saldoCapital', 'Febrero', 'diaMes')
+    this.carteraService.queryCarteraSaldo('Febrero', 'diaMes')
       .subscribe(
         XYSerie => {
           this.xSerie = XYSerie.xSerie;
@@ -28,6 +49,7 @@ export class ChartSaldoCarteraComponent implements OnInit {
           
           let clone = JSON.parse(JSON.stringify(this.barChartData));
           clone[0].data = XYSerie.ySerie;
+          clone[1].data = new Array(this.ySerie.length).fill(this.meta);
           this.barChartData = clone;
         },
         err => {
@@ -35,19 +57,8 @@ export class ChartSaldoCarteraComponent implements OnInit {
         }
       )
   }
-  public barChartOptions:any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels:string[] = this.xSerie;
   
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = true;
- 
-  public barChartData:any[] = [
-    {data: this.ySerie, label: 'Saldo de Cartera'},
-  ];
- 
+  
   // events
   public chartClicked(e:any):void {
     console.log(e);
