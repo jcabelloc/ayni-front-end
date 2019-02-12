@@ -13,6 +13,9 @@ export class ChartMoraComponent implements OnInit {
 
   xSerie: string[] = [];
   ySerie: number[] = [];
+  fechaDesde: Date;
+  fechaHasta: Date = new Date();;
+
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -38,21 +41,21 @@ export class ChartMoraComponent implements OnInit {
   constructor(private carteraService: CarteraService) { }
 
   ngOnInit() {
-    console.log(this.metaMora);
-    console.log(this.diasAtrasoMayorA);
+    this.fechaHasta.setDate((new Date()).getDate() - 1); // yesterday
+    this.fechaDesde = new Date(this.fechaHasta.getFullYear(), this.fechaHasta.getMonth(), 1); // first day of the month
+    let desde = this.fechaDesde.toISOString().split("T")[0];
+    let hasta = this.fechaHasta.toISOString().split("T")[0];
 
-    this.carteraService.queryCarteraSaldo('Febrero', 'diaMes')
+    this.carteraService.queryCarteraSaldo(desde, hasta, 'diaMes')
       .subscribe(
         XYSerieSaldo => {
           this.xSerie = XYSerieSaldo.xSerie;
-          this.carteraService.queryCarteraAtrasada(this.diasAtrasoMayorA, 'Febrero', 'diaMes')
+          this.carteraService.queryCarteraAtrasada(this.diasAtrasoMayorA, desde, hasta, 'diaMes')
             .subscribe(
               XYSerieAtrasada => {
-                console.log(XYSerieAtrasada.ySerie);
-                console.log(XYSerieSaldo.ySerie);
                 this.ySerie = XYSerieAtrasada.ySerie.map(
-                          function(n, i) { return Math.round( n / XYSerieSaldo.ySerie[i] * 100 * 10) / 10; });
-                console.log(this.ySerie);
+                  function(n, i) { return Math.round( n / XYSerieSaldo.ySerie[i] * 100 * 10) / 10; }
+                );
                 this.barChartLabels.length = 0;
                 for (let i = 0; i < this.xSerie.length ; i++) {
                     this.barChartLabels.push(this.xSerie[i]);
@@ -74,6 +77,15 @@ export class ChartMoraComponent implements OnInit {
         }
       )
 
+  }
+    
+  // events
+  public chartClicked(e:any):void {
+    console.log(e);
+  }
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
   }
 
 }

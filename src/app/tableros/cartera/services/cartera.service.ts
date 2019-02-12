@@ -14,14 +14,20 @@ export class CarteraService {
 
   constructor(private http: HttpClient) { }
 
-  queryCarteraSaldo(mes: string, groupBy: string): Observable<XYSerie> {
-    let queryUrl = this.apiUrl + "/saldo/?mes=" + mes + "&groupBy=" + groupBy;
+  queryCarteraSaldo(desde: string, hasta: string, groupBy: string): Observable<XYSerie> {
+    let queryUrl = this.apiUrl + "/saldo/?desde=" + desde + "&hasta=" + hasta + "&groupBy=" + groupBy;
     return this.http.get<XYSerie>(queryUrl);
   }
 
-  queryCarteraAtrasada(diasAtrasoMayorA: number, mes: string, groupBy: string): Observable<XYSerie> {
+  queryCarteraAtrasada(diasAtrasoMayorA: number, desde: string, hasta: string,groupBy: string): Observable<XYSerie> {
     let queryUrl = this.apiUrl + "/atrasada?diasAtrasoMayorA=" + diasAtrasoMayorA +  
-          "&mes=" + mes + "&groupBy=" + groupBy;
+      "&desde=" + desde + "&hasta=" + hasta + "&groupBy=" + groupBy;
+    return this.http.get<XYSerie>(queryUrl);
+  }
+
+  queryDesembolsos(valor: string, desde: string, hasta: string, groupBy: string): Observable<XYSerie> {
+    let queryUrl = this.apiUrl + "/desembolsos?valor=" + valor +  
+      "&desde=" + desde + "&hasta=" + hasta + "&groupBy=" + groupBy;
     return this.http.get<XYSerie>(queryUrl);
   }
   
