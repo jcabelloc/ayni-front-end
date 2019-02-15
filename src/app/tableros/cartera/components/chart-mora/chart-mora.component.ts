@@ -41,7 +41,7 @@ export class ChartMoraComponent implements OnInit {
   constructor(private carteraService: CarteraService) { }
 
   ngOnInit() {
-    this.fechaHasta.setDate((new Date()).getDate() - 1); // yesterday
+    this.fechaHasta.setDate((new Date()).getDate());
     this.fechaDesde = new Date(this.fechaHasta.getFullYear(), this.fechaHasta.getMonth(), 1); // first day of the month
     let desde = this.fechaDesde.toISOString().split("T")[0];
     let hasta = this.fechaHasta.toISOString().split("T")[0];
