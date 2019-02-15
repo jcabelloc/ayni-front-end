@@ -34,19 +34,6 @@ export class DesembolsoCreditoService {
     return this.http.get<DesembolsoCredito>(findByIdUrl);
   }
 
-  // Deprecated
-  buildReporteSolicitud (desembolsoCredito: DesembolsoCredito) {
-    let buildReporteUrl = this.apiUrl + "/build-reporte-solicitud";
-    let headers = new HttpHeaders({
-        'Content-Type':  'application/json',
-    });
-    return this.http.post(buildReporteUrl, desembolsoCredito, {headers:headers,  responseType: "blob"})
-      .pipe(
-        catchError(this.handleError)
-      );
-    
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

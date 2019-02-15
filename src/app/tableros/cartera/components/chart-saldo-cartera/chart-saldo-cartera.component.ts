@@ -47,7 +47,6 @@ export class ChartSaldoCarteraComponent implements OnInit {
     this.carteraService.queryCarteraSaldo(desde, hasta, 'diaMes')
       .subscribe(
         XYSerie => {
-          console.log(XYSerie);
           this.xSerie = XYSerie.xSerie;
           this.ySerie = XYSerie.ySerie;
           this.barChartLabels.length = 0;

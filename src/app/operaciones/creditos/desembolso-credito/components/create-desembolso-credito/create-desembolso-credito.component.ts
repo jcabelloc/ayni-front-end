@@ -198,7 +198,6 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     });
   }
   desembolsarCredito(){
-    console.log(this.desembolsoCredito);
     this.desembolsoCredito.credito.usuarioResponsable = "OAJON"; //TODO
     this.desembolsoCreditoService.createDesembolso(this.desembolsoCredito)
       .subscribe(
@@ -209,20 +208,6 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       );
   }
 
-  // Deprecated
-  showReporteSolicitudDeprecated(){
-    this.desembolsoCredito.credito.usuarioResponsable = "OAJON"; //TODO
-    this.desembolsoCreditoService.buildReporteSolicitud(this.desembolsoCredito)
-      .subscribe(
-        res => {
-          var url = window.URL.createObjectURL(res);
-          window.open(url);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-  }
   showReporteSolicitud(){
     let monto = this.desembolsoCredito.credito.montoDesembolso;
     let fechaDesembolso = this.desembolsoCredito.credito.fechaDesembolso;

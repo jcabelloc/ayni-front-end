@@ -20,6 +20,7 @@ export interface Module {
 export class AppComponent implements OnDestroy {
   title = 'Systema Ayni';
   subTitle = "";
+  usuario: string = '';
   modules: Module[] = [
     { name: "Tableros", 
       options: [{name: "Cartera", path: "./tableros/cartera/resumen"}]
@@ -73,19 +74,28 @@ export class AppComponent implements OnDestroy {
   showOption(moduleName: string, optionName: string) {
     this.subTitle = moduleName + " > " + optionName;
   }
+
+
   isAuthenticated() {
-    return this.authService.getAuth();
+    let usuario = this.authService.getUsuarioAuth()
+    if (usuario) {
+      this.usuario = usuario.usuario;
+      return true;
+    }else {
+      return false;
+    }
   }
+
   logout(){
     this.authService.logout()
       .subscribe(
         response => {
-          this.authService.setAuth(false);
+          this.authService.setUsuarioAuth(null);
           this.router.navigate(['inicio/ingreso']);
         },
         err => {
           console.log(err);
-          this.authService.setAuth(false);
+          this.authService.setUsuarioAuth(null);
           this.router.navigate(['inicio/ingreso']);
         }
 

@@ -7,7 +7,8 @@ import { Usuario } from '../../inicio/models/Usuario';
   providedIn: 'root'
 })
 export class AuthService {
-  private authenticated: boolean = false;
+  // private authenticated: boolean = false;
+  private usuario: Usuario = null;
   apiUrl = environment.apiUrl;
   hostUrl = environment.host;
 
@@ -20,14 +21,14 @@ export class AuthService {
       .subscribe(
         usuario => {
           if (usuario.usuario) {
-            this.authenticated = true;
+            this.usuario = {usuario: usuario.usuario};
           } else {
-            this.authenticated = false;
+            this.usuario = null;
           }
           return callback && callback();
         },
         err => {
-          this.authenticated = false;
+          this.usuario = null;
           console.log(err);
         }
       );
@@ -40,11 +41,11 @@ export class AuthService {
     
   }
 
-  getAuth(){
-    return this.authenticated;
+  getUsuarioAuth(){
+    return this.usuario;
   }
 
-  setAuth(val: boolean) {
-    this.authenticated = false;
+  setUsuarioAuth(val: boolean) {
+    this.usuario = null;
   }
 }

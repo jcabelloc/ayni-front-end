@@ -53,7 +53,6 @@ export class ChartDesembolsosComponent implements OnInit {
       .subscribe(
         XYSerie => {
           this.xSerie = XYSerie.xSerie;
-          console.log(XYSerie.ySerie);
           let yAcc = [];
           XYSerie.ySerie.reduce(
             function(acc,cur,i) {return yAcc[i] = acc + cur; },0)
