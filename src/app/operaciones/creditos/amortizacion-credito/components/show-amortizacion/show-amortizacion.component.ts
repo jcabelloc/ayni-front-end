@@ -10,12 +10,7 @@ import { AmortizacionCreditoService } from '../../services/amortizacion-credito.
 })
 export class ShowAmortizacionComponent implements OnInit {
 
-  amortizacion: AmortizacionCredito = {
-    idCuenta: null, 
-    cliente: {id: null, nombre: null, tipoIdentificacion: null, nroIdentificacion: null},
-    operacion: {id: null, moneda: null, monto: null, tipoOperacion: null, usuario: null, fechaOperacion: null, 
-        horaOperacion: null, idCuentaRecaudo: null, tipoCuentaRecaudo: null,}
-  };
+  amortizacion: AmortizacionCredito = null;
 
   constructor(private route: ActivatedRoute, private amortizacionCreditoService: AmortizacionCreditoService ) { }
 

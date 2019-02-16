@@ -110,6 +110,23 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Analista" formControlName="analista" required >
+            <mat-option *ngFor="let analista of analistas" [value]="analista.value">
+              {{analista.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mat-form-field"  >
+          <mat-select placeholder="Promotor" formControlName="promotor" required >
+            <mat-option *ngFor="let promotor of promotores" [value]="promotor.value">
+              {{promotor.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
       </form>
 
       <mat-divider></mat-divider>

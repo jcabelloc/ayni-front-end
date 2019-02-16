@@ -17,6 +17,8 @@ export interface Credito {
     usuarioAprobador: string;
     nroCondicion: number;
     usuarioResponsable: string;
+    analista: string;
+    promotor: string;
     cliente: Cliente;
     saldoCapital: number;
 }

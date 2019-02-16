@@ -37,7 +37,18 @@
           <mat-label>Usuario Aprobador</mat-label>
           <input type="text" matInput [value] = "desembolsoCredito?.credito?.usuarioAprobador" disabled>
         </mat-form-field>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Analista</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.credito?.analista" disabled>
+        </mat-form-field>
+        
+        <mat-form-field class="mat-form-field" appearance="standard">
+          <mat-label>Promotor</mat-label>
+          <input type="text" matInput [value] = "desembolsoCredito?.credito?.promotor" disabled>
+        </mat-form-field>
         <mat-divider></mat-divider>
+
         <br><br>
       </div>
       <mat-form-field class="mat-form-field" appearance="standard">

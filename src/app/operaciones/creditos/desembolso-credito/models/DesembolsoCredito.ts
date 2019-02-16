@@ -9,6 +9,8 @@ interface Credito {
     fechaPrimeraCuota: string;
     usuarioAprobador?: string;
     usuarioResponsable?: string;
+    analista?: string;
+    promotor?: string;
 }
 
 interface Operacion {

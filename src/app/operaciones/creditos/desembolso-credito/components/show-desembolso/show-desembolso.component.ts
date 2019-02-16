@@ -10,13 +10,16 @@ import { DesembolsoCreditoService } from '../../services/desembolso-credito.serv
 })
 export class ShowDesembolsoComponent implements OnInit {
 
-  desembolsoCredito: DesembolsoCredito = {
+  desembolsoCreditoDeprecated: DesembolsoCredito = {
     credito: {idCuenta: null, nroCuotas: null, moneda: null, montoDesembolso: null, fechaDesembolso: null, 
-        fechaPrimeraCuota: null, frecuencia: null, tem: null, usuarioAprobador: null, usuarioResponsable: null},
+        fechaPrimeraCuota: null, frecuencia: null, tem: null, usuarioAprobador: null, usuarioResponsable: null,
+        analista: null, promotor: null},
     cliente: {id: null, nombre: null, tipoIdentificacion: null, nroIdentificacion: null},
     operacion: {id: null, moneda: null, monto: null, tipoOperacion: null, usuario: null, fechaOperacion: null, 
         horaOperacion: null, cuentaDesembolsoDescripcion: null, idCuentaDesembolso: null, tipoCuentaDesembolso: null,}
   };
+
+  desembolsoCredito: DesembolsoCredito = null;
 
   constructor(private route: ActivatedRoute, private desembolsoCreditoService: DesembolsoCreditoService) { }
 

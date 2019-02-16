@@ -56,6 +56,17 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     {value: 'MFERNANDEZ', viewValue: 'MFERNANDEZ'},
   ];
 
+  analistas: Option[] = [
+    {value: 'OAJON', viewValue: 'OAJON'},
+    {value: 'MGALLARDO', viewValue: 'MGALLARDO'},
+  ];
+
+  promotores: Option[] = [
+    {value: 'OAJON', viewValue: 'OAJON'},
+    {value: 'MGALLARDO', viewValue: 'MGALLARDO'},
+  ];
+
+
   constructor(private _formBuilder: FormBuilder, 
               public dialog: MatDialog,
               private clienteService: ClienteService,
@@ -80,6 +91,8 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
       tipoCuentaDesembolso: ['', Validators.required],
       idCuentaDesembolso: ['', Validators.required],
       usuarioAprobador:['', Validators.required],
+      analista:['OAJON', Validators.required],
+      promotor:['', Validators.required],
     });
   }
 
@@ -113,6 +126,8 @@ export class CreateDesembolsoCreditoComponent implements OnInit {
     this.desembolsoCredito.operacion = {tipoCuentaDesembolso: value.tipoCuentaDesembolso, idCuentaDesembolso: +value.idCuentaDesembolso, 
       cuentaDesembolsoDescripcion: this.cuentasDesembolso.find(e=> e.idCuenta == value.idCuentaDesembolso).descripcion};
     this.desembolsoCredito.credito.usuarioAprobador = value.usuarioAprobador;
+    this.desembolsoCredito.credito.analista = value.analista;
+    this.desembolsoCredito.credito.promotor = value.promotor;
   }
 
   onFrecuenciaSelection(frecuencia: MatSelectChange) {
